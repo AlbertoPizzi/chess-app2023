@@ -1,0 +1,49 @@
+ @startuml
+
+class Piece implements Movable{
+    -color: Color
+    -type: Type
+    -position: Position
+    +Piece(color: Color, type: Type, position: Position)
+    +getColor(): Color
+    +getType(): Type
+}
+class Position{
+    -column: int
+    -line: int
+    +Position(x: int, y: int)
+    +getColumn(): int
+    +getLine(): int
+}
+enum Color{
+    WHITE
+    BLACK
+}
+enum PieceType{
+    PAWN
+    ROOK
+    KNIGHT
+    BISHOP
+    QUEEN
+    KING
+}
+interface MoveValidator{
+    +validateMove(Piece piece, Position position): boolean
+}
+class VerticalMovement implements MoveValidator{
+    +validateMove(Piece piece, Position position): boolean
+}
+class HorizontalMovement implements MoveValidator{
+    +validateMove(Piece piece, Position position): boolean
+}
+class DiagonalMovement implements MoveValidator{
+    +validateMove(Piece piece, Position position): boolean
+}
+interface Board{
+    buildBoard(): void
+    getWhitePieces(): List<Piece>
+    getBlackPieces(): List<Piece>
+    getPieceAtPosition(Position position): Piece
+    }
+
+@enduml
