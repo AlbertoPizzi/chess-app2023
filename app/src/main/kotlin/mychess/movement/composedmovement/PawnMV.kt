@@ -1,5 +1,6 @@
 package mychess.movement.composedmovement
 
+import edu.austral.dissis.chess.gui.Move
 import mychess.board.Board
 import mychess.movement.Movement
 import mychess.movement.MovementValidator
@@ -7,6 +8,7 @@ import mychess.movement.concretemovement.ColorMV
 import mychess.movement.concretemovement.DiagonalMV
 import mychess.movement.concretemovement.PathIsFreeMV
 import mychess.movement.concretemovement.VerticalMV
+import mychess.piece.Color
 import mychess.piece.Piece
 import mychess.piece.PieceType
 
@@ -17,6 +19,26 @@ class PawnMV : MovementValidator {
     private val pathIsFreeMV : MovementValidator = PathIsFreeMV() //checks free path
 
     override fun validateMovement(board: Board, movement: Movement): Boolean {
-        TODO("implement this method and all the other Validator")
+
+       if(verticalMV.validateMovement(board , movement) || diagonalMV.validateMovement(board , movement)){
+        //White
+           if(checkFirstMove(board , movement)){
+               TODO("Implement this method")
+           }
+       }
+        return true
+    }
+    fun checkFirstMove(board: Board , movement: Movement) : Boolean {
+        //White
+        if(board.getPieceByPosition(movement.initpos).getPieceColor() == Color.WHITE
+            && movement.initpos.row == 1 ){
+            return true
+        }
+        //black
+        if(board.getPieceByPosition(movement.initpos).getPieceColor() == Color.BLACK
+            && movement.initpos.row == 6){
+            return true
+        }
+        return false
     }
 }

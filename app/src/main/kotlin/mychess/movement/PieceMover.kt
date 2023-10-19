@@ -1,6 +1,6 @@
 package mychess.movement
 
-import mychess.Factory.BoardFactory
+import mychess.factory.BoardFactory
 import mychess.board.Board
 import mychess.board.Position
 import mychess.piece.Piece

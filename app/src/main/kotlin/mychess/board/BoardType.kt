@@ -1,5 +1,6 @@
 package mychess.board
 
 enum class BoardType {
-    REGULAR
+    REGULAR,
+    CHECKERS
 }

@@ -3,6 +3,7 @@ package mychess.movement.concretemovement
 import mychess.board.Board
 import mychess.movement.Movement
 import mychess.movement.MovementValidator
+import mychess.piece.Color
 import mychess.piece.Piece
 
 class ColorMV : MovementValidator {
@@ -15,4 +16,5 @@ class ColorMV : MovementValidator {
         }
         return false
     }
+
 }

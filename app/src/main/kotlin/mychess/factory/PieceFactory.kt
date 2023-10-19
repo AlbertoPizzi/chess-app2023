@@ -1,4 +1,4 @@
-package mychess.Factory
+package mychess.factory
 
 import mychess.movement.composedmovement.*
 import mychess.piece.Color
