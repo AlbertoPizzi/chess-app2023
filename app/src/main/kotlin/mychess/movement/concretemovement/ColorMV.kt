@@ -19,5 +19,4 @@ class ColorMV : MovementValidator {
         }
         return FailureResult("Pieces are different color!")
     }
-
 }

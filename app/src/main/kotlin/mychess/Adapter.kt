@@ -1,0 +1,4 @@
+package mychess
+
+class Adapter {
+}

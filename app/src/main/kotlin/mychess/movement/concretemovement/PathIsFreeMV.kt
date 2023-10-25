@@ -7,6 +7,7 @@ import mychess.movement.Movement
 import mychess.movement.MovementValidator
 import mychess.piece.PieceType
 import mychess.result.ResultValidator
+import mychess.result.SuccessfulResult
 import kotlin.math.abs
 
 class PathIsFreeMV : MovementValidator {
@@ -21,5 +22,6 @@ class PathIsFreeMV : MovementValidator {
                 TODO("Not yet implemented")
             }
         }
+        return SuccessfulResult("TODO")
     }
 }
