@@ -3,7 +3,7 @@ package mychess.piece
 import mychess.movement.MovementValidator
 import mychess.piece.Color
 
-class Piece(private val id: String, private val pieceColor: Color, private val movementList: List<MovementValidator>){
+class Piece(private val type: PieceType ,private val id: String, private val pieceColor: Color, private val movementList: List<MovementValidator>){
     fun getId() : String{
         return id
     }
@@ -12,6 +12,9 @@ class Piece(private val id: String, private val pieceColor: Color, private val m
     }
     fun getMovementList(): List<MovementValidator>{
         return movementList
+    }
+    fun getPieceType():PieceType{
+        return type
     }
 
 }

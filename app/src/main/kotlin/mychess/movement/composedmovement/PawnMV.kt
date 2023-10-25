@@ -11,6 +11,7 @@ import mychess.movement.concretemovement.VerticalMV
 import mychess.piece.Color
 import mychess.piece.Piece
 import mychess.piece.PieceType
+import mychess.result.ResultValidator
 
 class PawnMV : MovementValidator {
     private val verticalMV : MovementValidator = VerticalMV() //moves
@@ -18,15 +19,8 @@ class PawnMV : MovementValidator {
     private val colorCheck : MovementValidator = ColorMV() //checks Color
     private val pathIsFreeMV : MovementValidator = PathIsFreeMV() //checks free path
 
-    override fun validateMovement(board: Board, movement: Movement): Boolean {
-
-       if(verticalMV.validateMovement(board , movement) || diagonalMV.validateMovement(board , movement)){
-        //White
-           if(checkFirstMove(board , movement)){
-               TODO("Implement this method")
-           }
-       }
-        return true
+    override fun validateMovement(board: Board, movement: Movement): ResultValidator {
+        TODO("Not yet implemented")
     }
     fun checkFirstMove(board: Board , movement: Movement) : Boolean {
         //White
