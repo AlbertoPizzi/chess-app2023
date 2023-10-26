@@ -22,16 +22,19 @@ class Game {
     }
     fun init(): GameState{
         val board = BoardFactory.createNewBoard(BoardType.REGULAR)
+        println(board.getPositionMap().keys)
         val boardHistory : List<Board> = createHistoryFromBoard(board)
         val turnManager : TurnManager = ClassicTurn(Color.WHITE)
         val gameState = GameState(turnManager , boardHistory)
         adapter.saveHistory(gameState)
+        println(board.getPositionMap().size)
+        println(board.getPositionMap().values.toString())
         return gameState
     }
     private fun createHistoryFromBoard(board: Board) : List<Board>{
-        val historialBoards : MutableList<Board> = mutableListOf()
-        historialBoards.add(board)
-        return historialBoards
+        val boardHistory : MutableList<Board> = mutableListOf()
+        boardHistory.add(board)
+        return boardHistory
     }
     fun applyMove(movement: Movement, gameState: GameState) : ResultValidator {
         val pieceToMove  = gameState.getBoardHistory().last().getPieceByPosition(movement.initpos)
@@ -45,23 +48,11 @@ class Game {
                         pieceToMove.getId().takeWhile { it.isLetter() })
             }
             val kingColor = pieceToMove.getPieceColor()
-//            val kingPosition : Position = findKingPosition(newBoard, kingColor)
-
-//            // Verificar si el rey del jugador actual está en jaque en el nuevo tablero
-//            val kingInCheckValidator = KingInCheckValidator()
-//            val checkMateValidator = CheckMateValidator()
-//            if (kingInCheckValidator.isKingInCheck(newBoard, kingPosition, kingColor)){
-//                return InvalidMovement("Tu rey está en jaque")
-//            }
 
             val history : List<Board> = createHistoryFromBoard(newBoard)
             val advanceTurn = turnStrategy.nextTurn(pieceToMove.getPieceColor())
             adapter.saveHistory(GameState(advanceTurn, history))
 
-            // Verificar si el jugador actual está en jaque mate
-//            if (checkMateValidator.validateMovement(history.last(), kingPosition, kingColor, movement)){
-//                return GameOver("Jaque Mate!")
-//            }
 
             return SuccessfulResult("It is a valid Move")
         }

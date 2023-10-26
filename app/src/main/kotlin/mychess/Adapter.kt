@@ -5,7 +5,6 @@ import mychess.board.Board
 import mychess.board.Position
 import mychess.game.GameState
 import mychess.movement.Movement
-import mychess.movement.PieceMover
 import mychess.piece.Color
 import mychess.piece.Piece
 import mychess.result.FailureResult
@@ -21,20 +20,22 @@ class Adapter {
         else PlayerColor.BLACK
     }
     private fun chessPieceAdapter(board: Board ,piece : Piece) : ChessPiece{
-        return ChessPiece(piece.getId(), colorAdapter(piece.getPieceColor()) ,positionAdapter(board.getPositionByPiece(piece))  , piece.getId())
+        return ChessPiece(piece.getId(), colorAdapter(piece.getPieceColor()) ,positionAdapter(board.getPositionByPiece(piece)),
+        piece.getPieceType().toString().lowercase())
     }
     private fun moveAdapter(movement : Movement) : Move{
         return Move(positionAdapter(movement.initpos) , positionAdapter(movement.finalpos))
     }
-    private fun piecesAdapter(board: Board , pieceList : List<Piece>): List<ChessPiece>{
+    private fun pieceListAdapter(board: Board ): List<ChessPiece>{
+        val pieceList : List<Piece> = board.getPositionMap().values.toList()
         val chessPieceList : MutableList<ChessPiece> = mutableListOf()
         pieceList.forEach{
             piece : Piece -> chessPieceList.add(chessPieceAdapter(board , piece))
         }
-        return chessPieceList
+        return chessPieceList.toList()
     }
-    private fun adaptBoardSize(row : Int , column : Int) : BoardSize{
-        return BoardSize(row , column)
+    private fun adaptBoardSize(board: Board) : BoardSize{
+        return BoardSize(board.getRowSize() , board.getColSize())
     }
     private var states : MutableList<GameState> = mutableListOf()
 
@@ -46,15 +47,15 @@ class Adapter {
     }
     fun adaptGameStateToInitialState(gameState: GameState) : InitialState {
         val board : Board = gameState.getBoardHistory().last()
-        val boardSize = adaptBoardSize(board.getRowSize(), board.getColSize())
-        val chessPieces = piecesAdapter(board, board.getPositionMap().values.toList())
+        val boardSize = adaptBoardSize(board)
+        val chessPieces = pieceListAdapter(board)
         val playerColor = colorAdapter(gameState.getTurnManager().getCurrentPlayer())
         return InitialState(boardSize, chessPieces, playerColor)
     }
     fun adaptMoveResult(result : ResultValidator) : MoveResult{
         val gameState : GameState = states.last()
         val board : Board = gameState.getBoardHistory().last()
-        val chessPieces = piecesAdapter(board, board.getPositionMap().values.toList())
+        val chessPieces = pieceListAdapter(board)
         val playerColor = colorAdapter(gameState.getTurnManager().getCurrentPlayer())
         return when(result){
             is FailureResult -> InvalidMove(result.message )
@@ -64,7 +65,7 @@ class Adapter {
     }
 
     fun translateMovement(move : Move) : Movement{
-
         return Movement(Position(move.from.column , move.from.row) , Position(move.to.column , move.to.row))
     }
+
 }

@@ -24,11 +24,11 @@ class PawnMV : MovementValidator {
             diagonalMV.validateMovement(board, movement) is SuccessfulResult ){
             //first move
             if(checkFirstMove(board , movement)){
-                if(checkWhiteMovement(board, movement) is SuccessfulResult && movement.finalpos.row == movement.initpos.row + 1
+                if(checkWhiteMovement(board, movement) is FailureResult && movement.finalpos.row == movement.initpos.row + 1
                     || movement.finalpos.row == movement.initpos.row + 2){
                     return SuccessfulResult("It's a valid move")
                 }
-                if(checkWhiteMovement(board , movement) is FailureResult && movement.finalpos.row == movement.initpos.row - 1
+                if(checkWhiteMovement(board , movement) is SuccessfulResult && movement.finalpos.row == movement.initpos.row - 1
                     || movement.finalpos.row == movement.initpos.row - 2 ){
                     return SuccessfulResult("It's a valid move")
                 }
@@ -51,12 +51,12 @@ class PawnMV : MovementValidator {
     fun checkFirstMove(board: Board , movement: Movement) : Boolean {
         //White
         if(board.getPieceByPosition(movement.initpos).getPieceColor() == Color.WHITE
-            && movement.initpos.row == 1 ){
+            && movement.initpos.row == 2 ){
             return true
         }
         //black
         if(board.getPieceByPosition(movement.initpos).getPieceColor() == Color.BLACK
-            && movement.initpos.row == 6){
+            && movement.initpos.row == 7){
             return true
         }
         return false
