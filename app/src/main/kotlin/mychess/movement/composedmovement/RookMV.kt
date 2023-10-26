@@ -19,7 +19,7 @@ class RookMV : MovementValidator {
     override fun validateMovement(board: Board, movement: Movement): ResultValidator {
         if(verticalMV.validateMovement(board , movement) is SuccessfulResult ||
                 horizontalMV.validateMovement(board , movement) is SuccessfulResult){
-            if(board.isInBounds(movement.finalpos) && freeMV.validateMovement(board, movement) is SuccessfulResult){
+            if(freeMV.validateMovement(board, movement) is SuccessfulResult){
                 return SuccessfulResult("It's a valid Move")
             }
         }
