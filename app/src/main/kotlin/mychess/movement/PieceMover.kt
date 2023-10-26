@@ -22,7 +22,7 @@ class PieceMover {
             }
             positionMapCopy[finalpos] = pieceToMove
             positionMapCopy.toMap()
-            return BoardFactory.createNewBoard(positionMapCopy , board)
+            return BoardFactory.updateBoard(positionMapCopy , board)
             }
         }
         return board

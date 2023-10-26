@@ -7,12 +7,19 @@ import mychess.board.Position
 import mychess.board.RegularBoard
 import mychess.piece.Color
 import mychess.piece.Piece
+import mychess.result.FailureResult
 
 class BoardFactory {
     companion object {
-        fun createNewBoard(boardMap: Map<Position, Piece>, board: Board): Board {
-            if (board.getBoardType() == BoardType.REGULAR) {
+        fun createNewBoard(boardType: BoardType): Board {
+            if (boardType == BoardType.REGULAR) {
                 return createNewRegularBoard()
+            }
+            return createNewRegularBoard()
+        }
+        fun updateBoard(boardMap: Map<Position , Piece>, board : Board ): Board{
+            if(board.getBoardType() == BoardType.REGULAR){
+                return RegularBoard(BoardType.REGULAR , 8 , 8 , boardMap , board.getPositions())
             }
             return board
         }

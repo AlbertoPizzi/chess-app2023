@@ -1,5 +1,8 @@
 package mychess.game
 
-class TurnManager {
+import mychess.piece.Color
 
+interface TurnManager {
+    fun nextTurn(currentPlayer : Color) : TurnManager
+    fun getCurrentPlayer() : Color
 }
