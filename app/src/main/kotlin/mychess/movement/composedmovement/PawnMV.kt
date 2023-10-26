@@ -50,19 +50,19 @@ class PawnMV : MovementValidator {
     }
     fun checkFirstMove(board: Board , movement: Movement) : Boolean {
         //White
-        if(board.getPieceByPosition(movement.initpos).getPieceColor() == Color.WHITE
+        if(board.getPieceByPosition(movement.initpos)!!.getPieceColor() == Color.WHITE
             && movement.initpos.row == 2 ){
             return true
         }
         //black
-        if(board.getPieceByPosition(movement.initpos).getPieceColor() == Color.BLACK
+        if(board.getPieceByPosition(movement.initpos)!!.getPieceColor() == Color.BLACK
             && movement.initpos.row == 7){
             return true
         }
         return false
     }
     fun checkWhiteMovement(board: Board , movement: Movement) : ResultValidator{
-        if(board.getPieceByPosition(movement.initpos).getPieceColor().equals(Color.WHITE)){
+        if(board.getPieceByPosition(movement.initpos)!!.getPieceColor().equals(Color.WHITE)){
             return SuccessfulResult("It's a white piece!")
         }
         else return FailureResult("It's a black piece!")

@@ -43,8 +43,9 @@ class RegularBoard(
         return positionList
     }
 
-    override fun getPieceByPosition(position: Position): Piece {
-        return positionMap[position]!!
+    override fun getPieceByPosition(position: Position): Piece? {
+       val target : Piece? = positionMap.getValue(position)
+        return target
     }
 
 }
