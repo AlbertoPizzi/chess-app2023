@@ -25,10 +25,10 @@ class BishopMV : MovementValidator {
                     && freePath.validateMovement(board , movement) is SuccessfulResult)
                 return SuccessfulResult("valid movement")
 
-                if(target != null && colorMV.validateMovement(board, movement) is SuccessfulResult){
+                if(target != null && eatMV.validateMovement(board , movement) is FailureResult){
                     return FailureResult("Not valid movement")
                 }
-                else if (target != null && colorMV.validateMovement(board, movement) is FailureResult
+                else if (target != null && eatMV.validateMovement(board, movement) is SuccessfulResult
                     && freePath.validateMovement(board , movement) is SuccessfulResult){
                     return SuccessfulResult("valid movement")
                 }

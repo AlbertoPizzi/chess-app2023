@@ -19,26 +19,33 @@ class PawnMV : MovementValidator {
     private val eatMV: MovementValidator = EatMV()
     private val colorCheck : MovementValidator = ColorMV() //checks Color
     private val pathIsFreeMV : MovementValidator = PathIsFreeMV() //checks free path
-
+    private val positionIsFreeMV : MovementValidator = PositionIsFreeMV() // checks if the final position is free
     override fun validateMovement(board: Board, movement: Movement): ResultValidator {
         //check if movement is part of moveSet
-        if(verticalMV.validateMovement(board, movement) is SuccessfulResult){
-            if(checkFirstMove(board , movement) && movement.finalpos.row.equals(movement.initpos.row + (2 * checkWhiteMovement(board , movement)))
+        if (verticalMV.validateMovement(board, movement) is SuccessfulResult) {
+            if (checkFirstMove(
+                    board,
+                    movement
+                ) && movement.finalpos.row.equals(movement.initpos.row + (2 * checkWhiteMovement(board, movement)))
                 && pathIsFreeMV.validateMovement(board, movement) is SuccessfulResult
-                && checkFreeFinalPos(board , movement.finalpos) is SuccessfulResult){
+                && positionIsFreeMV.validateMovement(board, movement) is SuccessfulResult
+            ) {
                 return SuccessfulResult("It's a valid first move!")
             }
-            if(movement.finalpos.row.equals(movement.initpos.row + (1 * checkWhiteMovement(board , movement)))
-                && checkFreeFinalPos(board , movement.finalpos) is SuccessfulResult
-            ){
+            if (movement.finalpos.row.equals(movement.initpos.row + (1 * checkWhiteMovement(board, movement)))
+                && positionIsFreeMV.validateMovement(board, movement) is SuccessfulResult
+            ) {
                 return SuccessfulResult("It's a valid move!")
             }
         }
-        if(diagonalMV.validateMovement(board , movement) is SuccessfulResult
-            && eatMV.validateMovement(board , movement) is SuccessfulResult){
-            if(movement.finalpos.row.equals(movement.initpos.row + (1 * checkWhiteMovement(board , movement))))
-                return SuccessfulResult("It's a valid move!")
-        }
+        if(positionIsFreeMV.validateMovement(board , movement) is FailureResult){
+            if (diagonalMV.validateMovement(board, movement) is SuccessfulResult
+                && eatMV.validateMovement(board, movement) is SuccessfulResult
+            ) {
+                if (movement.finalpos.row.equals(movement.initpos.row + (1 * checkWhiteMovement(board, movement))))
+                    return SuccessfulResult("It's a valid move!")
+            }
+    }
         return FailureResult("It's not a valid move!")
     }
     fun checkFirstMove(board: Board , movement: Movement) : Boolean {
