@@ -17,7 +17,7 @@ class PathIsFreeMV : MovementValidator {
         val pieceActualPosition : Position = movement.initpos
         val difRow: Int = abs(pieceActualPosition.row - movement.finalpos.row)
         var path: Position
-        for (i in 1..difRow) {
+        for (i in 1..difRow - 1) {
             path = Position(
                 pieceActualPosition.column + i * ((movement.finalpos.column - pieceActualPosition.column)
                         / difRow),

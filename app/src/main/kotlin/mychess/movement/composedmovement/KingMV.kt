@@ -3,10 +3,7 @@ package mychess.movement.composedmovement
 import mychess.board.Board
 import mychess.movement.Movement
 import mychess.movement.MovementValidator
-import mychess.movement.concretemovement.DiagonalMV
-import mychess.movement.concretemovement.EatMV
-import mychess.movement.concretemovement.HorizontalMV
-import mychess.movement.concretemovement.VerticalMV
+import mychess.movement.concretemovement.*
 import mychess.piece.Piece
 import mychess.result.FailureResult
 import mychess.result.ResultValidator
@@ -19,15 +16,20 @@ class KingMV : MovementValidator {
     private val horizontalMV : MovementValidator = HorizontalMV()
     private val verticalMV : MovementValidator = VerticalMV()
     private val eatMV : MovementValidator = EatMV()
-
+    private val positionIsFreeMV : MovementValidator = PositionIsFreeMV()
 
     override fun validateMovement(board: Board, movement: Movement): ResultValidator {
         if(diagonalMV.validateMovement(board , movement) is SuccessfulResult ||
             horizontalMV.validateMovement(board , movement) is SuccessfulResult ||
             verticalMV.validateMovement(board , movement) is SuccessfulResult) {
-            if(checkKingLimit(board, movement)){
-                return SuccessfulResult("This is a valid move for a king!")
-
+            if(checkKingLimit(board, movement)) {
+                if (positionIsFreeMV.validateMovement(board, movement) is SuccessfulResult) {
+                    return SuccessfulResult("This is a valid move for a king!")
+                } else if (positionIsFreeMV.validateMovement(board, movement) is FailureResult
+                    && eatMV.validateMovement(board, movement) is SuccessfulResult
+                ) {
+                    return SuccessfulResult("This is a valid move for a king!")
+                }
             }
         }
         return FailureResult("This is an invalid move for a king!")
