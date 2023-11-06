@@ -22,12 +22,12 @@ class BishopMV : MovementValidator {
     override fun validateMovement(board: Board, movement: Movement): ResultValidator {
         val target : Piece? = board.getPositionMap().get(movement.finalpos)
             if(diagonalMV.validateMovement(board , movement) is SuccessfulResult
-//                && freePath.validateMovement(board , movement) is SuccessfulResult
+                && freePath.validateMovement(board , movement) is SuccessfulResult
             ){
-                if(target != null ){
+                if(target != null && colorMV.validateMovement(board, movement) is SuccessfulResult){
                     return FailureResult("Not valid movement")
                 }
-                if (colorMV.validateMovement(board, movement) is FailureResult){
+                else if (target != null && colorMV.validateMovement(board, movement) is FailureResult){
                     return SuccessfulResult("valid movement")
                 }
             }

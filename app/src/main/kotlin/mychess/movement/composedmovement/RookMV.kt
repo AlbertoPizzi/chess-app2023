@@ -16,13 +16,22 @@ class RookMV : MovementValidator {
     private val horizontalMV : MovementValidator = HorizontalMV()
     private val freeMV: MovementValidator = PathIsFreeMV()
     private val eatMV : MovementValidator = EatMV()
+    private val positionIsFreeMV : MovementValidator = PathIsFreeMV()
     override fun validateMovement(board: Board, movement: Movement): ResultValidator {
-        if(verticalMV.validateMovement(board , movement) is SuccessfulResult ||
-                horizontalMV.validateMovement(board , movement) is SuccessfulResult){
-            if(freeMV.validateMovement(board, movement) is SuccessfulResult){
-                return SuccessfulResult("It's a valid Move")
+        if(positionIsFreeMV.validateMovement(board , movement) is SuccessfulResult){
+            if(freeMV.validateMovement(board , movement) is SuccessfulResult){
+                if(horizontalMV.validateMovement(board , movement) is SuccessfulResult){
+                    return SuccessfulResult("Valid movement")
+                }
+                if(verticalMV.validateMovement(board , movement) is SuccessfulResult){
+                    return SuccessfulResult("Valid movement")
+                }
             }
         }
-        return FailureResult("It's not a valid move")
+        if(positionIsFreeMV.validateMovement(board , movement) is FailureResult
+            && eatMV.validateMovement(board, movement) is SuccessfulResult ){
+            return SuccessfulResult("Valid movement")
+        }
+        return FailureResult("Invalid movement")
     }
 }

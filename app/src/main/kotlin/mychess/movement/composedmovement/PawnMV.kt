@@ -1,6 +1,7 @@
 package mychess.movement.composedmovement
 
 import edu.austral.dissis.chess.gui.Move
+import edu.austral.dissis.chess.gui.Position
 import mychess.board.Board
 import mychess.movement.Movement
 import mychess.movement.MovementValidator
@@ -20,51 +21,48 @@ class PawnMV : MovementValidator {
     private val pathIsFreeMV : MovementValidator = PathIsFreeMV() //checks free path
 
     override fun validateMovement(board: Board, movement: Movement): ResultValidator {
-        if(verticalMV.validateMovement(board , movement) is SuccessfulResult ||
-            diagonalMV.validateMovement(board, movement) is SuccessfulResult ){
-            //first move
-            if(checkFirstMove(board , movement)){
-                if(checkWhiteMovement(board, movement) is FailureResult && movement.finalpos.row == movement.initpos.row + 1
-                    || movement.finalpos.row == movement.initpos.row + 2){
-                    return SuccessfulResult("It's a valid move")
-                }
-                if(checkWhiteMovement(board , movement) is SuccessfulResult && movement.finalpos.row == movement.initpos.row - 1
-                    || movement.finalpos.row == movement.initpos.row - 2 ){
-                    return SuccessfulResult("It's a valid move")
-                }
+        //check if movement is part of moveSet
+        if(verticalMV.validateMovement(board, movement) is SuccessfulResult){
+            if(checkFirstMove(board , movement) && movement.finalpos.row.equals(movement.initpos.row + (2 * checkWhiteMovement(board , movement)))
+                && pathIsFreeMV.validateMovement(board, movement) is SuccessfulResult
+                && checkFreeFinalPos(board , movement.finalpos) is SuccessfulResult){
+                return SuccessfulResult("It's a valid first move!")
             }
-            //eat
-            if(diagonalMV.validateMovement(board, movement) is SuccessfulResult && eatMV.validateMovement(board, movement) is SuccessfulResult){
-                return SuccessfulResult("It's a valid move")
-            }
-            if(verticalMV.validateMovement(board, movement) is SuccessfulResult){
-                if(checkWhiteMovement(board, movement) is SuccessfulResult && movement.finalpos.row == movement.initpos.row + 1){
-                    return SuccessfulResult("It's a valid move")
-                }
-                if(checkWhiteMovement(board , movement) is FailureResult && movement.finalpos.row == movement.initpos.row - 1){
-                    return SuccessfulResult("It's a valid move")
-                }
+            if(movement.finalpos.row.equals(movement.initpos.row + (1 * checkWhiteMovement(board , movement)))
+                && checkFreeFinalPos(board , movement.finalpos) is SuccessfulResult
+            ){
+                return SuccessfulResult("It's a valid move!")
             }
         }
-        return FailureResult("It's not a valid Pawn move")
+        if(diagonalMV.validateMovement(board , movement) is SuccessfulResult
+            && eatMV.validateMovement(board , movement) is SuccessfulResult){
+            if(movement.finalpos.row.equals(movement.initpos.row + (1 * checkWhiteMovement(board , movement))))
+                return SuccessfulResult("It's a valid move!")
+        }
+        return FailureResult("It's not a valid move!")
     }
     fun checkFirstMove(board: Board , movement: Movement) : Boolean {
         //White
-        if(board.getPieceByPosition(movement.initpos)!!.getPieceColor() == Color.WHITE
+        if(board.getPieceByPosition(movement.initpos)?.getPieceColor() == Color.WHITE
             && movement.initpos.row == 2 ){
             return true
         }
         //black
-        if(board.getPieceByPosition(movement.initpos)!!.getPieceColor() == Color.BLACK
+        if(board.getPieceByPosition(movement.initpos)?.getPieceColor() == Color.BLACK
             && movement.initpos.row == 7){
             return true
         }
         return false
     }
-    fun checkWhiteMovement(board: Board , movement: Movement) : ResultValidator{
-        if(board.getPieceByPosition(movement.initpos)!!.getPieceColor().equals(Color.WHITE)){
-            return SuccessfulResult("It's a white piece!")
+    fun checkWhiteMovement(board: Board , movement: Movement) : Int{
+        return if(board.getPieceByPosition(movement.initpos)?.getPieceColor() == Color.WHITE){
+            1
+        } else return -1
+    }
+    fun checkFreeFinalPos(board : Board , finalpos: mychess.board.Position) : ResultValidator{
+        if(!board.getPositionMap().containsKey(finalpos)){
+            return SuccessfulResult("that's a free square")
         }
-        else return FailureResult("It's a black piece!")
+        return FailureResult("Position not free")
     }
 }

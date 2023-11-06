@@ -19,8 +19,9 @@ class PieceMover {
                 positionMapCopy.remove(initPos)
             }else{
                 positionMapCopy.remove(finalpos)
+                positionMapCopy.remove(initPos)
             }
-            positionMapCopy[finalpos] = pieceToMove
+            positionMapCopy[Position(finalpos.column , finalpos.row)] = pieceToMove
             positionMapCopy.toMap()
             return BoardFactory.updateBoard(positionMapCopy , board)
             }

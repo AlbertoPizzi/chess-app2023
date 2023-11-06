@@ -16,9 +16,7 @@ class KnightMV : MovementValidator {
         val difRow : Int = abs(movement.initpos.row - movement.finalpos.row )
         val difCol : Int = abs(movement.initpos.column - movement.finalpos.column)
         if ((difRow == 1 && difCol == 2) || (difRow == 2 && difCol == 1)){
-            if (colorMV.validateMovement(board, movement) is SuccessfulResult){
                 return SuccessfulResult("Is valid movement")
-            }
         }
         return FailureResult("Not valid movement")
         }

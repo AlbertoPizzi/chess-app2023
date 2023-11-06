@@ -7,10 +7,10 @@ import mychess.result.FailureResult
 import mychess.result.ResultValidator
 import mychess.result.SuccessfulResult
 
-class HorizontalMV : MovementValidator {
+class PositionIsFreeMV : MovementValidator {
     override fun validateMovement(board: Board, movement: Movement): ResultValidator {
-        return if(board.isInBounds(movement.finalpos) && (movement.initpos.row == movement.finalpos.row)){
-            SuccessfulResult("It is a horizontal Movement")
-        } else FailureResult("It is not a horizontal movement!")
+        return if(board.getPositionMap().containsKey(movement.finalpos)){
+            FailureResult("Position isn't free")
+        } else SuccessfulResult("Position is Free")
     }
 }

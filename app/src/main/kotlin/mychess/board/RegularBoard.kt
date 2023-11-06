@@ -27,7 +27,7 @@ class RegularBoard(
     }
 
     override fun isInBounds(position: Position): Boolean {
-        return (position.column in 0 until colSize) && (position.row in 0 until rowSize)
+        return (position.column in 1 .. colSize) && (position.row in 1 .. rowSize)
     }
 
     override fun getPositionByPiece(piece: Piece): Position {
@@ -44,8 +44,7 @@ class RegularBoard(
     }
 
     override fun getPieceByPosition(position: Position): Piece? {
-       val target : Piece? = positionMap.getValue(position)
-        return target
+        return positionMap.getValue(position)
     }
 
 }

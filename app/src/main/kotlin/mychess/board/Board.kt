@@ -11,4 +11,5 @@ interface Board {
     fun getPositionByPiece(piece: Piece) : Position
     fun getPositions() : List<Position>
     fun getPieceByPosition(position: Position) : Piece?
+
 }

@@ -15,18 +15,18 @@ class Adapter {
     private fun positionAdapter(position: Position) : edu.austral.dissis.chess.gui.Position{
         return edu.austral.dissis.chess.gui.Position(position.row , position.column)
     }
-    private fun colorAdapter(color: Color) : PlayerColor{
+     fun colorAdapter(color: Color) : PlayerColor{
         return if(color == Color.WHITE) PlayerColor.WHITE
         else PlayerColor.BLACK
     }
-    private fun chessPieceAdapter(board: Board ,piece : Piece) : ChessPiece{
+     fun chessPieceAdapter(board: Board ,piece : Piece) : ChessPiece{
         return ChessPiece(piece.getId(), colorAdapter(piece.getPieceColor()) ,positionAdapter(board.getPositionByPiece(piece)),
         piece.getPieceType().toString().lowercase())
     }
     private fun moveAdapter(movement : Movement) : Move{
         return Move(positionAdapter(movement.initpos) , positionAdapter(movement.finalpos))
     }
-    private fun pieceListAdapter(board: Board ): List<ChessPiece>{
+     fun pieceListAdapter(board: Board ): List<ChessPiece>{
         val pieceList : List<Piece> = board.getPositionMap().values.toList()
         val chessPieceList : MutableList<ChessPiece> = mutableListOf()
         pieceList.forEach{
