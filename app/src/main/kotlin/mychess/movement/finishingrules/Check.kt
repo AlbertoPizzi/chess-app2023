@@ -1,4 +1,4 @@
 package mychess.movement.finishingrules
 
-class Check {
+class Check : MatchEndingRules {
 }

@@ -1,4 +1,4 @@
 package mychess.movement.finishingrules
 
-class tie {
+class tie : MatchEndingRules {
 }

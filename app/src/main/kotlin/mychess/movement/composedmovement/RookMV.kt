@@ -28,7 +28,10 @@ class RookMV : MovementValidator {
         if(positionIsFreeMV.validateMovement(board , movement) is FailureResult
             && eatMV.validateMovement(board, movement) is SuccessfulResult
             && freeMV.validateMovement(board , movement) is SuccessfulResult){
-            return SuccessfulResult("Valid movement")
+            if(horizontalMV.validateMovement(board , movement) is SuccessfulResult
+                || verticalMV.validateMovement(board, movement) is SuccessfulResult ){
+                return SuccessfulResult("Valid movement")
+            }
         }
         return FailureResult("Invalid movement")
     }
