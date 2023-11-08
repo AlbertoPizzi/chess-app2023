@@ -47,4 +47,8 @@ class RegularBoard(
         return positionMap.getValue(position)
     }
 
+    override fun getPieces(): List<Piece> {
+        return positionMap.values.toList()
+    }
+
 }

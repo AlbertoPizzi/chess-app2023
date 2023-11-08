@@ -7,12 +7,16 @@ import mychess.board.BoardType
 import mychess.board.Position
 import mychess.factory.BoardFactory
 import mychess.movement.PieceMover
+import mychess.movement.endvalidators.KingIsDeadValidator
+import mychess.movement.endvalidators.MatchEndingValidator
 import mychess.piece.Color
+import mychess.result.GameOver
 
 class ApeEngine : GameEngine {
     //    private val game  = Game()
     private val adapter = Adapter()
     private val pieceMover = PieceMover()
+    private val kingIsDeadValidator : MatchEndingValidator = KingIsDeadValidator()
     override fun applyMove(move: Move): MoveResult {
         val initPosition: Position = Position(move.from.column, move.from.row)
         val finalPosition: Position = Position(move.to.column, move.to.row)
@@ -30,12 +34,17 @@ class ApeEngine : GameEngine {
                     return InvalidMove("Invalid movement for " +
                             pieceToMove.getId().takeWhile { it.isLetter() })
                 }
-//            val kingColor = pieceToMove.getPieceColor()
+                if(kingIsDeadValidator.validate(board) is GameOver){
+                    if(turnManager.getCurrentPlayer() == Color.WHITE){
+                        return edu.austral.dissis.chess.gui.GameOver(adapter.colorAdapter(Color.BLACK))
+                    }
+                    else return edu.austral.dissis.chess.gui.GameOver(adapter.colorAdapter(Color.WHITE))
+                }
 
                 val history: List<Board> = createHistoryFromBoard(newBoard)
                 val advanceTurn = turnManager.nextTurn(pieceToMove.getPieceColor())
-                adapter.saveHistory(GameState(advanceTurn, history))
 
+                adapter.saveHistory(GameState(advanceTurn, history))
 
                 return NewGameState(
                     adapter.pieceListAdapter(newBoard),
