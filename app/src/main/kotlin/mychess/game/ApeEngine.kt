@@ -36,9 +36,9 @@ class ApeEngine : GameEngine {
                 }
                 if(kingIsDeadValidator.validate(board) is GameOver){
                     if(turnManager.getCurrentPlayer() == Color.WHITE){
-                        return edu.austral.dissis.chess.gui.GameOver(adapter.colorAdapter(Color.BLACK))
+                        return GameOver(adapter.colorAdapter(Color.BLACK))
                     }
-                    else return edu.austral.dissis.chess.gui.GameOver(adapter.colorAdapter(Color.WHITE))
+                    else return GameOver(adapter.colorAdapter(Color.WHITE))
                 }
 
                 val history: List<Board> = createHistoryFromBoard(newBoard)

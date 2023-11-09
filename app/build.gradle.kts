@@ -1,7 +1,7 @@
 plugins {
     java
     application
-    kotlin("jvm") version "1.7.10"
+    kotlin("jvm") version "1.9.10"
     id("org.openjfx.javafxplugin").version("0.0.13")
 
 }
@@ -25,8 +25,8 @@ dependencies {
     implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("edu.austral.dissis.chess:chess-ui:1.0.0")
-}
-
+    implementation("edu.austral.dissis.chess:simple-client-server:1.2.0")
+    }
 javafx {
     version = "18"
     modules = listOf("javafx.graphics")

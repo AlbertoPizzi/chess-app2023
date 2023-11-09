@@ -3,10 +3,7 @@
  */
 package edu.austral.dissis.chess
 
-import edu.austral.dissis.chess.gui.CachedImageResolver
-import edu.austral.dissis.chess.gui.DefaultImageResolver
-import edu.austral.dissis.chess.gui.GameView
-import edu.austral.dissis.chess.gui.SimpleGameEngine
+import edu.austral.dissis.chess.gui.*
 import javafx.application.Application
 import javafx.application.Application.launch
 import javafx.scene.Scene
@@ -29,9 +26,10 @@ class ChessGameApplication : Application() {
     override fun start(primaryStage: Stage) {
         primaryStage.title = GameTitle
 
-        val root = GameView(gameEngine, imageResolver)
+        val root = GameView(gameEngine ,imageResolver)
         primaryStage.scene = Scene(root)
 
+//        root.addListener(GameEventListener)
         primaryStage.show()
     }
 }
