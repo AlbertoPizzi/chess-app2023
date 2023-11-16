@@ -1,14 +1,12 @@
 package mychess.movement.composedmovement
 
 import mychess.board.Board
-import mychess.movement.Movement
-import mychess.movement.MovementValidator
-import mychess.movement.concretemovement.*
-import mychess.piece.Piece
-import mychess.result.FailureResult
-import mychess.result.ResultValidator
-import mychess.result.SuccessfulResult
-import java.lang.Math.E
+import commons.movementvalidators.Movement
+import commons.movementvalidators.MovementValidator
+import commons.movementvalidators.concretemovement.*
+import commons.result.FailureResult
+import commons.result.ResultValidator
+import commons.result.SuccessfulResult
 import java.lang.Math.abs
 
 class KingMV : MovementValidator {
@@ -21,7 +19,8 @@ class KingMV : MovementValidator {
     override fun validateMovement(board: Board, movement: Movement): ResultValidator {
         if(diagonalMV.validateMovement(board , movement) is SuccessfulResult ||
             horizontalMV.validateMovement(board , movement) is SuccessfulResult ||
-            verticalMV.validateMovement(board , movement) is SuccessfulResult) {
+            verticalMV.validateMovement(board , movement) is SuccessfulResult
+        ) {
             if(checkKingLimit(board, movement)) {
                 if (positionIsFreeMV.validateMovement(board, movement) is SuccessfulResult) {
                     return SuccessfulResult("This is a valid move for a king!")

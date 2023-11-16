@@ -1,12 +1,11 @@
 package mychess.movement.composedmovement
 
-import edu.austral.dissis.chess.gui.Move
 import mychess.board.Board
-import mychess.movement.Movement
-import mychess.movement.MovementValidator
-import mychess.result.FailureResult
-import mychess.result.ResultValidator
-import mychess.result.SuccessfulResult
+import commons.movementvalidators.Movement
+import commons.movementvalidators.MovementValidator
+import commons.result.FailureResult
+import commons.result.ResultValidator
+import commons.result.SuccessfulResult
 
 class QueenMV : MovementValidator {
     private val rookMV : MovementValidator = RookMV()

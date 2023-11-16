@@ -4,12 +4,12 @@
 //import mychess.board.Board
 //import mychess.board.BoardType
 //import mychess.factory.BoardFactory
-//import mychess.movement.Movement
-//import mychess.movement.PieceMover
-//import mychess.piece.Color
-//import mychess.result.FailureResult
-//import mychess.result.ResultValidator
-//import mychess.result.SuccessfulResult
+//import commons.movementvalidators.Movement
+//import commons.movementvalidators.PieceMover
+//import commons.Color
+//import commons.FailureResult
+//import commons.ResultValidator
+//import commons.SuccessfulResult
 //import java.util.Scanner
 //
 //class Game {

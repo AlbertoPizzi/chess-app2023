@@ -1,7 +1,7 @@
 package mychess.board
 
 import mychess.exceptions.PieceNotFoundException
-import mychess.piece.Piece
+import commons.piece.Piece
 
 class RegularBoard(
     private val boardType: BoardType,

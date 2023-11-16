@@ -1,12 +1,12 @@
 package mychess.movement.composedmovement
 
 import mychess.board.Board
-import mychess.movement.Movement
-import mychess.movement.MovementValidator
-import mychess.movement.concretemovement.*
-import mychess.result.FailureResult
-import mychess.result.ResultValidator
-import mychess.result.SuccessfulResult
+import commons.movementvalidators.Movement
+import commons.movementvalidators.MovementValidator
+import commons.movementvalidators.concretemovement.*
+import commons.result.FailureResult
+import commons.result.ResultValidator
+import commons.result.SuccessfulResult
 
 class RookMV : MovementValidator {
     private val verticalMV : MovementValidator = VerticalMV()
@@ -27,9 +27,11 @@ class RookMV : MovementValidator {
         }
         if(positionIsFreeMV.validateMovement(board , movement) is FailureResult
             && eatMV.validateMovement(board, movement) is SuccessfulResult
-            && freeMV.validateMovement(board , movement) is SuccessfulResult){
+            && freeMV.validateMovement(board , movement) is SuccessfulResult
+        ){
             if(horizontalMV.validateMovement(board , movement) is SuccessfulResult
-                || verticalMV.validateMovement(board, movement) is SuccessfulResult ){
+                || verticalMV.validateMovement(board, movement) is SuccessfulResult
+            ){
                 return SuccessfulResult("Valid movement")
             }
         }

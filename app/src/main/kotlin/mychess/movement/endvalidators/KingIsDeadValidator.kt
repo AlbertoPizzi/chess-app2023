@@ -1,9 +1,11 @@
 package mychess.movement.endvalidators
 
 import mychess.board.Board
-import mychess.piece.Piece
-import mychess.piece.PieceType
-import mychess.result.*
+import commons.piece.Piece
+import commons.piece.PieceType
+import commons.result.FailureResult
+import commons.result.GameOver
+import commons.result.ResultValidator
 
 class KingIsDeadValidator : MatchEndingValidator {
 

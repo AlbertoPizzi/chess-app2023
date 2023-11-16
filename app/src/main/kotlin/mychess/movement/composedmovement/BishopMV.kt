@@ -1,15 +1,13 @@
 package mychess.movement.composedmovement
 
-import com.sun.net.httpserver.Authenticator.Success
-import edu.austral.dissis.chess.gui.Move
 import mychess.board.Board
-import mychess.movement.Movement
-import mychess.movement.MovementValidator
-import mychess.movement.concretemovement.*
-import mychess.piece.Piece
-import mychess.result.FailureResult
-import mychess.result.ResultValidator
-import mychess.result.SuccessfulResult
+import commons.movementvalidators.Movement
+import commons.movementvalidators.MovementValidator
+import commons.movementvalidators.concretemovement.*
+import commons.piece.Piece
+import commons.result.FailureResult
+import commons.result.ResultValidator
+import commons.result.SuccessfulResult
 
 class BishopMV : MovementValidator {
     private val diagonalMV : MovementValidator = DiagonalMV ()
@@ -22,14 +20,16 @@ class BishopMV : MovementValidator {
             if(diagonalMV.validateMovement(board , movement) is SuccessfulResult
             ){
                 if(positionIsFreeMV.validateMovement(board, movement) is SuccessfulResult
-                    && freePath.validateMovement(board , movement) is SuccessfulResult)
+                    && freePath.validateMovement(board , movement) is SuccessfulResult
+                )
                 return SuccessfulResult("valid movement")
 
                 if(target != null && eatMV.validateMovement(board , movement) is FailureResult){
                     return FailureResult("Not valid movement")
                 }
                 else if (target != null && eatMV.validateMovement(board, movement) is SuccessfulResult
-                    && freePath.validateMovement(board , movement) is SuccessfulResult){
+                    && freePath.validateMovement(board , movement) is SuccessfulResult
+                ){
                     return SuccessfulResult("valid movement")
                 }
             }

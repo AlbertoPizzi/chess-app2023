@@ -1,7 +1,7 @@
 package mychess.movement.endvalidators
 
 import mychess.board.Board
-import mychess.result.ResultValidator
+import commons.result.ResultValidator
 
 class tie : MatchEndingValidator {
     override fun validate(board: Board): ResultValidator {

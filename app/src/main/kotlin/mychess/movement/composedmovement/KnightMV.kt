@@ -1,16 +1,14 @@
 package mychess.movement.composedmovement
 
-import edu.austral.dissis.chess.gui.Move
 import mychess.board.Board
-import mychess.board.Position
-import mychess.movement.Movement
-import mychess.movement.MovementValidator
-import mychess.movement.concretemovement.ColorMV
-import mychess.movement.concretemovement.EatMV
-import mychess.movement.concretemovement.PositionIsFreeMV
-import mychess.result.FailureResult
-import mychess.result.ResultValidator
-import mychess.result.SuccessfulResult
+import commons.movementvalidators.Movement
+import commons.movementvalidators.MovementValidator
+import commons.movementvalidators.concretemovement.ColorMV
+import commons.movementvalidators.concretemovement.EatMV
+import commons.movementvalidators.concretemovement.PositionIsFreeMV
+import commons.result.FailureResult
+import commons.result.ResultValidator
+import commons.result.SuccessfulResult
 import kotlin.math.abs
 
 class KnightMV : MovementValidator {
@@ -24,7 +22,8 @@ class KnightMV : MovementValidator {
             if(positionIsFreeMV.validateMovement(board , movement) is SuccessfulResult)
                 return SuccessfulResult("Is valid movement")
             else if(positionIsFreeMV.validateMovement(board , movement) is FailureResult
-                && eatMV.validateMovement(board , movement) is SuccessfulResult)
+                && eatMV.validateMovement(board , movement) is SuccessfulResult
+            )
                 return SuccessfulResult("Is valid movement")
         }
         return FailureResult("Not valid movement")

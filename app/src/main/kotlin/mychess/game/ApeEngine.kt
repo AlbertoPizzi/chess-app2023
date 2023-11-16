@@ -6,11 +6,11 @@ import mychess.board.Board
 import mychess.board.BoardType
 import mychess.board.Position
 import mychess.factory.BoardFactory
-import mychess.movement.PieceMover
+import commons.movementvalidators.PieceMover
 import mychess.movement.endvalidators.KingIsDeadValidator
 import mychess.movement.endvalidators.MatchEndingValidator
-import mychess.piece.Color
-import mychess.result.GameOver
+import commons.piece.Color
+import commons.result.GameOver
 
 class ApeEngine : GameEngine {
     //    private val game  = Game()

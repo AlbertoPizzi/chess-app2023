@@ -1,17 +1,13 @@
 package mychess.movement.composedmovement
 
-import edu.austral.dissis.chess.gui.Move
-import edu.austral.dissis.chess.gui.Position
 import mychess.board.Board
-import mychess.movement.Movement
-import mychess.movement.MovementValidator
-import mychess.movement.concretemovement.*
-import mychess.piece.Color
-import mychess.piece.Piece
-import mychess.piece.PieceType
-import mychess.result.FailureResult
-import mychess.result.ResultValidator
-import mychess.result.SuccessfulResult
+import commons.movementvalidators.Movement
+import commons.movementvalidators.MovementValidator
+import commons.movementvalidators.concretemovement.*
+import commons.piece.Color
+import commons.result.FailureResult
+import commons.result.ResultValidator
+import commons.result.SuccessfulResult
 
 class PawnMV : MovementValidator {
     private val verticalMV : MovementValidator = VerticalMV() //moves
@@ -66,7 +62,7 @@ class PawnMV : MovementValidator {
             1
         } else return -1
     }
-    fun checkFreeFinalPos(board : Board , finalpos: mychess.board.Position) : ResultValidator{
+    fun checkFreeFinalPos(board : Board , finalpos: mychess.board.Position) : ResultValidator {
         if(!board.getPositionMap().containsKey(finalpos)){
             return SuccessfulResult("that's a free square")
         }
