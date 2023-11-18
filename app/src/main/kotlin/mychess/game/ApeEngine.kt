@@ -17,6 +17,21 @@ class ApeEngine : GameEngine {
     private val adapter = Adapter()
     private val pieceMover = PieceMover()
     private val kingIsDeadValidator : MatchEndingValidator = KingIsDeadValidator()
+
+    override fun init(): InitialState {
+        val board = BoardFactory.createNewBoard(BoardType.REGULAR)
+        val boardHistory: List<Board> = createHistoryFromBoard(board)
+        val turnManager: TurnManager = ClassicTurn(Color.WHITE)
+        val gameState = GameState(turnManager, boardHistory)
+        adapter.saveHistory(gameState)
+        return adapter.adaptGameStateToInitialState(gameState)
+    }
+
+    private fun createHistoryFromBoard(board: Board): List<Board> {
+        val boardHistory: MutableList<Board> = mutableListOf()
+        boardHistory.add(board)
+        return boardHistory
+    }
     override fun applyMove(move: Move): MoveResult {
         val initPosition: Position = Position(move.from.column, move.from.row)
         val finalPosition: Position = Position(move.to.column, move.to.row)
@@ -54,21 +69,5 @@ class ApeEngine : GameEngine {
         }
     }
 
-    override fun init(): InitialState {
-        val board = BoardFactory.createNewBoard(BoardType.REGULAR)
-        println(board.getPositionMap().keys)
-        val boardHistory: List<Board> = createHistoryFromBoard(board)
-        val turnManager: TurnManager = ClassicTurn(Color.WHITE)
-        val gameState = GameState(turnManager, boardHistory)
-        adapter.saveHistory(gameState)
-        println(board.getPositionMap().size)
-        println(board.getPositionMap().values.toString())
-        return adapter.adaptGameStateToInitialState(gameState)
-    }
 
-    private fun createHistoryFromBoard(board: Board): List<Board> {
-        val boardHistory: MutableList<Board> = mutableListOf()
-        boardHistory.add(board)
-        return boardHistory
-    }
 }

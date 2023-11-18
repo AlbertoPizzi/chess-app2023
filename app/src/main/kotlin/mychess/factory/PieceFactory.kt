@@ -27,5 +27,8 @@ class PieceFactory {
         fun buildQueen(pieceColor: Color): Piece {
             return Piece(PieceType.QUEEN,"queen " + id++  , pieceColor , listOf(QueenMV()))
         }
+        fun buildSithMaster(pieceColor: Color): Piece{
+            return Piece(PieceType.KING , "SM" + id++ , pieceColor , listOf(SithMasterMV()))
+        }
     }
 }
