@@ -1,5 +1,5 @@
-//package clientserver.netty
-//
+package clientserver.netty
+
 //import edu.austral.ingsis.clientserver.*
 //import edu.austral.ingsis.clientserver.Server
 //import edu.austral.ingsis.clientserver.netty.client.NettyClientBuilder
