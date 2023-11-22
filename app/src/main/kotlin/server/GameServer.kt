@@ -18,7 +18,7 @@ class GameServer {
 
     private val gameEngine = ApeEngine()
     fun handleMove(message: Message<Move>) {
-        when(val moveResult = gameEngine.applyMove(message.payload)){
+        when (val moveResult = gameEngine.applyMove(message.payload)) {
             is GameOver -> server.broadcast(Message("game-over", moveResult))
             is InvalidMove -> server.broadcast(Message("invalid", moveResult))
             is NewGameState -> server.broadcast(Message("new-game-state", moveResult))
@@ -30,11 +30,11 @@ class GameServer {
     }
 
 
-    fun startServer(){
+    fun startServer() {
         server.start()
     }
 
-    fun stopServer(){
+    fun stopServer() {
         server.stop()
     }
 }

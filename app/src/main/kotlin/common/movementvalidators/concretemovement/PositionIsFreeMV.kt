@@ -9,7 +9,7 @@ import common.result.SuccessfulResult
 
 class PositionIsFreeMV : MovementValidator {
     override fun validateMovement(board: Board, movement: Movement): ResultValidator {
-        return if(board.getPositionMap().containsKey(movement.finalpos)){
+        return if (board.getPositionMap().containsKey(movement.finalpos)) {
             FailureResult("Position isn't free")
         } else SuccessfulResult("Position is Free")
     }

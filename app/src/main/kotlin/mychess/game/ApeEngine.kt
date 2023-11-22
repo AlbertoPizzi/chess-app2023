@@ -16,7 +16,7 @@ class ApeEngine : GameEngine {
     //    private val game  = Game()
     private val adapter = Adapter()
     private val pieceMover = PieceMover()
-    private val kingIsDeadValidator : MatchEndingValidator = KingIsDeadValidator()
+    private val kingIsDeadValidator: MatchEndingValidator = KingIsDeadValidator()
 
     override fun init(): InitialState {
         val board = BoardFactory.createNewBoard(BoardType.REGULAR)
@@ -32,6 +32,7 @@ class ApeEngine : GameEngine {
         boardHistory.add(board)
         return boardHistory
     }
+
     override fun applyMove(move: Move): MoveResult {
         val initPosition: Position = Position(move.from.column, move.from.row)
         val finalPosition: Position = Position(move.to.column, move.to.row)
@@ -49,11 +50,10 @@ class ApeEngine : GameEngine {
                     return InvalidMove("Invalid movement for " +
                             pieceToMove.getId().takeWhile { it.isLetter() })
                 }
-                if(kingIsDeadValidator.validate(board) is GameOver){
-                    if(turnManager.getCurrentPlayer() == Color.WHITE){
+                if (kingIsDeadValidator.validate(board) is GameOver) {
+                    if (turnManager.getCurrentPlayer() == Color.WHITE) {
                         return GameOver(adapter.colorAdapter(Color.BLACK))
-                    }
-                    else return GameOver(adapter.colorAdapter(Color.WHITE))
+                    } else return GameOver(adapter.colorAdapter(Color.WHITE))
                 }
 
                 val history: List<Board> = createHistoryFromBoard(newBoard)

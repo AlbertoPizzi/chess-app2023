@@ -15,7 +15,7 @@ class RegularBoard(
     }
 
     override fun getColSize(): Int {
-       return colSize
+        return colSize
     }
 
     override fun getRowSize(): Int {
@@ -27,12 +27,12 @@ class RegularBoard(
     }
 
     override fun isInBounds(position: Position): Boolean {
-        return (position.column in 1 .. colSize) && (position.row in 1 .. rowSize)
+        return (position.column in 1..colSize) && (position.row in 1..rowSize)
     }
 
     override fun getPositionByPiece(piece: Piece): Position {
-        for( i in positionMap.keys){
-            if(piece == positionMap[i]){
+        for (i in positionMap.keys) {
+            if (piece == positionMap[i]) {
                 return i
             }
         }

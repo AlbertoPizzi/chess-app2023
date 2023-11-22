@@ -10,9 +10,11 @@ import common.result.SuccessfulResult
 
 class ColorMV : MovementValidator {
     override fun validateMovement(board: Board, movement: Movement): ResultValidator {
-        val target : Piece? = board.getPieceByPosition(movement.finalpos)
-        if(target != null){
-            if(target.getPieceColor() == (board.getPieceByPosition(movement.initpos)?.getPieceColor()) ){//TODO: FIJATE EN ESTO BOLUDO
+        val target: Piece? = board.getPieceByPosition(movement.finalpos)
+        if (target != null) {
+            if (target.getPieceColor() == (board.getPieceByPosition(movement.initpos)
+                    ?.getPieceColor())
+            ) {//TODO: FIJATE EN ESTO BOLUDO
                 return SuccessfulResult("Pieces are the same Color!")
             }
         }

@@ -1,6 +1,6 @@
 package server
 
-fun main(){
+fun main() {
     val server = GameServer()
     server.startServer()
 }

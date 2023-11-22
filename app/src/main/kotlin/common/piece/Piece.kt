@@ -2,17 +2,25 @@ package common.piece
 
 import common.movementvalidators.MovementValidator
 
-class Piece(private val type: PieceType ,private val id: String, private val pieceColor: Color, private val movementList: List<MovementValidator>){
-    fun getId() : String{
+class Piece(
+    private val type: PieceType,
+    private val id: String,
+    private val pieceColor: Color,
+    private val movementList: List<MovementValidator>
+) {
+    fun getId(): String {
         return id
     }
-    fun getPieceColor() : Color {
+
+    fun getPieceColor(): Color {
         return pieceColor
     }
-    fun getMovementList(): List<MovementValidator>{
+
+    fun getMovementList(): List<MovementValidator> {
         return movementList
     }
-    fun getPieceType():PieceType{
+
+    fun getPieceType(): PieceType {
         return type
     }
 

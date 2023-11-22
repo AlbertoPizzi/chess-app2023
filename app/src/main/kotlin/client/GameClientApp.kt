@@ -8,15 +8,17 @@ import javafx.scene.Scene
 import javafx.stage.Stage
 
 
-fun main(){
+fun main() {
     Application.launch(ChessClientApp::class.java)
 }
 
 class ChessClientApp : Application() {
     private val imageResolver = CachedImageResolver(DefaultImageResolver())
+
     companion object {
         const val GameTitle = "Chess"
     }
+
     override fun start(primaryStage: Stage) {
         primaryStage.title = GameTitle
         val root = GameView(imageResolver)

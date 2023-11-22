@@ -1,4 +1,4 @@
 package common.result
 
-class GameOver(val message : String) : ResultValidator {
+class GameOver(val message: String) : ResultValidator {
 }

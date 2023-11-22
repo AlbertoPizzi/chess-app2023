@@ -12,7 +12,7 @@ import kotlin.math.abs
 
 class PathIsFreeMV : MovementValidator {
     override fun validateMovement(board: Board, movement: Movement): ResultValidator {
-        val pieceActualPosition : Position = movement.initpos
+        val pieceActualPosition: Position = movement.initpos
         val difRow: Int = abs(pieceActualPosition.row - movement.finalpos.row)
         var path: Position
         for (i in 1..difRow - 1) {

@@ -10,7 +10,7 @@ import edu.austral.ingsis.clientserver.netty.client.NettyClientBuilder
 import javafx.application.Platform
 import java.net.InetSocketAddress
 
-class GameClient ( private val gameView : GameView){
+class GameClient(private val gameView: GameView) {
     private val client =
         NettyClientBuilder.createDefault()
             .withAddress(InetSocketAddress(8080))
@@ -26,13 +26,14 @@ class GameClient ( private val gameView : GameView){
         Thread.sleep(200)
         client.send(Message("init", Unit))
     }
-    fun handleMoveResult(moveResult: MoveResult){
+
+    fun handleMoveResult(moveResult: MoveResult) {
         Platform.runLater {
             gameView.handleMoveResult(moveResult)
         }
     }
 
-    fun move(move: Move){
+    fun move(move: Move) {
         client.send(Message("move", move))
     }
 

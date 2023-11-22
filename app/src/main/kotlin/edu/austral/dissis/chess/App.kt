@@ -26,7 +26,7 @@ class ChessGameApplication : Application() {
     override fun start(primaryStage: Stage) {
         primaryStage.title = GameTitle
 
-        val root = createGameViewFrom(gameEngine,  imageResolver)
+        val root = createGameViewFrom(gameEngine, imageResolver)
         primaryStage.scene = Scene(root)
         root.handleInitialState(gameEngine.init())
         primaryStage.show()

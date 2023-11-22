@@ -8,15 +8,13 @@ import common.result.ResultValidator
 import common.result.SuccessfulResult
 
 class QueenMV : MovementValidator {
-    private val rookMV : MovementValidator = RookMV()
-    private val bishopMV : MovementValidator = BishopMV()
+    private val rookMV: MovementValidator = RookMV()
+    private val bishopMV: MovementValidator = BishopMV()
     override fun validateMovement(board: Board, movement: Movement): ResultValidator {
-        if(rookMV.validateMovement(board , movement) is SuccessfulResult){
+        if (rookMV.validateMovement(board, movement) is SuccessfulResult) {
             return SuccessfulResult("Rook Movement is valid")
-        }
-        else if(bishopMV.validateMovement(board, movement) is SuccessfulResult){
+        } else if (bishopMV.validateMovement(board, movement) is SuccessfulResult) {
             return SuccessfulResult("Bishop Movement is valid")
-        }
-        else return FailureResult("Movement not valid")
+        } else return FailureResult("Movement not valid")
     }
 }
