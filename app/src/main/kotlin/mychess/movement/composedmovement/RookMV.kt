@@ -1,12 +1,12 @@
 package mychess.movement.composedmovement
 
 import mychess.board.Board
-import mychess.movement.Movement
-import mychess.movement.MovementValidator
-import mychess.movement.concretemovement.*
-import mychess.result.FailureResult
-import mychess.result.ResultValidator
-import mychess.result.SuccessfulResult
+import common.movementvalidators.Movement
+import common.movementvalidators.MovementValidator
+import common.movementvalidators.concretemovement.*
+import common.result.FailureResult
+import common.result.ResultValidator
+import common.result.SuccessfulResult
 
 class RookMV : MovementValidator {
     private val verticalMV : MovementValidator = VerticalMV()

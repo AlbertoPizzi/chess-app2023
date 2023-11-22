@@ -1,3 +1,3 @@
-package mychess.result
+package common.result
 
 data class SuccessfulResult(val message : String) : ResultValidator

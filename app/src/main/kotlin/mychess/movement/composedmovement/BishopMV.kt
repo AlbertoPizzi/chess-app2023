@@ -1,15 +1,13 @@
 package mychess.movement.composedmovement
 
-import com.sun.net.httpserver.Authenticator.Success
-import edu.austral.dissis.chess.gui.Move
 import mychess.board.Board
-import mychess.movement.Movement
-import mychess.movement.MovementValidator
-import mychess.movement.concretemovement.*
-import mychess.piece.Piece
-import mychess.result.FailureResult
-import mychess.result.ResultValidator
-import mychess.result.SuccessfulResult
+import common.movementvalidators.Movement
+import common.movementvalidators.MovementValidator
+import common.movementvalidators.concretemovement.*
+import common.piece.Piece
+import common.result.FailureResult
+import common.result.ResultValidator
+import common.result.SuccessfulResult
 
 class BishopMV : MovementValidator {
     private val diagonalMV : MovementValidator = DiagonalMV ()

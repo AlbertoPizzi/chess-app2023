@@ -1,3 +1,3 @@
-package mychess.result
+package common.result
 
 sealed interface ResultValidator

@@ -1,4 +1,4 @@
-package mychess.movement
+package common.movementvalidators
 
 import mychess.board.Position
 

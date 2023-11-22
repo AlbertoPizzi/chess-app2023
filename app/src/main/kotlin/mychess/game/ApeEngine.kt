@@ -1,16 +1,16 @@
 package mychess.game
 
 import edu.austral.dissis.chess.gui.*
-import mychess.Adapter
+import common.Adapter
 import mychess.board.Board
 import mychess.board.BoardType
 import mychess.board.Position
 import mychess.factory.BoardFactory
-import mychess.movement.PieceMover
+import common.movementvalidators.PieceMover
 import mychess.movement.endvalidators.KingIsDeadValidator
 import mychess.movement.endvalidators.MatchEndingValidator
-import mychess.piece.Color
-import mychess.result.GameOver
+import common.piece.Color
+import common.result.GameOver
 
 class ApeEngine : GameEngine {
     //    private val game  = Game()

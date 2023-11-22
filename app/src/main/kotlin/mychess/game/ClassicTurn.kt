@@ -1,6 +1,6 @@
 package mychess.game
 
-import mychess.piece.Color
+import common.piece.Color
 
 class ClassicTurn(private val color : Color) : TurnManager{
     override fun nextTurn(currentPlayer: Color): TurnManager {

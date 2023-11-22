@@ -1,6 +1,6 @@
 package mychess.board
 
-import mychess.piece.Piece
+import common.piece.Piece
 
 interface Board {
     fun getBoardType() : BoardType

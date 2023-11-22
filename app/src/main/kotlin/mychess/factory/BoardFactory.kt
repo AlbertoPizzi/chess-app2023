@@ -1,13 +1,11 @@
 package mychess.factory
 
-import javafx.geometry.Pos
 import mychess.board.Board
 import mychess.board.BoardType
 import mychess.board.Position
 import mychess.board.RegularBoard
-import mychess.piece.Color
-import mychess.piece.Piece
-import mychess.result.FailureResult
+import common.piece.Color
+import common.piece.Piece
 
 class BoardFactory {
     companion object {

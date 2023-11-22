@@ -1,16 +1,14 @@
 package mychess.movement.composedmovement
 
-import edu.austral.dissis.chess.gui.Move
 import mychess.board.Board
-import mychess.board.Position
-import mychess.movement.Movement
-import mychess.movement.MovementValidator
-import mychess.movement.concretemovement.ColorMV
-import mychess.movement.concretemovement.EatMV
-import mychess.movement.concretemovement.PositionIsFreeMV
-import mychess.result.FailureResult
-import mychess.result.ResultValidator
-import mychess.result.SuccessfulResult
+import common.movementvalidators.Movement
+import common.movementvalidators.MovementValidator
+import common.movementvalidators.concretemovement.ColorMV
+import common.movementvalidators.concretemovement.EatMV
+import common.movementvalidators.concretemovement.PositionIsFreeMV
+import common.result.FailureResult
+import common.result.ResultValidator
+import common.result.SuccessfulResult
 import kotlin.math.abs
 
 class KnightMV : MovementValidator {

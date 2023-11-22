@@ -1,15 +1,15 @@
 //package mychess.game
 //
-//import mychess.Adapter
+//import commons.Adapter
 //import mychess.board.Board
 //import mychess.board.BoardType
 //import mychess.factory.BoardFactory
 //import mychess.movement.Movement
 //import mychess.movement.PieceMover
-//import mychess.piece.Color
-//import mychess.result.FailureResult
-//import mychess.result.ResultValidator
-//import mychess.result.SuccessfulResult
+//import commons.piece.Color
+//import commons.result.FailureResult
+//import commons.result.ResultValidator
+//import commons.result.SuccessfulResult
 //import java.util.Scanner
 //
 //class Game {

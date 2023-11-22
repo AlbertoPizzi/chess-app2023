@@ -1,9 +1,9 @@
 package mychess.factory
 
 import mychess.movement.composedmovement.*
-import mychess.piece.Color
-import mychess.piece.Piece
-import mychess.piece.PieceType
+import common.piece.Color
+import common.piece.Piece
+import common.piece.PieceType
 
 class PieceFactory {
     companion object{

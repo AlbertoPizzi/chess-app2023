@@ -1,14 +1,12 @@
 package mychess.movement.composedmovement
 
 import mychess.board.Board
-import mychess.movement.Movement
-import mychess.movement.MovementValidator
-import mychess.movement.concretemovement.*
-import mychess.piece.Piece
-import mychess.result.FailureResult
-import mychess.result.ResultValidator
-import mychess.result.SuccessfulResult
-import java.lang.Math.E
+import common.movementvalidators.Movement
+import common.movementvalidators.MovementValidator
+import common.movementvalidators.concretemovement.*
+import common.result.FailureResult
+import common.result.ResultValidator
+import common.result.SuccessfulResult
 import java.lang.Math.abs
 
 class KingMV : MovementValidator {

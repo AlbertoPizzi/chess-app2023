@@ -1,7 +1,6 @@
-package mychess.piece
+package common.piece
 
-import mychess.movement.MovementValidator
-import mychess.piece.Color
+import common.movementvalidators.MovementValidator
 
 class Piece(private val type: PieceType ,private val id: String, private val pieceColor: Color, private val movementList: List<MovementValidator>){
     fun getId() : String{

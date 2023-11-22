@@ -1,15 +1,15 @@
-package mychess
+package common
 
 import edu.austral.dissis.chess.gui.*
 import mychess.board.Board
 import mychess.board.Position
 import mychess.game.GameState
-import mychess.movement.Movement
-import mychess.piece.Color
-import mychess.piece.Piece
-import mychess.result.FailureResult
-import mychess.result.ResultValidator
-import mychess.result.SuccessfulResult
+import common.movementvalidators.Movement
+import common.piece.Color
+import common.piece.Piece
+import common.result.FailureResult
+import common.result.ResultValidator
+import common.result.SuccessfulResult
 
 class Adapter {
     private fun positionAdapter(position: Position) : edu.austral.dissis.chess.gui.Position{
@@ -60,11 +60,11 @@ class Adapter {
         return when(result){
             is FailureResult -> InvalidMove(result.message )
             is SuccessfulResult -> NewGameState(chessPieces, playerColor)
-            is mychess.result.GameOver -> GameOver(if (playerColor == PlayerColor.WHITE) PlayerColor.BLACK else PlayerColor.WHITE)
+            is common.result.GameOver -> GameOver(if (playerColor == PlayerColor.WHITE) PlayerColor.BLACK else PlayerColor.WHITE)
         }
     }
 
-    fun translateMovement(move : Move) : Movement{
+    fun translateMovement(move : Move) : Movement {
         return Movement(Position(move.from.column , move.from.row) , Position(move.to.column , move.to.row))
     }
 
