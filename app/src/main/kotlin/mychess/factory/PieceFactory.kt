@@ -7,28 +7,28 @@ import mychess.piece.PieceType
 
 class PieceFactory {
     companion object{
-        private var id : Int = 0
 
-        fun buildKing(pieceColor: Color): Piece {
-            return Piece( PieceType.KING,"king " + id++   , pieceColor , listOf(KingMV()))
+
+        fun buildKing(id : String , pieceColor: Color  ): Piece {
+            return Piece( PieceType.KING,id , pieceColor , listOf(KingMV()))
         }
-        fun buildRook(pieceColor: Color): Piece {
-            return Piece(PieceType.ROOK, "rook " + id++  , pieceColor , listOf(RookMV()))
+        fun buildRook(id : String, pieceColor: Color ): Piece {
+            return Piece(PieceType.ROOK, id , pieceColor , listOf(RookMV()))
         }
-        fun buildBishop(pieceColor: Color): Piece {
-            return Piece(PieceType.BISHOP, "bishop " + id++  , pieceColor , listOf(BishopMV()))
+        fun buildBishop(id : String, pieceColor: Color ): Piece {
+            return Piece(PieceType.BISHOP, id, pieceColor , listOf(BishopMV()))
         }
-        fun buildPawn(pieceColor: Color): Piece {
-            return Piece(PieceType.PAWN,"pawn " + id++  , pieceColor , listOf(PawnMV()))
+        fun buildPawn(id : String, pieceColor: Color ): Piece {
+            return Piece(PieceType.PAWN,id , pieceColor , listOf(PawnMV()))
         }
-        fun buildKnight(pieceColor: Color): Piece {
-            return Piece(PieceType.KNIGHT,"knight " + id++  , pieceColor , listOf(KnightMV()))
+        fun buildKnight(id : String, pieceColor: Color ): Piece {
+            return Piece(PieceType.KNIGHT,id , pieceColor , listOf(KnightMV()))
         }
-        fun buildQueen(pieceColor: Color): Piece {
-            return Piece(PieceType.QUEEN,"queen " + id++  , pieceColor , listOf(QueenMV()))
+        fun buildQueen(id : String, pieceColor: Color ): Piece {
+            return Piece(PieceType.QUEEN,id  , pieceColor , listOf(QueenMV()))
         }
-        fun buildSithMaster(pieceColor: Color): Piece{
-            return Piece(PieceType.KING , "SM" + id++ , pieceColor , listOf(SithMasterMV()))
+        fun buildSithMaster(id : String, pieceColor: Color ): Piece{
+            return Piece(PieceType.KING , id , pieceColor , listOf(SithMasterMV()))
         }
     }
 }
