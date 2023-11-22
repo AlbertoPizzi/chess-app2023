@@ -1,6 +1,6 @@
 package mychess.movement.endvalidators
 
-import mychess.board.Board
+import common.board.Board
 import common.result.ResultValidator
 
 class tie : MatchEndingValidator {

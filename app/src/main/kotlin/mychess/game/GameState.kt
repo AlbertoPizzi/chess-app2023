@@ -1,6 +1,6 @@
 package mychess.game
 
-import mychess.board.Board
+import common.board.Board
 
 class GameState(private val turnManager: TurnManager, private val boardHistory: List<Board>) {
     fun getTurnManager(): TurnManager {

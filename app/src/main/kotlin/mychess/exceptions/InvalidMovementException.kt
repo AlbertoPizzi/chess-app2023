@@ -1,3 +1,3 @@
 package mychess.exceptions
 
-class InvalidMovementException(message: String) : Exception(message)
+class InvalidMovementException( message: String) : Exception(message)

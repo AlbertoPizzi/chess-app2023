@@ -1,7 +1,7 @@
 package common.movementvalidators.concretemovement
 
-import mychess.board.Board
-import mychess.board.Position
+import common.board.Board
+import common.board.Position
 import common.movementvalidators.Movement
 import common.movementvalidators.MovementValidator
 import common.piece.Piece

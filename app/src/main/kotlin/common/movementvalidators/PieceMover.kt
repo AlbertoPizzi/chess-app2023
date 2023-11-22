@@ -1,8 +1,8 @@
 package common.movementvalidators
 
-import mychess.factory.BoardFactory
-import mychess.board.Board
-import mychess.board.Position
+import common.factory.BoardFactory
+import common.board.Board
+import common.board.Position
 import common.piece.Piece
 import common.result.SuccessfulResult
 

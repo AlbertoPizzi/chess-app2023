@@ -1,4 +1,4 @@
-package mychess.board
+package common.board
 
 import common.piece.Piece
 

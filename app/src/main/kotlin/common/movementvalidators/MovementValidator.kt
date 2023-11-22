@@ -1,6 +1,6 @@
 package common.movementvalidators
 
-import mychess.board.Board
+import common.board.Board
 import common.result.ResultValidator
 
 interface MovementValidator {

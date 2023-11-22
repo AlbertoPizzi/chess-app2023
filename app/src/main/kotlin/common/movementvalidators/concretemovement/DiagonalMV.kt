@@ -1,6 +1,6 @@
 package common.movementvalidators.concretemovement
 
-import mychess.board.Board
+import common.board.Board
 import common.movementvalidators.Movement
 import common.movementvalidators.MovementValidator
 import common.result.FailureResult

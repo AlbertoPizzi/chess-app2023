@@ -1,8 +1,8 @@
 package common
 
 import edu.austral.dissis.chess.gui.*
-import mychess.board.Board
-import mychess.board.Position
+import common.board.Board
+import common.board.Position
 import mychess.game.GameState
 import common.movementvalidators.Movement
 import common.piece.Color

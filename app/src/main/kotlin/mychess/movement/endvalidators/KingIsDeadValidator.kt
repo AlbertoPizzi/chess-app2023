@@ -1,6 +1,6 @@
 package mychess.movement.endvalidators
 
-import mychess.board.Board
+import common.board.Board
 import common.piece.Piece
 import common.piece.PieceType
 import common.result.*

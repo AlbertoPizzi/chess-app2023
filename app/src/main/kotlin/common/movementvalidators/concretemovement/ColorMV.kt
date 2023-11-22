@@ -1,6 +1,6 @@
 package common.movementvalidators.concretemovement
 
-import mychess.board.Board
+import common.board.Board
 import common.movementvalidators.Movement
 import common.movementvalidators.MovementValidator
 import common.piece.Piece
@@ -14,7 +14,7 @@ class ColorMV : MovementValidator {
         if (target != null) {
             if (target.getPieceColor() == (board.getPieceByPosition(movement.initpos)
                     ?.getPieceColor())
-            ) {//TODO: FIJATE EN ESTO BOLUDO
+            ) {
                 return SuccessfulResult("Pieces are the same Color!")
             }
         }

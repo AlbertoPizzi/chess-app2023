@@ -1,4 +1,4 @@
-package mychess.board
+package common.board
 
 import mychess.exceptions.PieceNotFoundException
 import common.piece.Piece

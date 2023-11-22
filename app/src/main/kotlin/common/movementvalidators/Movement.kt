@@ -1,6 +1,6 @@
 package common.movementvalidators
 
-import mychess.board.Position
+import common.board.Position
 
 data class Movement(
     val initpos: Position,

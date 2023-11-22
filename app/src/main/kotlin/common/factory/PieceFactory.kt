@@ -1,5 +1,6 @@
-package mychess.factory
+package common.factory
 
+import common.movementvalidators.concretemovement.DiagonalMV
 import mychess.movement.composedmovement.*
 import common.piece.Color
 import common.piece.Piece
@@ -7,7 +8,6 @@ import common.piece.PieceType
 
 class PieceFactory {
     companion object {
-
 
         fun buildKing(id: String, pieceColor: Color): Piece {
             return Piece(PieceType.KING, id, pieceColor, listOf(KingMV()))
@@ -35,6 +35,9 @@ class PieceFactory {
 
         fun buildSithMaster(id: String, pieceColor: Color): Piece {
             return Piece(PieceType.KING, id, pieceColor, listOf(SithMasterMV()))
+        }
+        fun buildChecker(id: String , pieceColor: Color) : Piece{
+            return Piece(PieceType.PAWN , id , pieceColor , listOf(DiagonalMV()))
         }
     }
 }

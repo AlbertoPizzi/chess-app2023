@@ -2,10 +2,10 @@ package mychess.game
 
 import edu.austral.dissis.chess.gui.*
 import common.Adapter
-import mychess.board.Board
-import mychess.board.BoardType
-import mychess.board.Position
-import mychess.factory.BoardFactory
+import common.board.Board
+import common.board.BoardType
+import common.board.Position
+import common.factory.BoardFactory
 import common.movementvalidators.PieceMover
 import mychess.movement.endvalidators.KingIsDeadValidator
 import mychess.movement.endvalidators.MatchEndingValidator
@@ -13,13 +13,12 @@ import common.piece.Color
 import common.result.GameOver
 
 class ApeEngine : GameEngine {
-    //    private val game  = Game()
     private val adapter = Adapter()
     private val pieceMover = PieceMover()
     private val kingIsDeadValidator: MatchEndingValidator = KingIsDeadValidator()
 
     override fun init(): InitialState {
-        val board = BoardFactory.createNewBoard(BoardType.REGULAR)
+        val board = BoardFactory.createNewBoard(BoardType.CHECKERS)
         val boardHistory: List<Board> = createHistoryFromBoard(board)
         val turnManager: TurnManager = ClassicTurn(Color.WHITE)
         val gameState = GameState(turnManager, boardHistory)
@@ -50,7 +49,8 @@ class ApeEngine : GameEngine {
                     return InvalidMove("Invalid movement for " +
                             pieceToMove.getId().takeWhile { it.isLetter() })
                 }
-                if (kingIsDeadValidator.validate(board) is GameOver) {
+                if (kingIsDeadValidator.validate(board) is GameOver
+                    && board.getBoardType() != BoardType.CHECKERS ) {
                     if (turnManager.getCurrentPlayer() == Color.WHITE) {
                         return GameOver(adapter.colorAdapter(Color.BLACK))
                     } else return GameOver(adapter.colorAdapter(Color.WHITE))
