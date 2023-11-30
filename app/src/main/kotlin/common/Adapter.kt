@@ -54,6 +54,9 @@ class Adapter {
     fun getLastState(): GameState {
         return states.last()
     }
+    fun getSecondToLastState() : GameState{
+        return states.get(states.size-1)
+    }
 
     fun adaptGameStateToInitialState(gameState: GameState): InitialState {
         val board: Board = gameState.getBoardHistory().last()

@@ -8,7 +8,7 @@ import common.piece.Piece
 import common.result.SuccessfulResult
 
 class PieceMover {
-    fun moveTo(pieceToMove: Piece, finalpos: Position, gameState: GameState): Board {
+    fun moveTo(pieceToMove: Piece, finalpos: Position, gameState: GameState): Board { //aca puedo darle la posicion de una
         val board = gameState.getBoardHistory().last()
         val positionMapCopy: MutableMap<Position, Piece> = board.getPositionMap().toMutableMap()
         val initPos: Position = board.getPositionByPiece(pieceToMove)

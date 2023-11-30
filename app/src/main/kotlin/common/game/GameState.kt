@@ -6,6 +6,7 @@ import common.movementvalidators.Movement
 import common.piece.PieceType
 import common.piece.Color
 import common.piece.Piece
+import common.result.FailureResult
 import common.result.SuccessfulResult
 
 data class GameState(private val turnManager: TurnManager, private val boardHistory: List<Board>) {
@@ -42,14 +43,13 @@ data class GameState(private val turnManager: TurnManager, private val boardHist
             for (j in 1 .. board.getRowSize()){
                 val finalPos = Position(i,j)
                 val auxMovement = Movement(initPos, finalPos)
-                if(piece.movement.get(0).validateMovement(gameState = this, auxMovement) is SuccessfulResult){
-                    return true
+                if(piece.movement[0].validateMovement(gameState = this, auxMovement) is SuccessfulResult){
+                    return false
                 }
+                return true
             }
-            return false
         }
         return false
-
     }
 
 

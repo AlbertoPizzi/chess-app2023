@@ -6,13 +6,12 @@ import common.board.Position
 import common.board.RegularBoard
 import common.piece.Color
 import common.piece.Piece
-import javafx.geometry.Pos
 
 class BoardFactory {
     companion object {
         fun createNewBoard(boardType: BoardType): Board {
             if (boardType == BoardType.CHESS) {
-                return createNewRegularBoard()
+                return createNewChessBoard()
             } else if (boardType == BoardType.JEDI_KNIGHTS) {
                 return createNewJediKnightBoard()
             } else if (boardType == BoardType.CHECKERS) {
@@ -51,7 +50,7 @@ class BoardFactory {
         }
 
 
-        private fun createNewRegularBoard(): Board {
+        private fun createNewChessBoard(): Board {
             val filledBoard: Map<Position, Piece> =
                 fillWithWhitePawns() + fillWithBlackPawns() + fillWithWhiteKing() +
                         fillWithWhiteRook() + fillWithBlackRook() + fillWithWhiteBishop() +
@@ -59,6 +58,11 @@ class BoardFactory {
                         fillWithBlackKnight() + fillWithBlackKing() + fillWithBlackBishop()
             val positionList = filledBoard.keys.toList()
             return RegularBoard(BoardType.CHESS, 8, 8, filledBoard, positionList)
+        }
+        private fun createNewRegularBoard(): Board{
+            val newBoard : Map<Position, Piece> = emptyMap<Position , Piece>()
+            val positionList = newBoard.keys.toList()
+            return RegularBoard(BoardType.EMPTY_BOARD , 8 , 8  , newBoard , positionList)
         }
 
         private fun fillWithWhiteKing(): Map<Position, Piece> {

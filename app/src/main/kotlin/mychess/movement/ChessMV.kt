@@ -1,6 +1,8 @@
-package common.movementvalidators
+package mychess.movement
 
 import common.game.GameState
+import common.movementvalidators.Movement
+import common.movementvalidators.MovementValidator
 import common.movementvalidators.concretemovement.EmptySquareMV
 import common.result.FailureResult
 import common.result.ResultValidator
@@ -15,7 +17,7 @@ class ChessMV : MovementValidator {
                 return board.getPositionMap()[movement.initpos]!!.movement[0].validateMovement(gameState, movement)
             }
              false -> {
-                return FailureResult("There's no piece in the initial position")
+                return FailureResult("Invalid Movement")
             }
         }
     }

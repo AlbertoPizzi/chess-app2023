@@ -3,6 +3,7 @@
  */
 package edu.austral.dissis.chess
 
+import checkers.CheckersRules
 import edu.austral.dissis.chess.gui.*
 import javafx.application.Application
 import javafx.application.Application.launch

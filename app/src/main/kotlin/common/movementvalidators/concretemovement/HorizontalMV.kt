@@ -9,8 +9,8 @@ import common.result.SuccessfulResult
 
 class HorizontalMV : MovementValidator {
     override fun validateMovement(gameState: GameState, movement: Movement): ResultValidator {
-        val board = gameState.getBoardHistory().last()
-        return if (board.isInBounds(movement.finalpos) && (movement.initpos.row == movement.finalpos.row)) {
+//        val board = gameState.getBoardHistory().last()
+        return if ((movement.initpos.row == movement.finalpos.row)) {
             SuccessfulResult("It is a horizontal Movement")
         } else FailureResult("It is not a horizontal movement!")
     }

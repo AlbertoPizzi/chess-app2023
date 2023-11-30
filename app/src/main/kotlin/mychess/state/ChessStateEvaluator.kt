@@ -22,13 +22,13 @@ class ChessStateEvaluator: StateEvaluator {
         val turnManager = gameState.getTurnManager()
         val newGameState = gameState.copy(turnManager.nextTurn())
         if(newGameState.isKingThreaten(turnManager.getCurrentPlayer())){
-            val pieceList = newGameState.getBoardHistory().last().getPositionMap().entries.filter { it.value.pieceColor === newGameState.getTurnManager().getCurrentPlayer() }
+            val pieceList = newGameState.getBoardHistory().last().getPositionMap().entries.filter { it.value.pieceColor == newGameState.getTurnManager().getCurrentPlayer() }
             for (piece in pieceList) {
-                if (newGameState.chessPieceHasAnyValidMovement(piece.value)) {
+                if (!newGameState.chessPieceHasAnyValidMovement(piece.value)) {
                     return true
                 }
             }
-            return true
+            return false
         }
         return false
     }
