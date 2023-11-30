@@ -7,16 +7,12 @@ import common.result.FailureResult
 import common.result.ResultValidator
 import common.result.SuccessfulResult
 
-class EatMV : MovementValidator {
-    private val colorCheck: MovementValidator = ColorMV()
+class EmptySquareMV : MovementValidator {
     override fun validateMovement(gameState: GameState, movement: Movement): ResultValidator {
         val board = gameState.getBoardHistory().last()
-        if (board.getPositionMap().containsKey(movement.finalpos) && colorCheck.validateMovement(
-                gameState,
-                movement
-            ) is FailureResult
-        ) {
-            return SuccessfulResult("This piece can eat!")
-        } else return FailureResult("Cannot eat your teammate!")
+        if(board.getPositionMap().containsKey(movement.initpos)){
+            return SuccessfulResult("There's a piece in the initial position")
+        }
+        else return FailureResult("There's no piece there")
     }
 }

@@ -1,6 +1,6 @@
 package common.movementvalidators.concretemovement
 
-import common.board.Board
+import common.game.GameState
 import common.movementvalidators.Movement
 import common.movementvalidators.MovementValidator
 import common.result.FailureResult
@@ -8,8 +8,8 @@ import common.result.ResultValidator
 import common.result.SuccessfulResult
 import kotlin.math.abs
 
-class JumpMV(private val x : Int , private val y : Int) : MovementValidator {
-    override fun validateMovement(board: Board, movement: Movement): ResultValidator {
+class JumpMV(private val x: Int, private val y: Int) : MovementValidator {
+    override fun validateMovement(gameState: GameState, movement: Movement): ResultValidator {
         if (isJumping(movement)) {
             return SuccessfulResult("Movement Successful ")
         }

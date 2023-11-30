@@ -1,8 +1,8 @@
 package common.movementvalidators
 
-import common.board.Board
+import common.game.GameState
 import common.result.ResultValidator
 
 interface MovementValidator {
-    fun validateMovement(board: Board, movement: Movement): ResultValidator
+    fun validateMovement(gameState: GameState, movement: Movement): ResultValidator
 }

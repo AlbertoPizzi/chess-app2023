@@ -12,6 +12,6 @@ interface Board {
     fun getPositions(): List<Position>
     fun getPieceByPosition(position: Position): Piece?
     fun getPieces(): List<Piece>
-    fun getPositionByID(id : String): Position?
+    fun getPositionByID(id: String): Position?
 
 }
