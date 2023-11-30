@@ -47,19 +47,19 @@ class PawnMV : MovementValidator {
     }
     fun checkFirstMove(board: Board, movement: Movement) : Boolean {
         //White
-        if(board.getPieceByPosition(movement.initpos)?.getPieceColor() == Color.WHITE
+        if(board.getPieceByPosition(movement.initpos)?.pieceColor == Color.WHITE
             && movement.initpos.row == 2 ){
             return true
         }
         //black
-        if(board.getPieceByPosition(movement.initpos)?.getPieceColor() == Color.BLACK
+        if(board.getPieceByPosition(movement.initpos)?.pieceColor == Color.BLACK
             && movement.initpos.row == 7){
             return true
         }
         return false
     }
     fun checkWhiteMovement(board: Board, movement: Movement) : Int{
-        return if(board.getPieceByPosition(movement.initpos)?.getPieceColor() == Color.WHITE){
+        return if(board.getPieceByPosition(movement.initpos)?.pieceColor == Color.WHITE){
             1
         } else return -1
     }

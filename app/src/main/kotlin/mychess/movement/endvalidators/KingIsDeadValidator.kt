@@ -17,7 +17,7 @@ class KingIsDeadValidator : MatchEndingValidator {
     private fun getKings(board: Board): List<Piece> {
         var kings: MutableList<Piece> = mutableListOf()
         for (piece: Piece in board.getPieces()) {
-            if (piece.getPieceType().equals(PieceType.KING)) {
+            if (piece.type.equals(PieceType.KING)) {
                 kings.add(piece)
             }
         }

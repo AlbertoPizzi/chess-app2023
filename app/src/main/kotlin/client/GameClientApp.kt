@@ -22,8 +22,10 @@ class ChessClientApp : Application() {
     override fun start(primaryStage: Stage) {
         primaryStage.title = GameTitle
         val root = GameView(imageResolver)
-        primaryStage.scene = Scene(root)
-
+        val scene = Scene(root , 800.0, 600.0)
+        primaryStage.scene = scene
+        primaryStage.width = 620.0
+        primaryStage.height = 800.0
         val client = GameClient(root)
         root.addListener(MovementListener(client))
         primaryStage.show()

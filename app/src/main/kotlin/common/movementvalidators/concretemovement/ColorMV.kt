@@ -12,8 +12,7 @@ class ColorMV : MovementValidator {
     override fun validateMovement(board: Board, movement: Movement): ResultValidator {
         val target: Piece? = board.getPieceByPosition(movement.finalpos)
         if (target != null) {
-            if (target.getPieceColor() == (board.getPieceByPosition(movement.initpos)
-                    ?.getPieceColor())
+            if (target.pieceColor == (board.getPieceByPosition(movement.initpos)?.pieceColor)
             ) {
                 return SuccessfulResult("Pieces are the same Color!")
             }

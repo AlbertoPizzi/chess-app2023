@@ -1,7 +1,7 @@
 package common.board
 
 enum class BoardType {
-    REGULAR,
+    CHESS,
     CHECKERS,
     JEDI_KNIGHTS
 }

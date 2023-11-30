@@ -11,7 +11,7 @@ import javafx.geometry.Pos
 class BoardFactory {
     companion object {
         fun createNewBoard(boardType: BoardType): Board {
-            if (boardType == BoardType.REGULAR) {
+            if (boardType == BoardType.CHESS) {
                 return createNewRegularBoard()
             } else if (boardType == BoardType.JEDI_KNIGHTS) {
                 return createNewJediKnightBoard()
@@ -23,11 +23,14 @@ class BoardFactory {
         }
 
         fun updateBoard(boardMap: Map<Position, Piece>, board: Board): Board {
-            if (board.getBoardType() == BoardType.REGULAR) {
-                return RegularBoard(BoardType.REGULAR, 8, 8, boardMap, board.getPositions())
+            if (board.getBoardType() == BoardType.CHESS) {
+                return RegularBoard(BoardType.CHESS, 8, 8, boardMap, board.getPositions())
             }
             if (board.getBoardType() == BoardType.JEDI_KNIGHTS) {
                 return RegularBoard(BoardType.JEDI_KNIGHTS, 8, 8, boardMap, board.getPositions())
+            }
+            if(board.getBoardType() == BoardType.CHECKERS){
+                return RegularBoard(BoardType.CHECKERS , 8 , 8 , boardMap , board.getPositions())
             }
             return board
         }
@@ -55,19 +58,19 @@ class BoardFactory {
                         fillWithWhiteQueen() + fillWithBlackQueen() + fillWithWhiteKnight() +
                         fillWithBlackKnight() + fillWithBlackKing() + fillWithBlackBishop()
             val positionList = filledBoard.keys.toList()
-            return RegularBoard(BoardType.REGULAR, 8, 8, filledBoard, positionList)
+            return RegularBoard(BoardType.CHESS, 8, 8, filledBoard, positionList)
         }
 
         private fun fillWithWhiteKing(): Map<Position, Piece> {
             val mapWithKings: Map<Position, Piece> = mapOf(
-                (Position(5, 1) to PieceFactory.buildKing("KW1", Color.WHITE))
+                (Position(5, 1) to PieceFactory.buildKing("KW", Color.WHITE))
             )
             return mapWithKings
         }
 
         private fun fillWithBlackKing(): Map<Position, Piece> {
             val mapWithKings: Map<Position, Piece> = mapOf(
-                (Position(5, 8) to PieceFactory.buildKing("KB1", Color.BLACK))
+                (Position(5, 8) to PieceFactory.buildKing("KB", Color.BLACK))
             )
             return mapWithKings
         }
@@ -131,13 +134,13 @@ class BoardFactory {
 
         private fun fillWithWhiteQueen(): Map<Position, Piece> {
             return mapOf(
-                (Position(4, 1) to PieceFactory.buildQueen("QW1", Color.WHITE))
+                (Position(4, 1) to PieceFactory.buildQueen("QW", Color.WHITE))
             )
         }
 
         private fun fillWithBlackQueen(): Map<Position, Piece> {
             return mapOf(
-                (Position(4, 8) to PieceFactory.buildQueen("QB1", Color.BLACK))
+                (Position(4, 8) to PieceFactory.buildQueen("QB", Color.BLACK))
             )
         }
 
@@ -158,24 +161,24 @@ class BoardFactory {
 
         private fun fillWithSM(): Map<Position, Piece> {
             val mapWithKings: Map<Position, Piece> = mapOf(
-                (Position(5, 8) to PieceFactory.buildSithMaster("SM1", Color.BLACK))
+                (Position(5, 8) to PieceFactory.buildSithMaster("SM", Color.BLACK))
             )
             return mapWithKings
         }
         private fun fillWithWhiteCheckers(): Map<Position , Piece> {
             val mapWithWhiteCheckers : Map<Position , Piece> = mapOf(
-                (Position(1 , 8) to PieceFactory.buildChecker("WC1" , Color.BLACK)),
-                (Position(3 , 8) to PieceFactory.buildChecker("WC2" , Color.BLACK)),
-                (Position(5 , 8) to PieceFactory.buildChecker("WC3" , Color.BLACK)),
-                (Position(7 , 8) to PieceFactory.buildChecker("WC4" , Color.BLACK)),
-                (Position(2 , 7) to PieceFactory.buildChecker("WC5" , Color.BLACK)),
-                (Position(4 , 7) to PieceFactory.buildChecker("WC6" , Color.BLACK)),
-                (Position(6 , 7) to PieceFactory.buildChecker("WC7" , Color.BLACK)),
-                (Position(8 , 7) to PieceFactory.buildChecker("WC8" , Color.BLACK)),
-                (Position(1 , 6) to PieceFactory.buildChecker("WC9" , Color.BLACK)),
-                (Position(3 , 6) to PieceFactory.buildChecker("WC10" , Color.BLACK)),
-                (Position(5 , 6) to PieceFactory.buildChecker("WC11" , Color.BLACK)),
-                (Position(7 , 6) to PieceFactory.buildChecker("WC12" , Color.BLACK)),
+                (Position(2 , 8) to PieceFactory.buildChecker("WC1" , Color.BLACK)),
+                (Position(4 , 8) to PieceFactory.buildChecker("WC2" , Color.BLACK)),
+                (Position(6 , 8) to PieceFactory.buildChecker("WC3" , Color.BLACK)),
+                (Position(8 , 8) to PieceFactory.buildChecker("WC4" , Color.BLACK)),
+                (Position(1 , 7) to PieceFactory.buildChecker("WC5" , Color.BLACK)),
+                (Position(3 , 7) to PieceFactory.buildChecker("WC6" , Color.BLACK)),
+                (Position(5 , 7) to PieceFactory.buildChecker("WC7" , Color.BLACK)),
+                (Position(7 , 7) to PieceFactory.buildChecker("WC8" , Color.BLACK)),
+                (Position(2 , 6) to PieceFactory.buildChecker("WC9" , Color.BLACK)),
+                (Position(4 , 6) to PieceFactory.buildChecker("WC10" , Color.BLACK)),
+                (Position(6 , 6) to PieceFactory.buildChecker("WC11" , Color.BLACK)),
+                (Position(8 , 6) to PieceFactory.buildChecker("WC12" , Color.BLACK)),
             )
             return mapWithWhiteCheckers
         }

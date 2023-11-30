@@ -8,7 +8,8 @@ import javafx.application.Application
 import javafx.application.Application.launch
 import javafx.scene.Scene
 import javafx.stage.Stage
-import mychess.game.ApeEngine
+import common.game.ApeEngine
+import mychess.ChessRules
 
 
 fun main() {
@@ -16,7 +17,7 @@ fun main() {
 }
 
 class ChessGameApplication : Application() {
-    private val gameEngine = ApeEngine()
+    private val gameEngine = ApeEngine(ChessRules())
     private val imageResolver = CachedImageResolver(DefaultImageResolver())
 
     companion object {

@@ -1,4 +1,4 @@
-package mychess.game
+package common.game
 
 import common.piece.Color
 

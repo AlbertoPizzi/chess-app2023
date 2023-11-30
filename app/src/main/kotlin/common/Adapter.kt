@@ -3,7 +3,7 @@ package common
 import edu.austral.dissis.chess.gui.*
 import common.board.Board
 import common.board.Position
-import mychess.game.GameState
+import common.game.GameState
 import common.movementvalidators.Movement
 import common.piece.Color
 import common.piece.Piece
@@ -23,8 +23,8 @@ class Adapter {
 
     fun chessPieceAdapter(board: Board, piece: Piece): ChessPiece {
         return ChessPiece(
-            piece.getId(), colorAdapter(piece.getPieceColor()), positionAdapter(board.getPositionByPiece(piece)),
-            piece.getPieceType().toString().lowercase()
+            piece.id, colorAdapter(piece.pieceColor), positionAdapter(board.getPositionByPiece(piece)),
+            piece.type.toString().lowercase()
         )
     }
 

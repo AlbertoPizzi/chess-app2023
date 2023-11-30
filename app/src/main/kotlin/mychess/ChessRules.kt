@@ -1,24 +1,28 @@
-package mychess.game
+package mychess
 
-import edu.austral.dissis.chess.gui.*
 import common.Adapter
+import common.Rules
 import common.board.Board
 import common.board.BoardType
 import common.board.Position
 import common.factory.BoardFactory
+import common.game.ClassicTurn
+import common.game.GameState
+import common.game.TurnManager
 import common.movementvalidators.PieceMover
-import mychess.movement.endvalidators.KingIsDeadValidator
-import mychess.movement.endvalidators.MatchEndingValidator
 import common.piece.Color
 import common.result.GameOver
+import edu.austral.dissis.chess.gui.*
+import mychess.movement.endvalidators.KingIsDeadValidator
+import mychess.movement.endvalidators.MatchEndingValidator
 
-class ApeEngine : GameEngine {
+class ChessRules : Rules {
     private val adapter = Adapter()
     private val pieceMover = PieceMover()
     private val kingIsDeadValidator: MatchEndingValidator = KingIsDeadValidator()
 
     override fun init(): InitialState {
-        val board = BoardFactory.createNewBoard(BoardType.CHECKERS)
+        val board = BoardFactory.createNewBoard(BoardType.CHESS)
         val boardHistory: List<Board> = createHistoryFromBoard(board)
         val turnManager: TurnManager = ClassicTurn(Color.WHITE)
         val gameState = GameState(turnManager, boardHistory)
@@ -26,10 +30,8 @@ class ApeEngine : GameEngine {
         return adapter.adaptGameStateToInitialState(gameState)
     }
 
-    private fun createHistoryFromBoard(board: Board): List<Board> {
-        val boardHistory: MutableList<Board> = mutableListOf()
-        boardHistory.add(board)
-        return boardHistory
+    override fun getAdapter(): Adapter {
+        return adapter
     }
 
     override fun applyMove(move: Move): MoveResult {
@@ -41,13 +43,13 @@ class ApeEngine : GameEngine {
         if (!board.getPositionMap().containsKey(initPosition)) return InvalidMove("There's nothing there")
         else {
             val pieceToMove = board.getPieceByPosition(initPosition)!!
-            if (pieceToMove.getPieceColor() != turnManager.getCurrentPlayer()) {
+            if (pieceToMove.pieceColor != turnManager.getCurrentPlayer()) {
                 return InvalidMove("It's " + turnManager.getCurrentPlayer() + "'s Turn!")
             } else {
                 val newBoard: Board = pieceMover.moveTo(pieceToMove, finalPosition, gameState.getBoardHistory().last())
                 if (newBoard == gameState.getBoardHistory().last()) {
                     return InvalidMove("Invalid movement for " +
-                            pieceToMove.getId().takeWhile { it.isLetter() })
+                            pieceToMove.id.takeWhile { it.isLetter() })
                 }
                 if (kingIsDeadValidator.validate(board) is GameOver
                     && board.getBoardType() != BoardType.CHECKERS ) {
@@ -57,7 +59,7 @@ class ApeEngine : GameEngine {
                 }
 
                 val history: List<Board> = createHistoryFromBoard(newBoard)
-                val advanceTurn = turnManager.nextTurn(pieceToMove.getPieceColor())
+                val advanceTurn = turnManager.nextTurn(pieceToMove.pieceColor)
 
                 adapter.saveHistory(GameState(advanceTurn, history))
 
@@ -68,6 +70,9 @@ class ApeEngine : GameEngine {
             }
         }
     }
-
-
+    private fun createHistoryFromBoard(board: Board): List<Board> {
+        val boardHistory: MutableList<Board> = mutableListOf()
+        boardHistory.add(board)
+        return boardHistory
+    }
 }

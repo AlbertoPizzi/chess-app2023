@@ -51,4 +51,13 @@ class RegularBoard(
         return positionMap.values.toList()
     }
 
+    override fun getPositionByID(id: String): Position? {
+        for (i in positionMap.keys) {
+            if (id == positionMap[i]?.id) {
+                return i
+            }
+        }
+        throw PieceNotFoundException("Piece not found!")
+    }
+
 }
