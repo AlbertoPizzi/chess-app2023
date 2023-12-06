@@ -18,6 +18,7 @@ class GameClient(private val gameView: GameView) {
             .addMessageListener("game-over", jacksonTypeRef(), GameOverListener(this))
             .addMessageListener("new-game-state", jacksonTypeRef(), SuccesfullMovementListener(this))
             .addMessageListener("init", jacksonTypeRef(), InitialClientListener(this))
+//            .addMessageListener("join", jacksonTypeRef(),)
             .build();
 
 

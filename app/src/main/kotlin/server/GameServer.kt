@@ -8,8 +8,10 @@ import edu.austral.dissis.chess.gui.NewGameState
 import edu.austral.ingsis.clientserver.Message
 import edu.austral.ingsis.clientserver.Server
 import edu.austral.ingsis.clientserver.netty.server.NettyServerBuilder
-import common.game.ApeEngine
-import mychess.ChessRules
+import edu.austral.dissis.chess.common.game.ApeEngine
+import edu.austral.dissis.chess.common.rules.RulesImpl
+import edu.austral.dissis.chess.mychess.ChessRules
+import edu.austral.dissis.chess.mychess.initializer.ChessInitializer
 
 class GameServer {
     private val server: Server = NettyServerBuilder.createDefault().withPort(8080)
@@ -17,7 +19,7 @@ class GameServer {
         .addMessageListener("init", jacksonTypeRef(), InitialServerListener(this))
         .build()
 
-    private val gameEngine = ApeEngine(ChessRules())
+    private val gameEngine = ApeEngine.chessEngine()
     fun handleMove(message: Message<Move>) {
         when (val moveResult = gameEngine.applyMove(message.payload)) {
             is GameOver -> server.broadcast(Message("game-over", moveResult))

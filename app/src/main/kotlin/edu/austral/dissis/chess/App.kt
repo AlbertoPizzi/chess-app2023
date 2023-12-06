@@ -3,14 +3,19 @@
  */
 package edu.austral.dissis.chess
 
-import checkers.CheckersRules
+import edu.austral.dissis.chess.checkers.CheckersMovementRules
+import edu.austral.dissis.chess.checkers.initializer.CheckersInitializer
+import edu.austral.dissis.chess.checkers.promotion.CheckersPromotionStrategy
 import edu.austral.dissis.chess.gui.*
 import javafx.application.Application
 import javafx.application.Application.launch
 import javafx.scene.Scene
 import javafx.stage.Stage
-import common.game.ApeEngine
-import mychess.ChessRules
+import edu.austral.dissis.chess.common.game.ApeEngine
+import edu.austral.dissis.chess.common.rules.RulesImpl
+import edu.austral.dissis.chess.mychess.ChessPromotionStrategy
+import edu.austral.dissis.chess.mychess.ChessMovementRules
+import edu.austral.dissis.chess.mychess.initializer.ChessInitializer
 
 
 fun main() {

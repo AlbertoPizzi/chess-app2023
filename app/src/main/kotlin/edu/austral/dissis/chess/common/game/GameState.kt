@@ -1,0 +1,36 @@
+package edu.austral.dissis.chess.common.game
+
+import edu.austral.dissis.chess.common.board.Board
+import edu.austral.dissis.chess.common.board.Position
+import edu.austral.dissis.chess.common.gamestates.StateEvaluatorResult
+import edu.austral.dissis.chess.common.history.History
+import edu.austral.dissis.chess.common.piece.Color
+import edu.austral.dissis.chess.common.piece.Piece
+
+data class GameState(
+    val turnManager: TurnManager,
+    val history: History,
+    val board: Board,
+    val state: StateEvaluatorResult
+) {
+
+    fun getActualColor(): Color{
+        return turnManager.getCurrentPlayer()
+    }
+
+    private var states: MutableList<GameState> = mutableListOf()
+
+    fun saveHistory(gameState: GameState) {
+        states.add(gameState)
+    }
+
+    fun getLastState(): GameState {
+        return states.last()
+    }
+    fun getPositionMap(): Map<Position, Piece>{
+        return board.getPositionMap()
+    }
+
+
+
+}

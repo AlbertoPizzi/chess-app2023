@@ -1,3 +1,0 @@
-package common.gamestates
-
-sealed interface StateEvaluatorResult
