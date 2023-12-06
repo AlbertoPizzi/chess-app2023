@@ -18,11 +18,11 @@ class ChessPieceFactoryTest {
         val emptyList: List<Position> = emptyBoard.keys.toList()
         return RegularBoard(BoardType.EMPTY_BOARD, x, y, emptyBoard, emptyList)
     }
-    fun generateGamestate(piece: Piece): GameState {
-        val turnManager: TurnManager = ClassicTurn(Color.WHITE)
-        val boardHistory: List<Board> = listOf(generateBoard(8, 8))
-        return GameState(turnManager, boardHistory,,)
-    }
+//    fun generateGamestate(piece: Piece): GameState {
+//        val turnManager: TurnManager = ClassicTurn(Color.WHITE)
+//        val boardHistory: List<Board> = listOf(generateBoard(8, 8))
+//        return GameState(turnManager, boardHistory,,)
+//    }
 
     @Test
     fun Test_001_CreatesAPiece(){

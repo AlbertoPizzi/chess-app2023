@@ -19,7 +19,7 @@ class GameClient(private val gameView: GameView) {
             .addMessageListener("new-game-state", jacksonTypeRef(), SuccesfullMovementListener(this))
             .addMessageListener("init", jacksonTypeRef(), InitialClientListener(this))
 //            .addMessageListener("join", jacksonTypeRef(),)
-            .build();
+            .build()
 
 
     init {
@@ -40,7 +40,7 @@ class GameClient(private val gameView: GameView) {
 
     fun handleInitialState(payload: InitialState) {
         Platform.runLater {
-            gameView.handleInitialState(payload);
+            gameView.handleInitialState(payload)
         }
 
     }

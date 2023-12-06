@@ -23,7 +23,8 @@ fun main() {
 }
 
 class ChessGameApplication : Application() {
-    private val gameEngine = ApeEngine(ChessRules())
+//    private val gameEngine = ApeEngine(RulesImpl(ChessInitializer(), ChessMovementRules(), ChessPromotionStrategy()))
+    private val gameEngine = ApeEngine(RulesImpl(CheckersInitializer(), CheckersMovementRules(), CheckersPromotionStrategy()))
     private val imageResolver = CachedImageResolver(DefaultImageResolver())
 
     companion object {
@@ -32,7 +33,6 @@ class ChessGameApplication : Application() {
 
     override fun start(primaryStage: Stage) {
         primaryStage.title = GameTitle
-
         val root = createGameViewFrom(gameEngine, imageResolver)
         primaryStage.scene = Scene(root)
         root.handleInitialState(gameEngine.init())

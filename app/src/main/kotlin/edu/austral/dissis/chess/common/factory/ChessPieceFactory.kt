@@ -22,7 +22,7 @@ class ChessPieceFactory {
             val diagonalMV = AndMV(listOf(DiagonalMV(), LimitMV(1), PositionIsFreeMV()))
             val eatMV = AndMV(listOf(EatMV(), LimitMV(1)))
             val movement = OrMV(listOf(horizontalMV, verticalMV, diagonalMV, eatMV))
-            return Piece(PieceType.KING, id, pieceColor, listOf(movement))
+            return Piece(PieceType.KING, id, pieceColor, listOf(movement), NormalMovementBehaviour())
         }
 
         fun buildRook(id: String, pieceColor: Color): Piece {
@@ -31,14 +31,14 @@ class ChessPieceFactory {
             val eatHorizontalMV = AndMV(listOf(HorizontalMV(), HorizontalOrVerticalPathsAreFreeMV(), EatMV()))
             val eatVerticalMV = AndMV(listOf(VerticalMV(), HorizontalOrVerticalPathsAreFreeMV(), EatMV()))
             val movement = OrMV(listOf(horizontalMV, verticalMV, eatHorizontalMV, eatVerticalMV))
-            return Piece(PieceType.ROOK, id, pieceColor, listOf(movement))
+            return Piece(PieceType.ROOK, id, pieceColor, listOf(movement), NormalMovementBehaviour())
         }
 
         fun buildBishop(id: String, pieceColor: Color): Piece {
             val normalmv = AndMV(listOf(DiagonalMV(), DiagonalPathIsFreeMV(), PositionIsFreeMV()))
             val eatMV = AndMV(listOf(DiagonalMV(), EatMV(), DiagonalPathIsFreeMV()))
             val movement = OrMV(listOf(normalmv, eatMV))
-            return Piece(PieceType.BISHOP, id, pieceColor, listOf(movement))
+            return Piece(PieceType.BISHOP, id, pieceColor, listOf(movement), NormalMovementBehaviour())
         }
 
         fun buildPawn(id: String, pieceColor: Color): Piece {
@@ -74,14 +74,14 @@ class ChessPieceFactory {
                     )
                 )
             )
-            return Piece(PieceType.PAWN, id, pieceColor, pawnMV)
+            return Piece(PieceType.PAWN, id, pieceColor, pawnMV, NormalMovementBehaviour())
         }
 
         fun buildKnight(id: String, pieceColor: Color): Piece {
             val normalmv = AndMV(listOf(JumpMV(1, 2), PositionIsFreeMV()))
             val eatMV = AndMV(listOf(JumpMV(1, 2), EatMV()))
             val movement = OrMV(listOf(normalmv, eatMV))
-            return Piece(PieceType.KNIGHT, id, pieceColor, listOf(movement))
+            return Piece(PieceType.KNIGHT, id, pieceColor, listOf(movement), NormalMovementBehaviour())
         }
 
         fun buildQueen(id: String, pieceColor: Color): Piece {
@@ -94,7 +94,7 @@ class ChessPieceFactory {
             val movement =
                 OrMV(listOf(horizontalMV, verticalMV, diagonalMV, eatHorizontalMV, eatVerticalMV, eatDiagonalMV))
 
-            return Piece(PieceType.QUEEN, id, pieceColor, listOf(movement))
+            return Piece(PieceType.QUEEN, id, pieceColor, listOf(movement), NormalMovementBehaviour())
         }
 
         fun buildSithMaster(id: String, pieceColor: Color): Piece {
@@ -116,14 +116,21 @@ class ChessPieceFactory {
                     jumpMV
                 )
             )
-            return Piece(PieceType.KING, id, pieceColor, listOf(movement))
+            return Piece(PieceType.KING, id, pieceColor, listOf(movement), NormalMovementBehaviour())
         }
 
         fun buildChecker(id: String, pieceColor: Color): Piece {
             val fowardDiagonalMV = AndMV(listOf(FowardDiagonalMV(), LimitMV(1), PositionIsFreeMV()))
             val eatMV = AndMV(listOf(FowardDiagonalMV(), LimitMV(2), EnemyInBetweenMV(), PositionIsFreeMV()))
             val movement = OrMV(listOf(fowardDiagonalMV, eatMV))
-            return Piece(PieceType.PAWN, id, pieceColor, listOf(movement))
+            return Piece(PieceType.PAWN, id, pieceColor, listOf(movement), CheckerMB())
+        }
+
+        fun buildCrowned(id: String, pieceColor: Color): Piece {
+            val diagonalMV = AndMV(listOf(DiagonalMV() , LimitMV(1) , PositionIsFreeMV()))
+            val eatMv = AndMV(listOf(DiagonalMV() , LimitMV(2) , EnemyInBetweenMV() , PositionIsFreeMV()))
+            val movement = OrMV(listOf(diagonalMV , eatMv))
+            return Piece(PieceType.QUEEN , id , pieceColor , listOf(movement) , CrownedMb())
         }
     }
 }

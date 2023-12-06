@@ -46,7 +46,7 @@ class NotInCheckMV : MovementValidator {
             board.getPositionMap().values.filter { it.pieceColor == color && it.id != "KW" && it.id != "KB" }
         for (piece in pieceFilterList) {
             val initPos = board.getPositionByPiece(piece)
-            if (piece.movement[0].validateMovement(gameState, Movement(initPos, target)) is SuccessfulResult) {
+            if (piece.mv[0].validateMovement(gameState, Movement(initPos, target)) is SuccessfulResult) {
                 return true
             }
         }

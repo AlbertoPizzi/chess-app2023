@@ -15,7 +15,8 @@ import edu.austral.dissis.chess.mychess.ChessMovementRules
 import edu.austral.dissis.chess.mychess.initializer.ChessInitializer
 
 class ApeEngine(rules: Rules) : GameEngine {
-    private val game = rules
+    private val rules = rules
+    private val adapter = Adapter()
 
     companion object {
         fun chessEngine(): ApeEngine {
@@ -29,11 +30,17 @@ class ApeEngine(rules: Rules) : GameEngine {
     }
 
     override fun init(): InitialState {
-        return game.getAdapter().adaptGameStateToInitialState(game.init())
+        return adapter.adaptGameStateToInitialState(rules.init())
     }
 
     override fun applyMove(move: Move): MoveResult {
-        return game.applyMove(move)
+        val movement : Movement = adapter.translateMovement(move)
+        return when(val stateResult = rules.applyMove(movement)){
+            is InProgressStateResult -> {
+                adapter.adaptGameState(rules.getGameState())
+            }
+            is WinStateResult -> GameOver(adapter.colorAdapter(stateResult.winner))
+        }
     }
 
 

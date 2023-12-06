@@ -31,6 +31,14 @@ data class GameState(
         return board.getPositionMap()
     }
 
+    fun getPiece(position: Position): Piece {
+        return board.getPositionMap().get(position)!!
+    }
+
+    fun getPositionByPieceID(id: String): Position {
+        return board.getPositionMap().entries.find { it.value.id == id }!!.key
+    }
+
 
 
 }

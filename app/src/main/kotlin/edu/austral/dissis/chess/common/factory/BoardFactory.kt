@@ -34,6 +34,16 @@ class BoardFactory {
             return board
         }
 
+        fun createBoardFromReference(board: Board, movement: Movement): Board {
+            val pieceToMove = board.getPositionMap()[movement.initpos]!!
+
+            val updatedPieceMap = board.getPositionMap()
+                .filterKeys { it != movement.initpos }
+                .plus(movement.finalpos to pieceToMove)
+
+            return updateBoard(updatedPieceMap , board)
+        }
+
         private fun createNewCheckersBoard(): Board {
             val filledBoard: Map<Position, Piece> = fillWithWhiteCheckers() + fillWithBlackCheckers()
             val positionList = filledBoard.keys.toList()

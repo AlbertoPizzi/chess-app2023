@@ -14,7 +14,7 @@ class CheckersMV : MovementValidator {
         val board = gameState.board
         when (basicCheckers(gameState, movement)) {
             true -> {
-                return board.getPositionMap()[movement.initpos]!!.movement[0].validateMovement(gameState, movement)
+                return board.getPositionMap()[movement.initpos]!!.mv[0].validateMovement(gameState, movement)
             }
             false -> {
                 return FailureResult("There's no piece in the initial position")

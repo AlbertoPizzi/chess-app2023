@@ -30,9 +30,5 @@ class ChessPromotionStrategy : PromotionStrategy {
     private fun comparePositionToBoardLimit(position: Position, row : Int): Boolean {
         return position.row == row
     }
-    private fun createHistoryFromBoard(board: Board): List<Board> {
-        val boardHistory: MutableList<Board> = mutableListOf()
-        boardHistory.add(board)
-        return boardHistory
-    }
+
 }

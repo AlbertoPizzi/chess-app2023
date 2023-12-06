@@ -38,5 +38,41 @@ class ChessStateEvaluator: StateEvaluator {
         return false
     }
 
+    fun threatsToTheKing(gameState: GameState): List<Position>{
+        val board = gameState.board
+        val color = gameState.turnManager.getCurrentPlayer()
+        var listOfPosition = mutableListOf<Position>()
+        val kingPosition = board.getPositionMap().entries.find { it.value.type == PieceType.KING && it.value.pieceColor == color }!!.key
+        val enemyPieces = board.getPositionMap().entries.filter { it.value.pieceColor !== color }
+        for (enemyPiece in enemyPieces) {
+            val enemyPiecePosition = enemyPiece.key
+            val enemyPieceMovement = Movement(kingPosition, enemyPiecePosition)
+            if (enemyPiece.value.mv[0].validateMovement( gameState = gameState, enemyPieceMovement,) is SuccessfulResult) {
+                listOfPosition.add(enemyPiecePosition)
+            }
+        }
+        val immutableList = listOfPosition.toList()
+        return immutableList
+    }
+    fun isKingThreaten(gameState: GameState): Boolean {
+        return threatsToTheKing(gameState).isNotEmpty()
+    }
+
+    fun chessPieceHasAnyValidMovement(piece: Piece , gameState: GameState): Boolean {
+        val board = gameState.board
+        val initPos = board.getPositionByPiece(piece)!!
+        for(i in 1 .. board.getColSize()){
+            for (j in 1 .. board.getRowSize()){
+                val finalPos = Position(i,j)
+                val auxMovement = Movement(initPos, finalPos)
+                if(piece.mv[0].validateMovement(gameState = gameState, auxMovement) is SuccessfulResult){
+                    return false
+                }
+                return true
+            }
+        }
+        return false
+    }
+
 
 }

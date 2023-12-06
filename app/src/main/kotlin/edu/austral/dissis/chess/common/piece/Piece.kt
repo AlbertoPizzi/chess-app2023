@@ -6,5 +6,6 @@ data class Piece(
     val type: PieceType,
     val id: String,
     val pieceColor: Color,
-    val movement: List<MovementValidator>
+    val mv: List<MovementValidator>,
+    val mb : MovementBehaviour
 )
