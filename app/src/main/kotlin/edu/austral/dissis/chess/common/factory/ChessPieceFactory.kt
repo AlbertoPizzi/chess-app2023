@@ -1,8 +1,6 @@
 package edu.austral.dissis.chess.common.factory
 
-import edu.austral.dissis.chess.checkers.movement.CheckerMB
-import edu.austral.dissis.chess.checkers.movement.CrownedMb
-import edu.austral.dissis.chess.checkers.movement.NotObligatedToEatValidator
+
 import edu.austral.dissis.chess.common.movementvalidators.behaviour.NormalMovementBehaviour
 import edu.austral.dissis.chess.common.movementvalidators.concretemovement.*
 import edu.austral.dissis.chess.common.movementvalidators.logicalmovement.AndMV
@@ -122,20 +120,6 @@ class ChessPieceFactory {
             return Piece(PieceType.KING, id, pieceColor, listOf(movement), NormalMovementBehaviour())
         }
 
-        fun buildChecker(id: String, pieceColor: Color): Piece {
-            val fowardDiagonalMV =
-                AndMV(listOf(FowardDiagonalMV(), LimitMV(1), PositionIsFreeMV(), NotObligatedToEatValidator()))
-            val eatMV = AndMV(listOf(FowardDiagonalMV(), LimitMV(2), EnemyInBetweenMV(), PositionIsFreeMV()))
-            val movement = OrMV(listOf(fowardDiagonalMV, eatMV))
-            return Piece(PieceType.PAWN, id, pieceColor, listOf(movement), CheckerMB())
-        }
-
-        fun buildCrowned(id: String, pieceColor: Color): Piece {
-            val diagonalMV = AndMV(listOf(DiagonalMV(), LimitMV(1), PositionIsFreeMV(), NotObligatedToEatValidator()))
-            val eatMv = AndMV(listOf(DiagonalMV(), LimitMV(2), EnemyInBetweenMV(), PositionIsFreeMV()))
-            val movement = OrMV(listOf(diagonalMV, eatMv))
-            return Piece(PieceType.QUEEN, id, pieceColor, listOf(movement), CrownedMb())
-        }
 
         fun buildArchBishop(id: String, color: Color): Piece {
             val bishopMV = AndMV(listOf(DiagonalMV(), DiagonalPathIsFreeMV(), PositionIsFreeMV()))

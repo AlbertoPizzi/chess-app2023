@@ -43,4 +43,12 @@ class GameStateFactory {
             InProgressStateResult()
         )
     }
+    fun emptyBoardBuilder(): GameState {
+        return GameState(
+            ClassicTurn(Color.WHITE),
+            History(listOf()),
+            BoardFactory.createNewRegularBoard(),
+            InProgressStateResult()
+        )
+    }
 }

@@ -10,6 +10,7 @@ import edu.austral.dissis.chess.common.movementvalidators.concretemovement.Empty
 import edu.austral.dissis.chess.common.movementvalidators.concretemovement.EnemyInBetweenMV
 import edu.austral.dissis.chess.common.movementvalidators.logicalmovement.AndMV
 import edu.austral.dissis.chess.common.movementvalidators.behaviour.MovementBehaviour
+import edu.austral.dissis.chess.common.movementvalidators.concretemovement.LimitMV
 import edu.austral.dissis.chess.common.piece.Piece
 import edu.austral.dissis.chess.common.result.SuccessfulResult
 
@@ -17,7 +18,7 @@ class CrownedMb : MovementBehaviour {
     private val normalDiagonalMv = AndMV(
         listOf(
             DiagonalMV(),
-            LimitMovementValidator(1),
+            LimitMV(1),
             EmptySquareMV(),
             NotObligatedToEatValidator()
         )
@@ -28,7 +29,7 @@ class CrownedMb : MovementBehaviour {
     val eatDiagonalMv = AndMV(
         listOf(
             DiagonalMV(),
-            LimitMovementValidator(2),
+            LimitMV(2),
             EnemyInBetweenMV(),
             EmptySquareMV(),
         )

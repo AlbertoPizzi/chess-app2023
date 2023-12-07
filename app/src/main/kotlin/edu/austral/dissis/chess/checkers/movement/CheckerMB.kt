@@ -9,6 +9,8 @@ import edu.austral.dissis.chess.common.movementvalidators.concretemovement.Empty
 import edu.austral.dissis.chess.common.movementvalidators.concretemovement.EnemyInBetweenMV
 import edu.austral.dissis.chess.common.movementvalidators.logicalmovement.AndMV
 import edu.austral.dissis.chess.common.movementvalidators.behaviour.MovementBehaviour
+import edu.austral.dissis.chess.common.movementvalidators.concretemovement.FowardDiagonalMV
+import edu.austral.dissis.chess.common.movementvalidators.concretemovement.LimitMV
 import edu.austral.dissis.chess.common.piece.Piece
 import edu.austral.dissis.chess.common.result.SuccessfulResult
 
@@ -16,9 +18,9 @@ class CheckerMB : MovementBehaviour {
 
     private val normalDiagonalMv = AndMV(
         listOf(
-            LimitMovementValidator(1),
+            LimitMV(1),
             EmptySquareMV(),
-            FowardDiagonalMovementValidator(),
+            FowardDiagonalMV(),
             NotObligatedToEatValidator()
         )
     )
@@ -27,10 +29,10 @@ class CheckerMB : MovementBehaviour {
 
     private val eatDiagonalMv = AndMV(
         listOf(
-            LimitMovementValidator(2),
+            LimitMV(2),
             EnemyInBetweenMV(),
             EmptySquareMV(),
-            FowardDiagonalMovementValidator()
+            FowardDiagonalMV()
         )
     )
 

@@ -4,9 +4,7 @@ import edu.austral.dissis.chess.common.board.Position
 import edu.austral.dissis.chess.common.game.GameState
 import edu.austral.dissis.chess.common.movementvalidators.Movement
 import edu.austral.dissis.chess.common.movementvalidators.MovementValidator
-import edu.austral.dissis.chess.common.movementvalidators.concretemovement.DiagonalMV
-import edu.austral.dissis.chess.common.movementvalidators.concretemovement.EmptySquareMV
-import edu.austral.dissis.chess.common.movementvalidators.concretemovement.EnemyInBetweenMV
+import edu.austral.dissis.chess.common.movementvalidators.concretemovement.*
 import edu.austral.dissis.chess.common.movementvalidators.logicalmovement.AndMV
 import edu.austral.dissis.chess.common.piece.PieceType
 import edu.austral.dissis.chess.common.result.FailureResult
@@ -16,16 +14,16 @@ import edu.austral.dissis.chess.common.result.SuccessfulResult
 class NotObligatedToEatValidator : MovementValidator {
     private val eatDiagonalMvChecker = AndMV(
         listOf(
-            LimitMovementValidator(2),
+            LimitMV(2),
             EnemyInBetweenMV(),
             EmptySquareMV(),
-            FowardDiagonalMovementValidator()
+            FowardDiagonalMV()
         )
     )
 
     private val eatDiagonalMvCrowned = AndMV(
         listOf(
-            LimitMovementValidator(2),
+            LimitMV(2),
             EnemyInBetweenMV(),
             EmptySquareMV(),
             DiagonalMV()

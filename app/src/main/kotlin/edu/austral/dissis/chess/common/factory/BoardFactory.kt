@@ -36,6 +36,9 @@ class BoardFactory {
             if (board.getBoardType() == BoardType.CAPABLANCA) {
                 return RegularBoard(BoardType.CAPABLANCA, 8, 10, boardMap, board.getPositions())
             }
+            if(board.getBoardType() == BoardType.EMPTY_BOARD){
+                return RegularBoard(BoardType.EMPTY_BOARD, 8, 8, boardMap, board.getPositions())
+            }
             return board
         }
 
@@ -82,7 +85,7 @@ class BoardFactory {
             return RegularBoard(BoardType.CHESS, 8, 8, filledBoard, positionList)
         }
 
-        private fun createNewRegularBoard(): Board {
+         fun createNewRegularBoard(): Board {
             val newBoard: Map<Position, Piece> = emptyMap<Position, Piece>()
             val positionList = newBoard.keys.toList()
             return RegularBoard(BoardType.EMPTY_BOARD, 8, 8, newBoard, positionList)
@@ -195,36 +198,36 @@ class BoardFactory {
 
         private fun fillWithBlackCheckers(): Map<Position, Piece> {
             val mapWithWhiteCheckers: Map<Position, Piece> = mapOf(
-                (Position(2, 8) to ChessPieceFactory.buildChecker("BC1", Color.BLACK)),
-                (Position(4, 8) to ChessPieceFactory.buildChecker("BC2", Color.BLACK)),
-                (Position(6, 8) to ChessPieceFactory.buildChecker("BC3", Color.BLACK)),
-                (Position(8, 8) to ChessPieceFactory.buildChecker("BC4", Color.BLACK)),
-                (Position(1, 7) to ChessPieceFactory.buildChecker("BC5", Color.BLACK)),
-                (Position(3, 7) to ChessPieceFactory.buildChecker("BC6", Color.BLACK)),
-                (Position(5, 7) to ChessPieceFactory.buildChecker("BC7", Color.BLACK)),
-                (Position(7, 7) to ChessPieceFactory.buildChecker("BC8", Color.BLACK)),
-                (Position(2, 6) to ChessPieceFactory.buildChecker("BC9", Color.BLACK)),
-                (Position(4, 6) to ChessPieceFactory.buildChecker("BC10", Color.BLACK)),
-                (Position(6, 6) to ChessPieceFactory.buildChecker("BC11", Color.BLACK)),
-                (Position(8, 6) to ChessPieceFactory.buildChecker("BC12", Color.BLACK)),
+                (Position(2, 8) to CheckersPieceFactory.buildChecker("BC1", Color.BLACK)),
+                (Position(4, 8) to CheckersPieceFactory.buildChecker("BC2", Color.BLACK)),
+                (Position(6, 8) to CheckersPieceFactory.buildChecker("BC3", Color.BLACK)),
+                (Position(8, 8) to CheckersPieceFactory.buildChecker("BC4", Color.BLACK)),
+                (Position(1, 7) to CheckersPieceFactory.buildChecker("BC5", Color.BLACK)),
+                (Position(3, 7) to CheckersPieceFactory.buildChecker("BC6", Color.BLACK)),
+                (Position(5, 7) to CheckersPieceFactory.buildChecker("BC7", Color.BLACK)),
+                (Position(7, 7) to CheckersPieceFactory.buildChecker("BC8", Color.BLACK)),
+                (Position(2, 6) to CheckersPieceFactory.buildChecker("BC9", Color.BLACK)),
+                (Position(4, 6) to CheckersPieceFactory.buildChecker("BC10", Color.BLACK)),
+                (Position(6, 6) to CheckersPieceFactory.buildChecker("BC11", Color.BLACK)),
+                (Position(8, 6) to CheckersPieceFactory.buildChecker("BC12", Color.BLACK)),
             )
             return mapWithWhiteCheckers
         }
 
         private fun fillWithWhiteCheckers(): Map<Position, Piece> {
             val mapWithBlackCheckers: Map<Position, Piece> = mapOf(
-                (Position(1, 1) to ChessPieceFactory.buildChecker("WC1", Color.WHITE)),
-                (Position(3, 1) to ChessPieceFactory.buildChecker("WC2", Color.WHITE)),
-                (Position(5, 1) to ChessPieceFactory.buildChecker("WC3", Color.WHITE)),
-                (Position(7, 1) to ChessPieceFactory.buildChecker("WC4", Color.WHITE)),
-                (Position(2, 2) to ChessPieceFactory.buildChecker("WC5", Color.WHITE)),
-                (Position(4, 2) to ChessPieceFactory.buildChecker("WC6", Color.WHITE)),
-                (Position(6, 2) to ChessPieceFactory.buildChecker("WC7", Color.WHITE)),
-                (Position(8, 2) to ChessPieceFactory.buildChecker("WC8", Color.WHITE)),
-                (Position(1, 3) to ChessPieceFactory.buildChecker("WC9", Color.WHITE)),
-                (Position(3, 3) to ChessPieceFactory.buildChecker("WC10", Color.WHITE)),
-                (Position(5, 3) to ChessPieceFactory.buildChecker("WC11", Color.WHITE)),
-                (Position(7, 3) to ChessPieceFactory.buildChecker("WC12", Color.WHITE)),
+                (Position(1, 1) to CheckersPieceFactory.buildChecker("WC1", Color.WHITE)),
+                (Position(3, 1) to CheckersPieceFactory.buildChecker("WC2", Color.WHITE)),
+                (Position(5, 1) to CheckersPieceFactory.buildChecker("WC3", Color.WHITE)),
+                (Position(7, 1) to CheckersPieceFactory.buildChecker("WC4", Color.WHITE)),
+                (Position(2, 2) to CheckersPieceFactory.buildChecker("WC5", Color.WHITE)),
+                (Position(4, 2) to CheckersPieceFactory.buildChecker("WC6", Color.WHITE)),
+                (Position(6, 2) to CheckersPieceFactory.buildChecker("WC7", Color.WHITE)),
+                (Position(8, 2) to CheckersPieceFactory.buildChecker("WC8", Color.WHITE)),
+                (Position(1, 3) to CheckersPieceFactory.buildChecker("WC9", Color.WHITE)),
+                (Position(3, 3) to CheckersPieceFactory.buildChecker("WC10", Color.WHITE)),
+                (Position(5, 3) to CheckersPieceFactory.buildChecker("WC11", Color.WHITE)),
+                (Position(7, 3) to CheckersPieceFactory.buildChecker("WC12", Color.WHITE)),
             )
             return mapWithBlackCheckers
         }

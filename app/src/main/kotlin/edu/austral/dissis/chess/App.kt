@@ -3,6 +3,9 @@
  */
 package edu.austral.dissis.chess
 
+import edu.austral.dissis.chess.checkers.initializer.CheckersInitializer
+import edu.austral.dissis.chess.checkers.promotion.CheckersPromotionStrategy
+import edu.austral.dissis.chess.checkers.rules.CheckersMovementRules
 import edu.austral.dissis.chess.gui.*
 import javafx.application.Application
 import javafx.application.Application.launch
@@ -21,10 +24,10 @@ fun main() {
 }
 
 class ChessGameApplication : Application() {
-    private val gameEngine = ApeEngine(RulesImpl(ChessInitializer(), ChessMovementRules(), ChessPromotionStrategy()))
+//    private val gameEngine = ApeEngine(RulesImpl(ChessInitializer(), ChessMovementRules(), ChessPromotionStrategy()))
 //    private val gameEngine = ApeEngine(RulesImpl(CapaBlancaInitializer(), ChessMovementRules(), ChessPromotionStrategy()))
 //    private val gameEngine = ApeEngine(RulesImpl(JediKnightsInitializer(), ChessMovementRules(), ChessPromotionStrategy()))
-//    private val gameEngine = ApeEngine(RulesImpl(CheckersInitializer(), CheckersMovementRules(), CheckersPromotionStrategy()))
+    private val gameEngine = ApeEngine(RulesImpl(CheckersInitializer(), CheckersMovementRules(), CheckersPromotionStrategy()))
     private val imageResolver = CachedImageResolver(DefaultImageResolver())
 
     companion object {
