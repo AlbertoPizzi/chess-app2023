@@ -26,6 +26,10 @@ data class GameState(
         return board.getPositionMap().get(position)!!
     }
 
+    fun getNextTurn(): Color {
+        return turnManager.nextTurn().getCurrentPlayer()
+    }
+
     fun getPositionByPieceID(id: String): Position {
         return board.getPositionMap().entries.find { it.value.id == id }!!.key
     }

@@ -37,7 +37,7 @@ class ChessStateEvaluator : StateEvaluator {
                 return false
             }
         }
-        return false
+        return true
     }
 
     fun threatsToTheKing(gameState: GameState): List<Position> {

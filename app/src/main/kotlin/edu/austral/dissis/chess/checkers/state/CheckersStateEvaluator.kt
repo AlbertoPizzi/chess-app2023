@@ -18,8 +18,8 @@ class CheckersStateEvaluator : StateEvaluator {
             }
 
             Color.BLACK -> {
-                if(colorHasNoPiecesLeft(gameState, currentColor)){
-                    return  WinStateResult(Color.WHITE)
+                if (colorHasNoPiecesLeft(gameState, currentColor)) {
+                    return WinStateResult(Color.BLACK)
                 }
             }
         }
