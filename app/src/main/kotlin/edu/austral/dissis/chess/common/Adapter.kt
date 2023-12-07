@@ -50,8 +50,9 @@ class Adapter {
         val playerColor = colorAdapter(gameState.turnManager.getCurrentPlayer())
         return InitialState(boardSize, chessPieces, playerColor)
     }
-    fun adaptGameState(gameState: GameState) : NewGameState{
-        val pieces = pieceListAdapter(gameState.history.boardHistory.last())
+
+    fun adaptGameState(gameState: GameState): NewGameState {
+        val pieces = pieceListAdapter(gameState.board)
         val playerColor = colorAdapter(gameState.turnManager.getCurrentPlayer())
         return NewGameState(pieces, playerColor)
     }

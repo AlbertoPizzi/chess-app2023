@@ -1,6 +1,6 @@
 package edu.austral.dissis.chess.checkers.movement
 
-import edu.austral.dissis.chess.common.movementvalidators.NormalMovementBehaviour
+import edu.austral.dissis.chess.common.movementvalidators.behaviour.NormalMovementBehaviour
 import edu.austral.dissis.chess.common.board.Position
 import edu.austral.dissis.chess.common.factory.BoardFactory
 import edu.austral.dissis.chess.common.game.GameState
@@ -8,7 +8,7 @@ import edu.austral.dissis.chess.common.movementvalidators.Movement
 import edu.austral.dissis.chess.common.movementvalidators.concretemovement.EmptySquareMV
 import edu.austral.dissis.chess.common.movementvalidators.concretemovement.EnemyInBetweenMV
 import edu.austral.dissis.chess.common.movementvalidators.logicalmovement.AndMV
-import edu.austral.dissis.chess.common.piece.MovementBehaviour
+import edu.austral.dissis.chess.common.movementvalidators.behaviour.MovementBehaviour
 import edu.austral.dissis.chess.common.piece.Piece
 import edu.austral.dissis.chess.common.result.SuccessfulResult
 
@@ -39,7 +39,7 @@ class CheckerMB : MovementBehaviour {
             return NormalMovementBehaviour().move(gameState, movement)
         }
         return applyEatMovement(movement, gameState)
-    } //TODO CHECKEA ESTO QUE COME SI HACES ALGO MAL
+    }
 
     private fun isAnNormalMovement(movement: Movement, gameState: GameState): Boolean {
         return (normalDiagonalMv.validateMovement(gameState, movement) is SuccessfulResult)

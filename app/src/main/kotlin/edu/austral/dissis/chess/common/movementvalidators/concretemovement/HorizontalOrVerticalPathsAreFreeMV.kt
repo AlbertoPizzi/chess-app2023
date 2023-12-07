@@ -16,7 +16,7 @@ class HorizontalOrVerticalPathsAreFreeMV : MovementValidator {
         val difCol: Int = (movement.finalpos.row - movement.initpos.row)
         val dif: Int = abs(difRow) + abs(difCol)
 
-        for (i in 1..dif - 1 ) {
+        for (i in 1..dif - 1) {
             val path = calculatePathPosition(movement.initpos, movement.finalpos, i, dif)
             if (board.getPositionMap()[path] != null) {
                 return FailureResult("There's a piece in the path")

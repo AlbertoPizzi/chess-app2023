@@ -26,6 +26,7 @@ class NotInCheckMV : MovementValidator {
                 }
                 return SuccessfulResult("Valid movement")
             }
+
             Color.BLACK -> {
                 val designatedPosition = board.getPositionByID("KB")!!
                 if (designatedPosition == movement.initpos) {
@@ -33,6 +34,7 @@ class NotInCheckMV : MovementValidator {
                         return FailureResult("King is in check")
                     }
                 } else if (isPieceColorTargetingPosition(designatedPosition, newGameState, Color.WHITE)) {
+                    println("King is in check")
                     return FailureResult("King is in check")
                 }
                 return SuccessfulResult("Valid movement")

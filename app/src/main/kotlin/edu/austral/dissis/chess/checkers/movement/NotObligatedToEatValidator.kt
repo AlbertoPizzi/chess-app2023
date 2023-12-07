@@ -35,7 +35,7 @@ class NotObligatedToEatValidator : MovementValidator {
     private val basicCheckersValidator = CheckersBasicMV()
 
     override fun validateMovement(gameState: GameState, movement: Movement): ResultValidator {
-        val pieceList = gameState.getPositionMap().filter { it.value.pieceColor == gameState.getActualColor() }
+        val pieceList = gameState.getPositionMap().filter { it.value.pieceColor == gameState.getCurrentPlayer() }
         for ((piecePosition, piece) in pieceList) {
             for (toPosition in generateMovementList(gameState)) {
                 val newMovement = Movement(piecePosition, toPosition)

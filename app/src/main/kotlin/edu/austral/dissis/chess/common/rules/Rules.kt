@@ -12,5 +12,5 @@ interface Rules {
 
     fun applyMove(move: Movement): StateEvaluatorResult
 
-    fun getGameState() : GameState
+    fun getGameState(): GameState
 }

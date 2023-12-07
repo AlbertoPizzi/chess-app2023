@@ -16,12 +16,14 @@ class CheckersMV : MovementValidator {
             true -> {
                 return board.getPositionMap()[movement.initpos]!!.mv[0].validateMovement(gameState, movement)
             }
+
             false -> {
                 return FailureResult("There's no piece in the initial position")
             }
         }
     }
+
     private fun basicCheckers(gameState: GameState, movement: Movement): Boolean {
-        return (EmptySquareMV().validateMovement(gameState, movement) is SuccessfulResult)
+        return (CheckersBasicMV().validateMovement(gameState, movement) is SuccessfulResult)
     }
 }

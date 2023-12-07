@@ -13,20 +13,23 @@ import edu.austral.dissis.chess.mychess.movement.ChessMV
 import edu.austral.dissis.chess.mychess.state.ChessStateEvaluator
 
 class ChessMovementRules : MovementRules {
-    private val gameValidator : MovementValidator = ChessMV()
-    private val chessStateEvaluator : StateEvaluator = ChessStateEvaluator()
+    private val gameValidator: MovementValidator = ChessMV()
+    private val chessStateEvaluator: StateEvaluator = ChessStateEvaluator()
 
-    override fun makeAMove(movement: Movement, gameState: GameState): StateEvaluatorResult {
-        return when(stateEvaluatorResult(gameState)){
+    override fun applyMove(gameState: GameState, movement: Movement): StateEvaluatorResult {
+        return when (stateEvaluatorResult(gameState)) {
             is InProgressStateResult -> {
                 InProgressStateResult()
             }
+
             is WinStateResult -> WinStateResult((stateEvaluatorResult(gameState) as WinStateResult).winner)
         }
     }
-    override fun isMovementSuccessful( gameState: GameState , movement: Movement): Boolean{
+
+    override fun isMovementSuccessful(gameState: GameState, movement: Movement): Boolean {
         return gameValidator.validateMovement(gameState, movement) is SuccessfulResult
     }
+
     private fun stateEvaluatorResult(gs: GameState): StateEvaluatorResult {
         return chessStateEvaluator.validate(gs)
     }

@@ -15,7 +15,9 @@ import edu.austral.dissis.chess.common.game.ApeEngine
 import edu.austral.dissis.chess.common.rules.RulesImpl
 import edu.austral.dissis.chess.mychess.ChessPromotionStrategy
 import edu.austral.dissis.chess.mychess.ChessMovementRules
+import edu.austral.dissis.chess.mychess.initializer.CapaBlancaInitializer
 import edu.austral.dissis.chess.mychess.initializer.ChessInitializer
+import edu.austral.dissis.chess.mychess.initializer.JediKnightsInitializer
 
 
 fun main() {
@@ -23,8 +25,12 @@ fun main() {
 }
 
 class ChessGameApplication : Application() {
-//    private val gameEngine = ApeEngine(RulesImpl(ChessInitializer(), ChessMovementRules(), ChessPromotionStrategy()))
-    private val gameEngine = ApeEngine(RulesImpl(CheckersInitializer(), CheckersMovementRules(), CheckersPromotionStrategy()))
+    //    private val gameEngine = ApeEngine(RulesImpl(ChessInitializer(), ChessMovementRules(), ChessPromotionStrategy()))
+    private val gameEngine =
+        ApeEngine(RulesImpl(CapaBlancaInitializer(), ChessMovementRules(), ChessPromotionStrategy()))
+
+    //    private val gameEngine = ApeEngine(RulesImpl(JediKnightsInitializer(), ChessMovementRules(), ChessPromotionStrategy()))
+//    private val gameEngine = ApeEngine(RulesImpl(CheckersInitializer(), CheckersMovementRules(), CheckersPromotionStrategy()))
     private val imageResolver = CachedImageResolver(DefaultImageResolver())
 
     companion object {

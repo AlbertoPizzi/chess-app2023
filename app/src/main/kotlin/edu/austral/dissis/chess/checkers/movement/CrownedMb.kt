@@ -1,6 +1,6 @@
 package edu.austral.dissis.chess.checkers.movement
 
-import edu.austral.dissis.chess.common.movementvalidators.NormalMovementBehaviour
+import edu.austral.dissis.chess.common.movementvalidators.behaviour.NormalMovementBehaviour
 import edu.austral.dissis.chess.common.board.Position
 import edu.austral.dissis.chess.common.factory.BoardFactory
 import edu.austral.dissis.chess.common.game.GameState
@@ -9,7 +9,7 @@ import edu.austral.dissis.chess.common.movementvalidators.concretemovement.Diago
 import edu.austral.dissis.chess.common.movementvalidators.concretemovement.EmptySquareMV
 import edu.austral.dissis.chess.common.movementvalidators.concretemovement.EnemyInBetweenMV
 import edu.austral.dissis.chess.common.movementvalidators.logicalmovement.AndMV
-import edu.austral.dissis.chess.common.piece.MovementBehaviour
+import edu.austral.dissis.chess.common.movementvalidators.behaviour.MovementBehaviour
 import edu.austral.dissis.chess.common.piece.Piece
 import edu.austral.dissis.chess.common.result.SuccessfulResult
 
@@ -39,7 +39,7 @@ class CrownedMb : MovementBehaviour {
             return NormalMovementBehaviour().move(gameState, movement)
         }
         return applyEatMovement(movement, gameState)
-    } //TODO CHECKEA ESTO QUE COME SI HACES ALGO MAL
+    }
 
     private fun isAnNormalMovement(movement: Movement, gameState: GameState): Boolean {
         return (normalDiagonalMv.validateMovement(gameState, movement) is SuccessfulResult)
@@ -65,23 +65,23 @@ class CrownedMb : MovementBehaviour {
         var newPieceMap = newGameState.getPositionMap().toMutableMap()
         newPieceMap.remove(intermediatePosition)
 
-        var afterEatingGs = newGameState.copy(board = BoardFactory.updateBoard(newPieceMap,newGameState.board))
+        var afterEatingGs = newGameState.copy(board = BoardFactory.updateBoard(newPieceMap, newGameState.board))
         val newPossibleMovement = canPieceStillEat(afterEatingGs, afterEatingGs.getPiece(movement.finalpos))
 
-        if(basicCheckersValidator.validateMovement(afterEatingGs, newPossibleMovement) is SuccessfulResult){
+        if (basicCheckersValidator.validateMovement(afterEatingGs, newPossibleMovement) is SuccessfulResult) {
             afterEatingGs = applyEatMovement(newPossibleMovement, afterEatingGs)
         }
 
         return afterEatingGs
     }
 
-    private fun canPieceStillEat(gameState: GameState, actualPiece : Piece): Movement {
+    private fun canPieceStillEat(gameState: GameState, actualPiece: Piece): Movement {
         val piecePosition = gameState.getPositionByPieceID(actualPiece.id)!!
         for (i in 1..gameState.board.getRowSize()) {
             for (j in 1..gameState.board.getRowSize()) {
                 val toPosition = Position(i, j)
                 val movement = Movement(piecePosition, toPosition)
-                if(actualPiece.mv[0].validateMovement(gameState, movement) is SuccessfulResult){
+                if (actualPiece.mv[0].validateMovement(gameState, movement) is SuccessfulResult) {
                     if (isAnEatMovement(movement, gameState)) {
                         return movement
                     }

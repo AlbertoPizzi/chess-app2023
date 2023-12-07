@@ -9,10 +9,38 @@ import edu.austral.dissis.chess.common.piece.Color
 
 class GameStateFactory {
     fun chessGameStateBuilder(): GameState {
-        return GameState(ClassicTurn(Color.WHITE) ,History(listOf()),  BoardFactory.createNewBoard(BoardType.CHESS), InProgressStateResult())
+        return GameState(
+            ClassicTurn(Color.WHITE),
+            History(listOf()),
+            BoardFactory.createNewBoard(BoardType.CHESS),
+            InProgressStateResult()
+        )
     }
 
     fun checkersStateBuilder(): GameState {
-        return GameState( ClassicTurn(Color.WHITE), History(listOf()), BoardFactory.createNewBoard(BoardType.CHECKERS), InProgressStateResult())
+        return GameState(
+            ClassicTurn(Color.WHITE),
+            History(listOf()),
+            BoardFactory.createNewBoard(BoardType.CHECKERS),
+            InProgressStateResult()
+        )
+    }
+
+    fun jediKnightStateBuilder(): GameState {
+        return GameState(
+            ClassicTurn(Color.WHITE),
+            History(listOf()),
+            BoardFactory.createNewBoard(BoardType.JEDI_KNIGHTS),
+            InProgressStateResult()
+        )
+    }
+
+    fun capaBlancaStateBuilder(): GameState {
+        return GameState(
+            ClassicTurn(Color.WHITE),
+            History(listOf()),
+            BoardFactory.createNewBoard(BoardType.CAPABLANCA),
+            InProgressStateResult()
+        )
     }
 }

@@ -14,20 +14,22 @@ import edu.austral.dissis.chess.common.result.SuccessfulResult
 
 
 class CheckersMovementRules : MovementRules {
-    private val gameValidator : MovementValidator = CheckersMV()
-    private val checkersStateEvaluator : StateEvaluator = CheckersStateEvaluator()
-    override fun makeAMove(movement: Movement, gameState: GameState): StateEvaluatorResult {
-        return when(stateEvaluatorResult(gameState)){
+    private val gameValidator: MovementValidator = CheckersMV()
+    private val checkersStateEvaluator: StateEvaluator = CheckersStateEvaluator()
+    override fun applyMove(gameState: GameState, movement: Movement): StateEvaluatorResult {
+        return when (stateEvaluatorResult(gameState)) {
             is InProgressStateResult -> {
                 InProgressStateResult()
             }
+
             is WinStateResult -> WinStateResult((stateEvaluatorResult(gameState) as WinStateResult).winner)
         }
     }
 
-    override fun isMovementSuccessful( gameState: GameState , movement: Movement): Boolean {
+    override fun isMovementSuccessful(gameState: GameState, movement: Movement): Boolean {
         return gameValidator.validateMovement(gameState, movement) is SuccessfulResult
     }
+
     private fun stateEvaluatorResult(gs: GameState): StateEvaluatorResult {
         return checkersStateEvaluator.validate(gs)
     }

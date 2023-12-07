@@ -9,7 +9,7 @@ import edu.austral.dissis.chess.common.result.SuccessfulResult
 
 class CurrentPlayerMV : MovementValidator {
     override fun validateMovement(gameState: GameState, movement: Movement): ResultValidator {
-        if(gameState.getPositionMap().get(movement.initpos)!!.pieceColor === gameState.getActualColor()){
+        if (gameState.getPositionMap().get(movement.initpos)!!.pieceColor === gameState.getCurrentPlayer()) {
             return SuccessfulResult("It's valid movement")
         }
         return FailureResult("The piece is not from actual turn colour")

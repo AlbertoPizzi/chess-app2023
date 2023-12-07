@@ -9,9 +9,6 @@ import edu.austral.ingsis.clientserver.Message
 import edu.austral.ingsis.clientserver.Server
 import edu.austral.ingsis.clientserver.netty.server.NettyServerBuilder
 import edu.austral.dissis.chess.common.game.ApeEngine
-import edu.austral.dissis.chess.common.rules.RulesImpl
-import edu.austral.dissis.chess.mychess.ChessRules
-import edu.austral.dissis.chess.mychess.initializer.ChessInitializer
 
 class GameServer {
     private val server: Server = NettyServerBuilder.createDefault().withPort(8080)

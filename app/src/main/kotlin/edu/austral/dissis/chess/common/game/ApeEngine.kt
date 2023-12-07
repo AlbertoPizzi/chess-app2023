@@ -12,7 +12,9 @@ import edu.austral.dissis.chess.common.rules.Rules
 import edu.austral.dissis.chess.common.rules.RulesImpl
 import edu.austral.dissis.chess.mychess.ChessPromotionStrategy
 import edu.austral.dissis.chess.mychess.ChessMovementRules
+import edu.austral.dissis.chess.mychess.initializer.CapaBlancaInitializer
 import edu.austral.dissis.chess.mychess.initializer.ChessInitializer
+import edu.austral.dissis.chess.mychess.initializer.JediKnightsInitializer
 
 class ApeEngine(rules: Rules) : GameEngine {
     private val rules = rules
@@ -20,11 +22,19 @@ class ApeEngine(rules: Rules) : GameEngine {
 
     companion object {
         fun chessEngine(): ApeEngine {
-            return ApeEngine(RulesImpl(ChessInitializer() , ChessMovementRules() , ChessPromotionStrategy() ))
+            return ApeEngine(RulesImpl(ChessInitializer(), ChessMovementRules(), ChessPromotionStrategy()))
         }
 
         fun checkersEngine(): ApeEngine {
-            return ApeEngine(RulesImpl(CheckersInitializer() , CheckersMovementRules() , CheckersPromotionStrategy() ))
+            return ApeEngine(RulesImpl(CheckersInitializer(), CheckersMovementRules(), CheckersPromotionStrategy()))
+        }
+
+        fun jediKnightsEngine(): ApeEngine {
+            return ApeEngine(RulesImpl(JediKnightsInitializer(), ChessMovementRules(), ChessPromotionStrategy()))
+        }
+
+        fun capaBlancaEngine(): ApeEngine {
+            return ApeEngine(RulesImpl(CapaBlancaInitializer(), ChessMovementRules(), ChessPromotionStrategy()))
         }
 
     }
@@ -34,11 +44,12 @@ class ApeEngine(rules: Rules) : GameEngine {
     }
 
     override fun applyMove(move: Move): MoveResult {
-        val movement : Movement = adapter.translateMovement(move)
-        return when(val stateResult = rules.applyMove(movement)){
+        val movement: Movement = adapter.translateMovement(move)
+        return when (val stateResult = rules.applyMove(movement)) {
             is InProgressStateResult -> {
                 adapter.adaptGameState(rules.getGameState())
             }
+
             is WinStateResult -> GameOver(adapter.colorAdapter(stateResult.winner))
         }
     }

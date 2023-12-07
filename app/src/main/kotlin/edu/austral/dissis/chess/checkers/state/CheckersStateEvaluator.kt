@@ -10,12 +10,13 @@ import edu.austral.dissis.chess.common.piece.Color
 class CheckersStateEvaluator : StateEvaluator {
     override fun validate(gameState: GameState): StateEvaluatorResult {
 
-        when(val currentColor = gameState.turnManager.getCurrentPlayer()){
+        when (val currentColor = gameState.turnManager.getCurrentPlayer()) {
             Color.WHITE -> {
-                if(colorHasNoPiecesLeft(gameState , currentColor)){
-                     return WinStateResult(Color.BLACK)
+                if (colorHasNoPiecesLeft(gameState, currentColor)) {
+                    return WinStateResult(Color.WHITE)
                 }
             }
+
             Color.BLACK -> {
                 if(colorHasNoPiecesLeft(gameState, currentColor)){
                     return  WinStateResult(Color.WHITE)
@@ -24,9 +25,10 @@ class CheckersStateEvaluator : StateEvaluator {
         }
         return InProgressStateResult()
     }
-    private fun colorHasNoPiecesLeft(gameState: GameState , color: Color) : Boolean{
+
+    private fun colorHasNoPiecesLeft(gameState: GameState, color: Color): Boolean {
         val board = gameState.board
-        return board.getPositionMap().entries.none(){ it.value.pieceColor == gameState.turnManager.getCurrentPlayer() }
+        return board.getPositionMap().entries.none() { it.value.pieceColor == gameState.getNextTurn() }
     }
 
 }

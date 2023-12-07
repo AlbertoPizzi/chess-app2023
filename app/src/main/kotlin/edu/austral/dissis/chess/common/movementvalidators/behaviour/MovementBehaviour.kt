@@ -1,4 +1,4 @@
-package edu.austral.dissis.chess.common.piece
+package edu.austral.dissis.chess.common.movementvalidators.behaviour
 
 import edu.austral.dissis.chess.common.game.GameState
 import edu.austral.dissis.chess.common.movementvalidators.Movement

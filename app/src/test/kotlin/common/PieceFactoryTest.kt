@@ -11,7 +11,7 @@ import edu.austral.dissis.chess.common.piece.Color
 import edu.austral.dissis.chess.common.piece.Piece
 import org.testng.annotations.Test
 
-class ChessPieceFactoryTest {
+class PieceFactoryTest {
 
     fun generateBoard(x: Int, y: Int): Board {
         val emptyBoard: Map<Position, Piece> = emptyMap()

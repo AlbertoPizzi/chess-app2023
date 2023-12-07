@@ -10,9 +10,8 @@ import edu.austral.dissis.chess.common.result.SuccessfulResult
 class EmptySquareMV : MovementValidator {
     override fun validateMovement(gameState: GameState, movement: Movement): ResultValidator {
         val board = gameState.board
-        if(board.getPositionMap().containsKey(movement.initpos)){
+        if (board.getPositionMap().containsKey(movement.initpos)) {
             return SuccessfulResult("There's a piece in the initial position")
-        }
-        else return FailureResult("There's no piece there")
+        } else return FailureResult("There's no piece there")
     }
 }

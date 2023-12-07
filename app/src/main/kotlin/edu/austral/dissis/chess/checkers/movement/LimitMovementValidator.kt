@@ -15,7 +15,7 @@ class LimitMovementValidator(
     override fun validateMovement(gameState: GameState, movement: Movement): ResultValidator {
         val difCol = abs(movement.finalpos.column - movement.initpos.column)
         val difRow = abs(movement.finalpos.row - movement.initpos.row)
-        if(difCol <= limit &&  difRow <= limit){
+        if (difCol <= limit && difRow <= limit) {
             return SuccessfulResult("")
         }
         return FailureResult("Invalid movement")

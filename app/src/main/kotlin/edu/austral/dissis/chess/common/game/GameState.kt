@@ -14,20 +14,11 @@ data class GameState(
     val state: StateEvaluatorResult
 ) {
 
-    fun getActualColor(): Color{
+    fun getCurrentPlayer(): Color {
         return turnManager.getCurrentPlayer()
     }
 
-    private var states: MutableList<GameState> = mutableListOf()
-
-    fun saveHistory(gameState: GameState) {
-        states.add(gameState)
-    }
-
-    fun getLastState(): GameState {
-        return states.last()
-    }
-    fun getPositionMap(): Map<Position, Piece>{
+    fun getPositionMap(): Map<Position, Piece> {
         return board.getPositionMap()
     }
 
@@ -38,7 +29,6 @@ data class GameState(
     fun getPositionByPieceID(id: String): Position {
         return board.getPositionMap().entries.find { it.value.id == id }!!.key
     }
-
 
 
 }
