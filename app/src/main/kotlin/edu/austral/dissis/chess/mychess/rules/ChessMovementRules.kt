@@ -1,6 +1,6 @@
-package edu.austral.dissis.chess.mychess
+package edu.austral.dissis.chess.mychess.rules
 
-import edu.austral.dissis.chess.common.MovementRules
+import edu.austral.dissis.chess.common.rules.MovementRules
 import edu.austral.dissis.chess.common.game.GameState
 import edu.austral.dissis.chess.common.gamestates.InProgressStateResult
 import edu.austral.dissis.chess.common.gamestates.StateEvaluator

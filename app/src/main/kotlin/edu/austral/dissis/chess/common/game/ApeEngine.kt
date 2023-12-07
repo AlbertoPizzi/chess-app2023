@@ -1,6 +1,6 @@
 package edu.austral.dissis.chess.common.game
 
-import edu.austral.dissis.chess.checkers.CheckersMovementRules
+import edu.austral.dissis.chess.checkers.rules.CheckersMovementRules
 import edu.austral.dissis.chess.checkers.initializer.CheckersInitializer
 import edu.austral.dissis.chess.checkers.promotion.CheckersPromotionStrategy
 import edu.austral.dissis.chess.common.Adapter
@@ -10,8 +10,8 @@ import edu.austral.dissis.chess.common.movementvalidators.Movement
 import edu.austral.dissis.chess.gui.*
 import edu.austral.dissis.chess.common.rules.Rules
 import edu.austral.dissis.chess.common.rules.RulesImpl
-import edu.austral.dissis.chess.mychess.ChessPromotionStrategy
-import edu.austral.dissis.chess.mychess.ChessMovementRules
+import edu.austral.dissis.chess.mychess.promotion.ChessPromotionStrategy
+import edu.austral.dissis.chess.mychess.rules.ChessMovementRules
 import edu.austral.dissis.chess.mychess.initializer.CapaBlancaInitializer
 import edu.austral.dissis.chess.mychess.initializer.ChessInitializer
 import edu.austral.dissis.chess.mychess.initializer.JediKnightsInitializer

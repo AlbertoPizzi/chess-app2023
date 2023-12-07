@@ -57,19 +57,15 @@ class CheckerMB : MovementBehaviour {
         }
         val auxX = (movement.finalpos.column - movement.initpos.column)
         val auxY = (movement.finalpos.row - movement.initpos.row)
-
         val stepX = if (auxX > 0) 1 else -1
         val stepY = if (auxY > 0) 1 else -1
-
         val intermediatePosition = Position(
             movement.initpos.column + 1 * stepX,
             movement.initpos.row + 1 * stepY
         )
-
         var newPieceMap = newGameState.getPositionMap().toMutableMap()
         newPieceMap.remove(intermediatePosition)
         val inmutableGameState = newGameState.copy(board = BoardFactory.updateBoard(newPieceMap, newGameState.board))
-
         return inmutableGameState
     }
 

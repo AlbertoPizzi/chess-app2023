@@ -1,4 +1,4 @@
-package edu.austral.dissis.chess.common
+package edu.austral.dissis.chess.common.rules
 
 import edu.austral.dissis.chess.common.game.GameState
 import edu.austral.dissis.chess.common.gamestates.StateEvaluatorResult

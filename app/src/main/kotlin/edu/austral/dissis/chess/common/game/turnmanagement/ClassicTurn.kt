@@ -1,4 +1,4 @@
-package edu.austral.dissis.chess.common.game
+package edu.austral.dissis.chess.common.game.turnmanagement
 
 import edu.austral.dissis.chess.common.piece.Color
 

@@ -13,7 +13,7 @@ import edu.austral.dissis.chess.common.piece.Piece
 import edu.austral.dissis.chess.common.piece.PieceType
 
 
-class PieceFactory {
+class ChessPieceFactory {
 
     companion object {
 

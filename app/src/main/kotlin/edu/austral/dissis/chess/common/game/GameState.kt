@@ -2,6 +2,7 @@ package edu.austral.dissis.chess.common.game
 
 import edu.austral.dissis.chess.common.board.Board
 import edu.austral.dissis.chess.common.board.Position
+import edu.austral.dissis.chess.common.game.turnmanagement.TurnManager
 import edu.austral.dissis.chess.common.gamestates.StateEvaluatorResult
 import edu.austral.dissis.chess.common.history.History
 import edu.austral.dissis.chess.common.piece.Color

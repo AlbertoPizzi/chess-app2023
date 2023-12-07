@@ -1,9 +1,9 @@
 package edu.austral.dissis.chess.checkers.promotion
 
-import edu.austral.dissis.chess.common.PromotionStrategy
+import edu.austral.dissis.chess.common.promotion.PromotionStrategy
 import edu.austral.dissis.chess.common.board.Position
 import edu.austral.dissis.chess.common.factory.BoardFactory
-import edu.austral.dissis.chess.common.factory.PieceFactory
+import edu.austral.dissis.chess.common.factory.ChessPieceFactory
 import edu.austral.dissis.chess.common.game.GameState
 import edu.austral.dissis.chess.common.piece.Color
 import edu.austral.dissis.chess.common.piece.PieceType
@@ -16,7 +16,7 @@ class CheckersPromotionStrategy : PromotionStrategy {
         for ((position, piece) in checkers) {
             val checkerPosition = position
             if (comparePositionToBoardLimit(checkerPosition, toRow)) {
-                val newCrowned = PieceFactory.buildCrowned(piece.id, gameState.getCurrentPlayer())
+                val newCrowned = ChessPieceFactory.buildCrowned(piece.id, gameState.getCurrentPlayer())
                 var newMutableMap = gameState.getPositionMap().toMutableMap()
                 newMutableMap.replace(checkerPosition, newCrowned)
                 return gameState.copy(board = BoardFactory.updateBoard(newMutableMap, gameState.board))

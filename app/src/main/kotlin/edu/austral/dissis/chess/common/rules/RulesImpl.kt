@@ -1,7 +1,6 @@
 package edu.austral.dissis.chess.common.rules
 
-import edu.austral.dissis.chess.common.PromotionStrategy
-import edu.austral.dissis.chess.common.MovementRules
+import edu.austral.dissis.chess.common.promotion.PromotionStrategy
 import edu.austral.dissis.chess.common.game.GameState
 import edu.austral.dissis.chess.common.gamestates.InProgressStateResult
 import edu.austral.dissis.chess.common.gamestates.StateEvaluatorResult

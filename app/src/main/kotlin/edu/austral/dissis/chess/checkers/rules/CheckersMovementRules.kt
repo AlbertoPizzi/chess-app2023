@@ -1,8 +1,8 @@
-package edu.austral.dissis.chess.checkers
+package edu.austral.dissis.chess.checkers.rules
 
 import edu.austral.dissis.chess.checkers.movement.CheckersMV
 import edu.austral.dissis.chess.checkers.state.CheckersStateEvaluator
-import edu.austral.dissis.chess.common.MovementRules
+import edu.austral.dissis.chess.common.rules.MovementRules
 import edu.austral.dissis.chess.common.game.GameState
 import edu.austral.dissis.chess.common.gamestates.InProgressStateResult
 import edu.austral.dissis.chess.common.gamestates.StateEvaluator
