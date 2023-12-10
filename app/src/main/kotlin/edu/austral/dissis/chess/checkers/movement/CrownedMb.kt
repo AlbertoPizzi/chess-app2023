@@ -13,6 +13,7 @@ import edu.austral.dissis.chess.common.movementvalidators.behaviour.MovementBeha
 import edu.austral.dissis.chess.common.movementvalidators.concretemovement.LimitMV
 import edu.austral.dissis.chess.common.piece.Piece
 import edu.austral.dissis.chess.common.result.SuccessfulResult
+import edu.austral.dissis.chess.common.rules.Game
 
 class CrownedMb : MovementBehaviour {
     private val normalDiagonalMv = AndMV(
@@ -35,11 +36,11 @@ class CrownedMb : MovementBehaviour {
         )
     )
 
-    override fun move(gameState: GameState, movement: Movement): GameState {
-        if (isAnNormalMovement(movement, gameState)) {
-            return NormalMovementBehaviour().move(gameState, movement)
+    override fun move(game: Game, movement: Movement): GameState {
+        if (isAnNormalMovement(movement, game)) {
+            return NormalMovementBehaviour().move(game, movement)
         }
-        return applyEatMovement(movement, gameState)
+        return applyEatMovement(movement, game)
     }
 
     private fun isAnNormalMovement(movement: Movement, gameState: GameState): Boolean {

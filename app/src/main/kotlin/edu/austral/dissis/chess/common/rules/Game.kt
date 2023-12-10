@@ -10,32 +10,31 @@ import edu.austral.dissis.chess.common.movementvalidators.Movement
 import edu.austral.dissis.chess.common.movementvalidators.PieceMover
 
 
-class RulesImpl(
-    private val gameInitializer: GameInitializer,
+data class Game(
+    private val state: GameState,
     private val movementRules: MovementRules,
     private val promotionStrategy: PromotionStrategy
-) : Rules {
-    private var gameState: GameState = init()
+) {
     private val historyUpdater: HistoryUpdater = HistoryUpdater()
     private val pieceMover: PieceMover = PieceMover()
 
-    override fun init(): GameState {
-        return gameInitializer.init()
-    }
+    constructor(gameInitializer: GameInitializer, movementRules: MovementRules, promotionStrategy: PromotionStrategy):  this(gameInitializer.init(), movementRules, promotionStrategy)
 
-    override fun applyMove(move: Movement): StateEvaluatorResult {
-        if (movementRules.isMovementSuccessful(gameState, move)) {
-            val afterMoveGs = historyUpdater.updateHistory(pieceMover.moveTo(gameState, move))
+
+
+     fun applyMove(game : Game , move: Movement): StateEvaluatorResult {
+        if (movementRules.isMovementSuccessful(state, move)) {
+            val afterMoveGs = historyUpdater.updateHistory(pieceMover.moveTo(game, move))
             val newGameState = promotionStrategy.promote(afterMoveGs)
             val moveResult = movementRules.applyMove(newGameState, move)
-            gameState = newGameState.copy(turnManager = newGameState.turnManager.nextTurn())
+            // newGameState.copy(turnManager = newGameState.turnManager.nextTurn())
             return moveResult
         }
-        return InProgressStateResult()
+        return InProgressStateResult(game)
     }
 
-    override fun getGameState(): GameState {
-        return gameState
+     fun getGameState(): GameState {
+        return state
     }
 
 }

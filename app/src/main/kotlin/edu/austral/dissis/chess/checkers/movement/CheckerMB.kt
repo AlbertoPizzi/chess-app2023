@@ -13,6 +13,7 @@ import edu.austral.dissis.chess.common.movementvalidators.concretemovement.Fowar
 import edu.austral.dissis.chess.common.movementvalidators.concretemovement.LimitMV
 import edu.austral.dissis.chess.common.piece.Piece
 import edu.austral.dissis.chess.common.result.SuccessfulResult
+import edu.austral.dissis.chess.common.rules.Game
 
 class CheckerMB : MovementBehaviour {
 
@@ -36,11 +37,11 @@ class CheckerMB : MovementBehaviour {
         )
     )
 
-    override fun move(gameState: GameState, movement: Movement): GameState {
-        if (isAnNormalMovement(movement, gameState)) {
-            return NormalMovementBehaviour().move(gameState, movement)
+    override fun move(game: Game, movement: Movement): Game {
+        if (isAnNormalMovement(movement, game.getGameState())) {
+            return NormalMovementBehaviour().move(game, movement)
         }
-        return applyEatMovement(movement, gameState)
+        return applyEatMovement(movement, game.getGameState())
     }
 
     private fun isAnNormalMovement(movement: Movement, gameState: GameState): Boolean {
@@ -51,8 +52,8 @@ class CheckerMB : MovementBehaviour {
         return (eatDiagonalMv.validateMovement(gameState, movement) is SuccessfulResult)
     }
 
-    private fun applyEatMovement(movement: Movement, gameState: GameState): GameState {
-        var newGameState = NormalMovementBehaviour().move(gameState, movement)
+    private fun applyEatMovement(movement: Movement, game : Game): Game {
+        var newGameState = NormalMovementBehaviour().move(game, movement)
         val newPossibleMovement = canPieceStillEat(newGameState, newGameState.getPiece(movement.finalpos))
         if (basicCheckersValidator.validateMovement(newGameState, newPossibleMovement) is SuccessfulResult) {
             newGameState = applyEatMovement(newPossibleMovement, newGameState)
@@ -65,7 +66,7 @@ class CheckerMB : MovementBehaviour {
             movement.initpos.column + 1 * stepX,
             movement.initpos.row + 1 * stepY
         )
-        var newPieceMap = newGameState.getPositionMap().toMutableMap()
+        var newPieceMap = newGameState.getGameState().getPositionMap().toMutableMap()
         newPieceMap.remove(intermediatePosition)
         val inmutableGameState = newGameState.copy(board = BoardFactory.updateBoard(newPieceMap, newGameState.board))
         return inmutableGameState

@@ -48,4 +48,8 @@ class ChessPieceFactoryTest {
         val pieceMap = mapOf((Position(5, 2) to piece))
         return gamestate.copy(board = BoardFactory.updateBoard(pieceMap , gamestate.board))
     }
+    fun generateFullChessBoard() : GameState{
+        var gameState = GameStateFactory().chessGameStateBuilder()
+        return gameState
+    }
 }

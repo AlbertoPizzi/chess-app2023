@@ -12,11 +12,10 @@ import javafx.application.Application.launch
 import javafx.scene.Scene
 import javafx.stage.Stage
 import edu.austral.dissis.chess.common.game.ApeEngine
-import edu.austral.dissis.chess.common.rules.RulesImpl
+import edu.austral.dissis.chess.common.rules.Game
+import edu.austral.dissis.chess.mychess.initializer.ChessInitializer
 import edu.austral.dissis.chess.mychess.promotion.ChessPromotionStrategy
 import edu.austral.dissis.chess.mychess.rules.ChessMovementRules
-import edu.austral.dissis.chess.mychess.initializer.CapaBlancaInitializer
-import edu.austral.dissis.chess.mychess.initializer.ChessInitializer
 
 
 fun main() {
@@ -24,10 +23,10 @@ fun main() {
 }
 
 class ChessGameApplication : Application() {
-//    private val gameEngine = ApeEngine(RulesImpl(ChessInitializer(), ChessMovementRules(), ChessPromotionStrategy()))
+    private val gameEngine = ApeEngine(Game(ChessInitializer(), ChessMovementRules(), ChessPromotionStrategy()))
 //    private val gameEngine = ApeEngine(RulesImpl(CapaBlancaInitializer(), ChessMovementRules(), ChessPromotionStrategy()))
 //    private val gameEngine = ApeEngine(RulesImpl(JediKnightsInitializer(), ChessMovementRules(), ChessPromotionStrategy()))
-    private val gameEngine = ApeEngine(RulesImpl(CheckersInitializer(), CheckersMovementRules(), CheckersPromotionStrategy()))
+//    private val gameEngine = ApeEngine(Game(CheckersInitializer(), CheckersMovementRules(), CheckersPromotionStrategy()))
     private val imageResolver = CachedImageResolver(DefaultImageResolver())
 
     companion object {

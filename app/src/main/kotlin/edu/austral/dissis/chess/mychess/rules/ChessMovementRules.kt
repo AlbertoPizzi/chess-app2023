@@ -9,6 +9,7 @@ import edu.austral.dissis.chess.common.gamestates.WinStateResult
 import edu.austral.dissis.chess.common.movementvalidators.Movement
 import edu.austral.dissis.chess.common.movementvalidators.MovementValidator
 import edu.austral.dissis.chess.common.result.SuccessfulResult
+import edu.austral.dissis.chess.common.rules.Game
 import edu.austral.dissis.chess.mychess.movement.ChessMV
 import edu.austral.dissis.chess.mychess.state.ChessStateEvaluator
 
@@ -16,10 +17,11 @@ class ChessMovementRules : MovementRules {
     private val gameValidator: MovementValidator = ChessMV()
     private val chessStateEvaluator: StateEvaluator = ChessStateEvaluator()
 
-    override fun applyMove(gameState: GameState, movement: Movement): StateEvaluatorResult {
-        return when (stateEvaluatorResult(gameState)) {
+    override fun applyMove(game: Game, movement: Movement): StateEvaluatorResult {
+        val gameState = game.getGameState()
+        return when (val res = stateEvaluatorResult(gameState)) {
             is InProgressStateResult -> {
-                InProgressStateResult()
+                InProgressStateResult(res.game)
             }
 
             is WinStateResult -> WinStateResult((stateEvaluatorResult(gameState) as WinStateResult).winner)

@@ -1,3 +1,5 @@
 package edu.austral.dissis.chess.common.gamestates
 
-class InProgressStateResult : StateEvaluatorResult
+import edu.austral.dissis.chess.common.rules.Game
+
+class InProgressStateResult(val game: Game) : StateEvaluatorResult
