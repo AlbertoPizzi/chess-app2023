@@ -4,7 +4,6 @@ import edu.austral.dissis.chess.common.board.Position
 import edu.austral.dissis.chess.common.factory.ChessPieceFactory
 import edu.austral.dissis.chess.common.movementvalidators.Movement
 import edu.austral.dissis.chess.common.piece.Color
-import edu.austral.dissis.chess.common.piece.Piece
 import edu.austral.dissis.chess.common.result.SuccessfulResult
 import junit.framework.TestCase.assertTrue
 

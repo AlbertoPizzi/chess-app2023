@@ -8,21 +8,22 @@ import edu.austral.dissis.chess.common.piece.Piece
 import edu.austral.dissis.chess.common.result.FailureResult
 import edu.austral.dissis.chess.common.result.ResultValidator
 import edu.austral.dissis.chess.common.result.SuccessfulResult
+import edu.austral.dissis.chess.common.rules.Game
 import kotlin.math.abs
 
 class PathIsFreeMV : MovementValidator {
     val verticalMV = VerticalMV()
     val horizontalMV = HorizontalMV()
     val diagonalMV = DiagonalMV()
-    override fun validateMovement(gameState: GameState, movement: Movement): ResultValidator {
-        if (verticalMV.validateMovement(gameState, movement) is SuccessfulResult ||
-            horizontalMV.validateMovement(gameState, movement) is SuccessfulResult
+    override fun validateMovement(game: Game, movement: Movement): ResultValidator {
+        if (verticalMV.validateMovement(game, movement) is SuccessfulResult ||
+            horizontalMV.validateMovement(game, movement) is SuccessfulResult
         ) {
-            if (validateHorizontalAndVerticalIsFree(gameState, movement)) {
+            if (validateHorizontalAndVerticalIsFree(game.getGameState(), movement)) {
                 return SuccessfulResult("It is a valid move!")
             }
-        } else if (diagonalMV.validateMovement(gameState, movement) is SuccessfulResult) {
-            if (validateDiagonalIsFree(gameState, movement)) {
+        } else if (diagonalMV.validateMovement(game, movement) is SuccessfulResult) {
+            if (validateDiagonalIsFree(game.getGameState(), movement)) {
                 return SuccessfulResult("It is a valid move!")
             }
         }

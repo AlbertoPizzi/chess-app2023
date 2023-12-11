@@ -31,7 +31,7 @@ class GameServer(val game: Game) {
         when (val moveResult = rules.applyMove(rules,newMove)) {
             is InProgressStateResult -> {
                 this.rules = moveResult.game
-                server.broadcast(Message("new-game-state",adapter.adaptGameState(moveResult.game.getGameState())))
+                server.broadcast(Message("new-game-state",adapter.adaptGameState(moveResult.game)))
             }
             is WinStateResult -> server.broadcast(Message("game-over",moveResult.winner))
             is InvalidMoveStateResult -> server.broadcast(Message("invalid",moveResult.message))

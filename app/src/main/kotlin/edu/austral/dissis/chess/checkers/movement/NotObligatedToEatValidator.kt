@@ -10,6 +10,7 @@ import edu.austral.dissis.chess.common.piece.PieceType
 import edu.austral.dissis.chess.common.result.FailureResult
 import edu.austral.dissis.chess.common.result.ResultValidator
 import edu.austral.dissis.chess.common.result.SuccessfulResult
+import edu.austral.dissis.chess.common.rules.Game
 
 class NotObligatedToEatValidator : MovementValidator {
     private val eatDiagonalMvChecker = AndMV(
@@ -32,18 +33,19 @@ class NotObligatedToEatValidator : MovementValidator {
 
     private val basicCheckersValidator = CheckersBasicMV()
 
-    override fun validateMovement(gameState: GameState, movement: Movement): ResultValidator {
+    override fun validateMovement(game: Game, movement: Movement): ResultValidator {
+        val gameState = game.getGameState()
         val pieceList = gameState.getPositionMap().filter { it.value.pieceColor == gameState.getCurrentPlayer() }
         for ((piecePosition, piece) in pieceList) {
             for (toPosition in generateMovementList(gameState)) {
                 val newMovement = Movement(piecePosition, toPosition)
-                if (basicCheckersValidator.validateMovement(gameState, newMovement) is SuccessfulResult) {
+                if (basicCheckersValidator.validateMovement(game, newMovement) is SuccessfulResult) {
                     if (piece.type.equals(PieceType.PAWN)) {
-                        if (eatDiagonalMvChecker.validateMovement(gameState, newMovement) is SuccessfulResult) {
+                        if (eatDiagonalMvChecker.validateMovement(game, newMovement) is SuccessfulResult) {
                             return FailureResult("You have to eat")
                         }
                     } else {
-                        if (eatDiagonalMvCrowned.validateMovement(gameState, newMovement) is SuccessfulResult) {
+                        if (eatDiagonalMvCrowned.validateMovement(game, newMovement) is SuccessfulResult) {
                             return FailureResult("You have to eat")
                         }
                     }

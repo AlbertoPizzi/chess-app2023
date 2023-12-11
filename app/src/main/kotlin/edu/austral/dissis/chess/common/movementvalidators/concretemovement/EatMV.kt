@@ -6,13 +6,15 @@ import edu.austral.dissis.chess.common.movementvalidators.MovementValidator
 import edu.austral.dissis.chess.common.result.FailureResult
 import edu.austral.dissis.chess.common.result.ResultValidator
 import edu.austral.dissis.chess.common.result.SuccessfulResult
+import edu.austral.dissis.chess.common.rules.Game
 
 class EatMV : MovementValidator {
     private val colorCheck: MovementValidator = ColorMV()
-    override fun validateMovement(gameState: GameState, movement: Movement): ResultValidator {
+    override fun validateMovement(game: Game, movement: Movement): ResultValidator {
+        val gameState = game.getGameState()
         val board = gameState.board
         if (board.getPositionMap().containsKey(movement.finalpos) && colorCheck.validateMovement(
-                gameState,
+                game,
                 movement
             ) is FailureResult
         ) {

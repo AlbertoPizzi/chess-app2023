@@ -6,9 +6,11 @@ import edu.austral.dissis.chess.common.movementvalidators.MovementValidator
 import edu.austral.dissis.chess.common.result.FailureResult
 import edu.austral.dissis.chess.common.result.ResultValidator
 import edu.austral.dissis.chess.common.result.SuccessfulResult
+import edu.austral.dissis.chess.common.rules.Game
 
 class CurrentPlayerMV : MovementValidator {
-    override fun validateMovement(gameState: GameState, movement: Movement): ResultValidator {
+    override fun validateMovement(game: Game, movement: Movement): ResultValidator {
+        val gameState = game.getGameState()
         if (gameState.getPositionMap().get(movement.initpos)!!.pieceColor === gameState.getCurrentPlayer()) {
             return SuccessfulResult("It's valid movement")
         }

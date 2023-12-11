@@ -13,7 +13,7 @@ class GameStateFactory {
             ClassicTurn(Color.WHITE),
             History(listOf()),
             BoardFactory.createNewBoard(BoardType.CHESS),
-            InProgressStateResult()
+
         )
     }
 
@@ -22,7 +22,7 @@ class GameStateFactory {
             ClassicTurn(Color.WHITE),
             History(listOf()),
             BoardFactory.createNewBoard(BoardType.CHECKERS),
-            InProgressStateResult()
+
         )
     }
 
@@ -31,7 +31,7 @@ class GameStateFactory {
             ClassicTurn(Color.WHITE),
             History(listOf()),
             BoardFactory.createNewBoard(BoardType.JEDI_KNIGHTS),
-            InProgressStateResult()
+
         )
     }
 
@@ -40,7 +40,7 @@ class GameStateFactory {
             ClassicTurn(Color.WHITE),
             History(listOf()),
             BoardFactory.createNewBoard(BoardType.CAPABLANCA),
-            InProgressStateResult()
+
         )
     }
     fun emptyBoardBuilder(): GameState {
@@ -48,7 +48,7 @@ class GameStateFactory {
             ClassicTurn(Color.WHITE),
             History(listOf()),
             BoardFactory.createNewRegularBoard(),
-            InProgressStateResult()
+
         )
     }
 }

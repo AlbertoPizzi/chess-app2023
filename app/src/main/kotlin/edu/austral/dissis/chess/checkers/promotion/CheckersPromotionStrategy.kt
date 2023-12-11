@@ -8,9 +8,11 @@ import edu.austral.dissis.chess.common.factory.ChessPieceFactory
 import edu.austral.dissis.chess.common.game.GameState
 import edu.austral.dissis.chess.common.piece.Color
 import edu.austral.dissis.chess.common.piece.PieceType
+import edu.austral.dissis.chess.common.rules.Game
 
 class CheckersPromotionStrategy : PromotionStrategy {
-    override fun promote(gameState: GameState): GameState {
+    override fun promote(game: Game): Game {
+        val gameState = game.getGameState()
         val checkers = gameState.getPositionMap()
             .filter { it.value.pieceColor == gameState.getCurrentPlayer() && it.value.type.equals(PieceType.PAWN) }
         val toRow = if (gameState.getCurrentPlayer() == Color.WHITE) gameState.board.getRowSize() else 1
@@ -20,10 +22,10 @@ class CheckersPromotionStrategy : PromotionStrategy {
                 val newCrowned = CheckersPieceFactory.buildCrowned(piece.id, gameState.getCurrentPlayer())
                 var newMutableMap = gameState.getPositionMap().toMutableMap()
                 newMutableMap.replace(checkerPosition, newCrowned)
-                return gameState.copy(board = BoardFactory.updateBoard(newMutableMap, gameState.board))
+                return game.copy(state = gameState.copy(board = BoardFactory.updateBoard(newMutableMap, gameState.board)))
             }
         }
-        return gameState
+        return game
     }
 
     private fun comparePositionToBoardLimit(position: Position, row: Int): Boolean {

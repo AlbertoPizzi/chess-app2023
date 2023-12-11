@@ -6,9 +6,10 @@ import edu.austral.dissis.chess.common.movementvalidators.MovementValidator
 import edu.austral.dissis.chess.common.result.FailureResult
 import edu.austral.dissis.chess.common.result.ResultValidator
 import edu.austral.dissis.chess.common.result.SuccessfulResult
+import edu.austral.dissis.chess.common.rules.Game
 
 class HorizontalMV : MovementValidator {
-    override fun validateMovement(gameState: GameState, movement: Movement): ResultValidator {
+    override fun validateMovement(game: Game, movement: Movement): ResultValidator {
 //        val board = gameState.getBoardHistory().last()
         return if ((movement.initpos.row == movement.finalpos.row)) {
             SuccessfulResult("It is a horizontal Movement")

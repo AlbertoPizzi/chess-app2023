@@ -5,6 +5,7 @@ import edu.austral.dissis.chess.checkers.initializer.CheckersInitializer
 import edu.austral.dissis.chess.checkers.promotion.CheckersPromotionStrategy
 import edu.austral.dissis.chess.common.Adapter
 import edu.austral.dissis.chess.common.gamestates.InProgressStateResult
+import edu.austral.dissis.chess.common.gamestates.InvalidMoveStateResult
 import edu.austral.dissis.chess.common.gamestates.WinStateResult
 import edu.austral.dissis.chess.common.movementvalidators.Movement
 import edu.austral.dissis.chess.gui.*
@@ -15,8 +16,8 @@ import edu.austral.dissis.chess.mychess.initializer.CapaBlancaInitializer
 import edu.austral.dissis.chess.mychess.initializer.ChessInitializer
 import edu.austral.dissis.chess.mychess.initializer.JediKnightsInitializer
 
-class ApeEngine(game: Game) : GameEngine {
-    private var rules = game
+class ApeEngine(val game: Game) : GameEngine {
+    private var currentGame = game
     private val adapter = Adapter()
 
     companion object {
@@ -39,18 +40,21 @@ class ApeEngine(game: Game) : GameEngine {
     }
 
     override fun init(): InitialState {
-        return adapter.adaptGameStateToInitialState(rules.getGameState())
+        return adapter.adaptGameStateToInitialState(currentGame.getGameState())
     }
 
     override fun applyMove(move: Move): MoveResult {
         val movement: Movement = adapter.translateMovement(move)
-        return when (val stateResult = rules.applyMove(rules ,movement)) {
+        return when (val stateResult = currentGame.applyMove(currentGame ,movement)) {
             is InProgressStateResult -> {
-                this.rules = stateResult.game
-                adapter.adaptGameState(rules.getGameState())
+                this.currentGame = stateResult.game
+                println(currentGame.getGameState().getCurrentPlayer().toString())
+                adapter.adaptGameState(currentGame)
             }
 
             is WinStateResult -> GameOver(adapter.colorAdapter(stateResult.winner))
+            is InvalidMoveStateResult ->
+                InvalidMove(stateResult.message)
         }
     }
 

@@ -6,10 +6,12 @@ import edu.austral.dissis.chess.common.movementvalidators.MovementValidator
 import edu.austral.dissis.chess.common.result.FailureResult
 import edu.austral.dissis.chess.common.result.ResultValidator
 import edu.austral.dissis.chess.common.result.SuccessfulResult
+import edu.austral.dissis.chess.common.rules.Game
 import kotlin.math.abs
 
 class DiagonalMV : MovementValidator {
-    override fun validateMovement(gameState: GameState, movement: Movement): ResultValidator {
+    override fun validateMovement(game: Game, movement: Movement): ResultValidator {
+        val gameState = game.getGameState()
         val board = gameState.board
         if (!board.isInBounds(movement.finalpos)) {
             return FailureResult("Movement is out of bounds!")

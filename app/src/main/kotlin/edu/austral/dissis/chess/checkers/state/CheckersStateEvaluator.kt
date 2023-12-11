@@ -6,10 +6,11 @@ import edu.austral.dissis.chess.common.gamestates.StateEvaluator
 import edu.austral.dissis.chess.common.gamestates.StateEvaluatorResult
 import edu.austral.dissis.chess.common.gamestates.WinStateResult
 import edu.austral.dissis.chess.common.piece.Color
+import edu.austral.dissis.chess.common.rules.Game
 
 class CheckersStateEvaluator : StateEvaluator {
-    override fun validate(gameState: GameState): StateEvaluatorResult {
-
+    override fun validate(game: Game): StateEvaluatorResult {
+        val gameState = game.getGameState()
         when (val currentColor = gameState.turnManager.getCurrentPlayer()) {
             Color.WHITE -> {
                 if (colorHasNoPiecesLeft(gameState, currentColor)) {
@@ -22,7 +23,7 @@ class CheckersStateEvaluator : StateEvaluator {
                 }
             }
         }
-        return InProgressStateResult()
+        return InProgressStateResult(game)
     }
 
     private fun colorHasNoPiecesLeft(gameState: GameState, color: Color): Boolean {

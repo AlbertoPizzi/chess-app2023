@@ -1,7 +1,7 @@
 package edu.austral.dissis.chess.common.gamestates
 
-import edu.austral.dissis.chess.common.game.GameState
+import edu.austral.dissis.chess.common.rules.Game
 
 interface StateEvaluator {
-    fun validate(gameState: GameState): StateEvaluatorResult
+    fun validate(game: Game): StateEvaluatorResult
 }

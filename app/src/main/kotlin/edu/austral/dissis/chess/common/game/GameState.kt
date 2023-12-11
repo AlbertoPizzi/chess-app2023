@@ -12,7 +12,7 @@ data class GameState(
     val turnManager: TurnManager,
     val history: History,
     val board: Board,
-    val state: StateEvaluatorResult
+
 ) {
 
     fun getCurrentPlayer(): Color {

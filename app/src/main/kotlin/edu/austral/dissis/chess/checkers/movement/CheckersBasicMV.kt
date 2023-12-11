@@ -9,10 +9,11 @@ import edu.austral.dissis.chess.common.movementvalidators.concretemovement.NotTh
 import edu.austral.dissis.chess.common.movementvalidators.concretemovement.PositionIsFreeMV
 import edu.austral.dissis.chess.common.movementvalidators.logicalmovement.AndMV
 import edu.austral.dissis.chess.common.result.ResultValidator
+import edu.austral.dissis.chess.common.rules.Game
 
 
 class CheckersBasicMV : MovementValidator {
-    override fun validateMovement(gameState: GameState, movement: Movement): ResultValidator {
+    override fun validateMovement(gameState: Game, movement: Movement): ResultValidator {
         val basicMovement =
             AndMV(listOf(EmptySquareMV(), CurrentPlayerMV(), NotTheSamePositionMV(), PositionIsFreeMV()))
         return basicMovement.validateMovement(gameState, movement)

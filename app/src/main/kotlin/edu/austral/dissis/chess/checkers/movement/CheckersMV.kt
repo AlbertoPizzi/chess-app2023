@@ -1,20 +1,19 @@
 package edu.austral.dissis.chess.checkers.movement
 
-import edu.austral.dissis.chess.common.game.GameState
 import edu.austral.dissis.chess.common.movementvalidators.Movement
 import edu.austral.dissis.chess.common.movementvalidators.MovementValidator
-import edu.austral.dissis.chess.common.movementvalidators.concretemovement.EmptySquareMV
 import edu.austral.dissis.chess.common.result.FailureResult
 import edu.austral.dissis.chess.common.result.ResultValidator
 import edu.austral.dissis.chess.common.result.SuccessfulResult
+import edu.austral.dissis.chess.common.rules.Game
 
 class CheckersMV : MovementValidator {
 
-    override fun validateMovement(gameState: GameState, movement: Movement): ResultValidator {
-        val board = gameState.board
-        when (basicCheckers(gameState, movement)) {
+    override fun validateMovement(game: Game, movement: Movement): ResultValidator {
+        val board = game.getGameState().board
+        when (basicCheckers(game, movement)) {
             true -> {
-                return board.getPositionMap()[movement.initpos]!!.mv[0].validateMovement(gameState, movement)
+                return board.getPositionMap()[movement.initpos]!!.mv[0].validateMovement(game, movement)
             }
 
             false -> {
@@ -23,7 +22,7 @@ class CheckersMV : MovementValidator {
         }
     }
 
-    private fun basicCheckers(gameState: GameState, movement: Movement): Boolean {
+    private fun basicCheckers(gameState: Game, movement: Movement): Boolean {
         return (CheckersBasicMV().validateMovement(gameState, movement) is SuccessfulResult)
     }
 }

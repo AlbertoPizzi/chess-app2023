@@ -7,6 +7,7 @@ import edu.austral.dissis.chess.common.game.GameState
 import edu.austral.dissis.chess.common.movementvalidators.Movement
 import edu.austral.dissis.chess.common.piece.Color
 import edu.austral.dissis.chess.common.piece.Piece
+import edu.austral.dissis.chess.common.rules.Game
 
 class Adapter {
     private fun positionAdapter(position: Position): edu.austral.dissis.chess.gui.Position {
@@ -51,9 +52,9 @@ class Adapter {
         return InitialState(boardSize, chessPieces, playerColor)
     }
 
-    fun adaptGameState(gameState: GameState): NewGameState {
-        val pieces = pieceListAdapter(gameState.board)
-        val playerColor = colorAdapter(gameState.turnManager.getCurrentPlayer())
+    fun adaptGameState(game: Game): NewGameState {
+        val pieces = pieceListAdapter(game.getGameState().board)
+        val playerColor = colorAdapter(game.getGameState().turnManager.getCurrentPlayer())
         return NewGameState(pieces, playerColor)
     }
 

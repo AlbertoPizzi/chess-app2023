@@ -6,9 +6,10 @@ import edu.austral.dissis.chess.common.movementvalidators.MovementValidator
 import edu.austral.dissis.chess.common.result.FailureResult
 import edu.austral.dissis.chess.common.result.ResultValidator
 import edu.austral.dissis.chess.common.result.SuccessfulResult
+import edu.austral.dissis.chess.common.rules.Game
 
 class NotTheSamePositionMV : MovementValidator {
-    override fun validateMovement(gameState: GameState, movement: Movement): ResultValidator {
+    override fun validateMovement(game: Game, movement: Movement): ResultValidator {
         if (movement.initpos == movement.finalpos) {
             return FailureResult("From and to are the same")
         }

@@ -8,10 +8,12 @@ import edu.austral.dissis.chess.common.piece.Piece
 import edu.austral.dissis.chess.common.result.FailureResult
 import edu.austral.dissis.chess.common.result.ResultValidator
 import edu.austral.dissis.chess.common.result.SuccessfulResult
+import edu.austral.dissis.chess.common.rules.Game
 import kotlin.math.abs
 
 class DiagonalPathIsFreeMV : MovementValidator {
-    override fun validateMovement(gameState: GameState, movement: Movement): ResultValidator {
+    override fun validateMovement(game: Game, movement: Movement): ResultValidator {
+        val gameState = game.getGameState()
         val board = gameState.board
         val pieceActualPosition: Position = movement.initpos
         val difRow: Int = abs(pieceActualPosition.row - movement.finalpos.row)

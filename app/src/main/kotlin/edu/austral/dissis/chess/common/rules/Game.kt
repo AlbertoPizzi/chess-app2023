@@ -23,11 +23,12 @@ data class Game(
 
 
      fun applyMove(game : Game , move: Movement): StateEvaluatorResult {
-        if (movementRules.isMovementSuccessful(state, move)) {
+        if (movementRules.isMovementSuccessful(game, move)) {
             val afterMoveGs = historyUpdater.updateHistory(pieceMover.moveTo(game, move))
             val newGameState = promotionStrategy.promote(afterMoveGs)
             val moveResult = movementRules.applyMove(newGameState, move)
             // newGameState.copy(turnManager = newGameState.turnManager.nextTurn())
+
             return moveResult
         }
         return InProgressStateResult(game)
@@ -35,6 +36,9 @@ data class Game(
 
      fun getGameState(): GameState {
         return state
+    }
+    fun nextTurn(): Game{
+        return this.copy(state = state.copy(turnManager = state.turnManager.nextTurn()))
     }
 
 }

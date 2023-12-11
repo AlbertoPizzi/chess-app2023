@@ -6,10 +6,11 @@ import edu.austral.dissis.chess.common.movementvalidators.MovementValidator
 import edu.austral.dissis.chess.common.result.FailureResult
 import edu.austral.dissis.chess.common.result.ResultValidator
 import edu.austral.dissis.chess.common.result.SuccessfulResult
+import edu.austral.dissis.chess.common.rules.Game
 import kotlin.math.abs
 
 class LimitMV(private val limit: Int) : MovementValidator {
-    override fun validateMovement(gameState: GameState, movement: Movement): ResultValidator {
+    override fun validateMovement(game: Game, movement: Movement): ResultValidator {
         val difCol = abs(movement.finalpos.column - movement.initpos.column)
         val difRow = abs(movement.finalpos.row - movement.initpos.row)
         if (difCol <= limit && difRow <= limit) {

@@ -36,22 +36,22 @@ class CrownedMb : MovementBehaviour {
         )
     )
 
-    override fun move(game: Game, movement: Movement): GameState {
+    override fun move(game: Game, movement: Movement): Game {
         if (isAnNormalMovement(movement, game)) {
             return NormalMovementBehaviour().move(game, movement)
         }
         return applyEatMovement(movement, game)
     }
 
-    private fun isAnNormalMovement(movement: Movement, gameState: GameState): Boolean {
-        return (normalDiagonalMv.validateMovement(gameState, movement) is SuccessfulResult)
+    private fun isAnNormalMovement(movement: Movement, game: Game): Boolean {
+        return (normalDiagonalMv.validateMovement(game, movement) is SuccessfulResult)
     }
 
-    private fun isAnEatMovement(movement: Movement, gameState: GameState): Boolean {
-        return (eatDiagonalMv.validateMovement(gameState, movement) is SuccessfulResult)
+    private fun isAnEatMovement(movement: Movement, game: Game): Boolean {
+        return (eatDiagonalMv.validateMovement(game, movement) is SuccessfulResult)
     }
 
-    private fun applyEatMovement(movement: Movement, gameState: GameState): GameState {
+    private fun applyEatMovement(movement: Movement, gameState: Game): Game {
         val newGameState = NormalMovementBehaviour().move(gameState, movement)
         val auxX = (movement.finalpos.column - movement.initpos.column)
         val auxY = (movement.finalpos.row - movement.initpos.row)
@@ -64,11 +64,11 @@ class CrownedMb : MovementBehaviour {
             movement.initpos.row + 1 * stepY
         )
 
-        var newPieceMap = newGameState.getPositionMap().toMutableMap()
+        var newPieceMap = newGameState.getGameState().getPositionMap().toMutableMap()
         newPieceMap.remove(intermediatePosition)
 
-        var afterEatingGs = newGameState.copy(board = BoardFactory.updateBoard(newPieceMap, newGameState.board))
-        val newPossibleMovement = canPieceStillEat(afterEatingGs, afterEatingGs.getPiece(movement.finalpos))
+        var afterEatingGs = newGameState.copy(state = newGameState.getGameState().copy(board = BoardFactory.updateBoard(newPieceMap, newGameState.getGameState().board)))
+        val newPossibleMovement = canPieceStillEat(afterEatingGs, afterEatingGs.getGameState().getPiece(movement.finalpos))
 
         if (basicCheckersValidator.validateMovement(afterEatingGs, newPossibleMovement) is SuccessfulResult) {
             afterEatingGs = applyEatMovement(newPossibleMovement, afterEatingGs)
@@ -77,14 +77,15 @@ class CrownedMb : MovementBehaviour {
         return afterEatingGs
     }
 
-    private fun canPieceStillEat(gameState: GameState, actualPiece: Piece): Movement {
+    private fun canPieceStillEat(game: Game, actualPiece: Piece): Movement {
+        val gameState = game.getGameState()
         val piecePosition = gameState.getPositionByPieceID(actualPiece.id)!!
         for (i in 1..gameState.board.getRowSize()) {
             for (j in 1..gameState.board.getRowSize()) {
                 val toPosition = Position(i, j)
                 val movement = Movement(piecePosition, toPosition)
-                if (actualPiece.mv[0].validateMovement(gameState, movement) is SuccessfulResult) {
-                    if (isAnEatMovement(movement, gameState)) {
+                if (actualPiece.mv[0].validateMovement(game, movement) is SuccessfulResult) {
+                    if (isAnEatMovement(movement, game)) {
                         return movement
                     }
                 }

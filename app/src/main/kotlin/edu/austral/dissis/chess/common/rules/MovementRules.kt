@@ -6,5 +6,5 @@ import edu.austral.dissis.chess.common.movementvalidators.Movement
 
 interface MovementRules {
     fun applyMove(game : Game, movement: Movement): StateEvaluatorResult
-    fun isMovementSuccessful(gameState: GameState, movement: Movement): Boolean
+    fun isMovementSuccessful(game: Game, movement: Movement): Boolean
 }

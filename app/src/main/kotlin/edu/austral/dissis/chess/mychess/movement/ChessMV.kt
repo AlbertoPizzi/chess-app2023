@@ -8,14 +8,16 @@ import edu.austral.dissis.chess.common.movementvalidators.concretemovement.Empty
 import edu.austral.dissis.chess.common.result.FailureResult
 import edu.austral.dissis.chess.common.result.ResultValidator
 import edu.austral.dissis.chess.common.result.SuccessfulResult
+import edu.austral.dissis.chess.common.rules.Game
 import edu.austral.dissis.chess.mychess.movement.composedmovement.NotInCheckMV
 
 class ChessMV : MovementValidator {
-    override fun validateMovement(gameState: GameState, movement: Movement): ResultValidator {
+    override fun validateMovement(game: Game, movement: Movement): ResultValidator {
+        val gameState = game.getGameState()
         val board = gameState.board
-        when (basicValidators(gameState, movement)) {
+        when (basicValidators(game, movement)) {
             true -> {
-                return board.getPositionMap()[movement.initpos]!!.mv[0].validateMovement(gameState, movement)
+                return board.getPositionMap()[movement.initpos]!!.mv[0].validateMovement(game, movement)
             }
 
             false -> {
@@ -24,9 +26,9 @@ class ChessMV : MovementValidator {
         }
     }
 
-    private fun basicValidators(gameState: GameState, movement: Movement): Boolean {
-        return (EmptySquareMV().validateMovement(gameState, movement) is SuccessfulResult
-                && NotInCheckMV().validateMovement(gameState, movement) is SuccessfulResult
-                && CurrentPlayerMV().validateMovement(gameState, movement) is SuccessfulResult)
+    private fun basicValidators(game: Game, movement: Movement): Boolean {
+        return (EmptySquareMV().validateMovement(game, movement) is SuccessfulResult
+                && NotInCheckMV().validateMovement(game, movement) is SuccessfulResult
+                && CurrentPlayerMV().validateMovement(game, movement) is SuccessfulResult)
     }
 }

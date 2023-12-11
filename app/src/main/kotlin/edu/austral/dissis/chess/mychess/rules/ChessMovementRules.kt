@@ -2,10 +2,7 @@ package edu.austral.dissis.chess.mychess.rules
 
 import edu.austral.dissis.chess.common.rules.MovementRules
 import edu.austral.dissis.chess.common.game.GameState
-import edu.austral.dissis.chess.common.gamestates.InProgressStateResult
-import edu.austral.dissis.chess.common.gamestates.StateEvaluator
-import edu.austral.dissis.chess.common.gamestates.StateEvaluatorResult
-import edu.austral.dissis.chess.common.gamestates.WinStateResult
+import edu.austral.dissis.chess.common.gamestates.*
 import edu.austral.dissis.chess.common.movementvalidators.Movement
 import edu.austral.dissis.chess.common.movementvalidators.MovementValidator
 import edu.austral.dissis.chess.common.result.SuccessfulResult
@@ -18,21 +15,21 @@ class ChessMovementRules : MovementRules {
     private val chessStateEvaluator: StateEvaluator = ChessStateEvaluator()
 
     override fun applyMove(game: Game, movement: Movement): StateEvaluatorResult {
-        val gameState = game.getGameState()
-        return when (val res = stateEvaluatorResult(gameState)) {
-            is InProgressStateResult -> {
-                InProgressStateResult(res.game)
-            }
 
-            is WinStateResult -> WinStateResult((stateEvaluatorResult(gameState) as WinStateResult).winner)
+        return when (val res = stateEvaluatorResult(game)) {
+            is InProgressStateResult -> {
+                InProgressStateResult(game)
+            }
+            is WinStateResult -> WinStateResult((stateEvaluatorResult(game) as WinStateResult).winner)
+            is InvalidMoveStateResult -> InvalidMoveStateResult(res.message)
         }
     }
 
-    override fun isMovementSuccessful(gameState: GameState, movement: Movement): Boolean {
-        return gameValidator.validateMovement(gameState, movement) is SuccessfulResult
+    override fun isMovementSuccessful(game: Game, movement: Movement): Boolean {
+        return gameValidator.validateMovement(game, movement) is SuccessfulResult
     }
 
-    private fun stateEvaluatorResult(gs: GameState): StateEvaluatorResult {
+    private fun stateEvaluatorResult(gs: Game): StateEvaluatorResult {
         return chessStateEvaluator.validate(gs)
     }
 
