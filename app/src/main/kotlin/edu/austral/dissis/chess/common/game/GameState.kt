@@ -7,6 +7,7 @@ import edu.austral.dissis.chess.common.gamestates.StateEvaluatorResult
 import edu.austral.dissis.chess.common.history.History
 import edu.austral.dissis.chess.common.piece.Color
 import edu.austral.dissis.chess.common.piece.Piece
+import edu.austral.dissis.chess.common.rules.Game
 
 data class GameState(
     val turnManager: TurnManager,
@@ -34,6 +35,8 @@ data class GameState(
     fun getPositionByPieceID(id: String): Position {
         return board.getPositionMap().entries.find { it.value.id == id }!!.key
     }
+
+
 
 
 }

@@ -8,6 +8,6 @@ import edu.austral.dissis.chess.common.rules.Game
 
 class NormalMovementBehaviour() : MovementBehaviour {
     override fun move(game: Game, movement: Movement): Game {
-        return game.copy(state = GameStateFactory().chessGameStateBuilder().copy(board = BoardFactory.createBoardFromReference(game.getGameState().board, movement)) )
+        return game.copy(state = game.getGameState().copy(board = BoardFactory.createBoardFromReference(game.getGameState().board, movement)) )
     }
 }

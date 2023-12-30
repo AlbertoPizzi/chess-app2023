@@ -4,6 +4,7 @@ import edu.austral.dissis.chess.checkers.rules.CheckersMovementRules
 import edu.austral.dissis.chess.checkers.initializer.CheckersInitializer
 import edu.austral.dissis.chess.checkers.promotion.CheckersPromotionStrategy
 import edu.austral.dissis.chess.common.Adapter
+import edu.austral.dissis.chess.common.game.turnmanagement.ClassicTurn
 import edu.austral.dissis.chess.common.gamestates.InProgressStateResult
 import edu.austral.dissis.chess.common.gamestates.InvalidMoveStateResult
 import edu.austral.dissis.chess.common.gamestates.WinStateResult
@@ -15,6 +16,7 @@ import edu.austral.dissis.chess.mychess.rules.ChessMovementRules
 import edu.austral.dissis.chess.mychess.initializer.CapaBlancaInitializer
 import edu.austral.dissis.chess.mychess.initializer.ChessInitializer
 import edu.austral.dissis.chess.mychess.initializer.JediKnightsInitializer
+import javafx.scene.paint.Color
 
 class ApeEngine(val game: Game) : GameEngine {
     private var currentGame = game
@@ -40,14 +42,14 @@ class ApeEngine(val game: Game) : GameEngine {
     }
 
     override fun init(): InitialState {
-        return adapter.adaptGameStateToInitialState(currentGame.getGameState())
+        return adapter.adaptGameStateToInitialState(game.getGameState())
     }
 
     override fun applyMove(move: Move): MoveResult {
         val movement: Movement = adapter.translateMovement(move)
         return when (val stateResult = currentGame.applyMove(currentGame ,movement)) {
             is InProgressStateResult -> {
-                this.currentGame = stateResult.game
+                this.currentGame = stateResult.game.nextTurn()
                 println(currentGame.getGameState().getCurrentPlayer().toString())
                 adapter.adaptGameState(currentGame)
             }
@@ -58,9 +60,6 @@ class ApeEngine(val game: Game) : GameEngine {
         }
     }
 
-    fun getAdapter() : Adapter{
-        return adapter
-    }
 
 
 }

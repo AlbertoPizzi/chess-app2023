@@ -5,9 +5,9 @@ import edu.austral.dissis.chess.common.rules.Game
 
 class HistoryUpdater {
     fun updateHistory(game : Game): Game {
-        val gameState = game.getGameState()
-        val auxBoard = gameState.board
-        val newHistory = gameState.history.copy(boardHistory = gameState.history.boardHistory + auxBoard)
-        return game.copy(state= gameState.copy(history = newHistory))
+        val currentGS = game.getGameState()
+        val auxBoard = currentGS.board
+        val newHistory = currentGS.history.copy(boardHistory = currentGS.history.boardHistory + auxBoard)
+        return game.copy(state = currentGS.copy(history = newHistory))
     }
 }

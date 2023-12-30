@@ -2,12 +2,15 @@ package edu.austral.dissis.chess.common.rules
 
 import edu.austral.dissis.chess.common.promotion.PromotionStrategy
 import edu.austral.dissis.chess.common.game.GameState
+import edu.austral.dissis.chess.common.game.turnmanagement.TurnManager
 import edu.austral.dissis.chess.common.gamestates.InProgressStateResult
+import edu.austral.dissis.chess.common.gamestates.InvalidMoveStateResult
 import edu.austral.dissis.chess.common.gamestates.StateEvaluatorResult
 import edu.austral.dissis.chess.common.history.HistoryUpdater
 import edu.austral.dissis.chess.common.initializer.GameInitializer
 import edu.austral.dissis.chess.common.movementvalidators.Movement
 import edu.austral.dissis.chess.common.movementvalidators.PieceMover
+import edu.austral.dissis.chess.common.result.FailureResult
 
 
 data class Game(
@@ -27,11 +30,12 @@ data class Game(
             val afterMoveGs = historyUpdater.updateHistory(pieceMover.moveTo(game, move))
             val newGameState = promotionStrategy.promote(afterMoveGs)
             val moveResult = movementRules.applyMove(newGameState, move)
+
             // newGameState.copy(turnManager = newGameState.turnManager.nextTurn())
 
             return moveResult
         }
-        return InProgressStateResult(game)
+        return InvalidMoveStateResult("Invalid Movement")
     }
 
      fun getGameState(): GameState {
@@ -39,6 +43,9 @@ data class Game(
     }
     fun nextTurn(): Game{
         return this.copy(state = state.copy(turnManager = state.turnManager.nextTurn()))
+    }
+    fun getTurn():TurnManager{
+        return state.turnManager
     }
 
 }

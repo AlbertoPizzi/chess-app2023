@@ -15,8 +15,10 @@ class Adapter {
     }
 
     fun colorAdapter(color: Color): PlayerColor {
-        return if (color == Color.WHITE) PlayerColor.WHITE
-        else PlayerColor.BLACK
+        return when(color){
+            Color.WHITE -> PlayerColor.WHITE
+            Color.BLACK -> PlayerColor.BLACK
+        }
     }
 
     fun chessPieceAdapter(board: Board, piece: Piece): ChessPiece {
@@ -54,7 +56,7 @@ class Adapter {
 
     fun adaptGameState(game: Game): NewGameState {
         val pieces = pieceListAdapter(game.getGameState().board)
-        val playerColor = colorAdapter(game.getGameState().turnManager.getCurrentPlayer())
+        val playerColor = colorAdapter(game.getTurn().getCurrentPlayer())
         return NewGameState(pieces, playerColor)
     }
 
